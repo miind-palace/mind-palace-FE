@@ -6,6 +6,7 @@ import Card from '@/components/Card'
 import MemoryDetail from '@/components/MemoryDetail'
 import Modal from '@/components/Modal'
 import useControlModal from '@/lib/hooks/useControlModal'
+import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 
 /**mock data */
 const MockMemoryType = (currentPage: number) => {
@@ -121,12 +122,21 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     setMemory(memory)
     handleOpenModal()
   }
+
+  const youtubeUrl = 'https://youtu.be/2T6KhOl-g8w'
+  const videoId = makeYouTubeVideoId(youtubeUrl)
+
   return (
     <S.Wrapper>
       <button onClick={handleOpenModal}>{isOpen ? '닫기' : '열기'}</button>
       {isOpen && memory && (
         <Modal onClose={handleCloseModal}>
-          <MemoryDetail backgroundImage={memory.backgroundImage} youtubeUrl={memory.youtubeUrl} text={memory.text} />
+          <MemoryDetail
+            createdAt={memory.createdAt}
+            backgroundImage={memory.backgroundImage}
+            videoId={videoId}
+            text={memory.text}
+          />
         </Modal>
       )}
       <S.Title>My Palace</S.Title>
