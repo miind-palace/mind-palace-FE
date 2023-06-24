@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
+import MemoryDetail from '@/components/MemoryDetail'
 import Modal from '@/components/Modal'
 import useControlModal from '@/lib/hooks/useControlModal'
 
@@ -13,7 +14,7 @@ const MockMemoryType = (currentPage: number) => {
       {
         id: currentPage,
         backgroundImage: '',
-        youtubeUrl: '',
+        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
@@ -21,7 +22,7 @@ const MockMemoryType = (currentPage: number) => {
       {
         id: currentPage,
         backgroundImage: '',
-        youtubeUrl: '',
+        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
@@ -63,6 +64,7 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
   const [memoryList, setMemoryList] = useState<MemoryListType>(initMemoryList)
 
   const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
+
   const [memory, setMemory] = useState<MemoryType>()
 
   const targetRef = useRef<HTMLDivElement>(null)
@@ -119,13 +121,12 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     setMemory(memory)
     handleOpenModal()
   }
-
   return (
     <S.Wrapper>
       <button onClick={handleOpenModal}>{isOpen ? '닫기' : '열기'}</button>
-      {isOpen && (
+      {isOpen && memory && (
         <Modal onClose={handleCloseModal}>
-          <h1>test</h1>
+          <MemoryDetail backgroundImage={memory.backgroundImage} youtubeUrl={memory.youtubeUrl} text={memory.text} />
         </Modal>
       )}
       <S.Title>My Palace</S.Title>
