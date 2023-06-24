@@ -1,14 +1,19 @@
+import YouTubePlayer from './YouTubePlayer'
+
 interface MemoryProps {
   backgroundImage: string
-  youtubeUrl: string
+  videoId: string
+  createdAt: string
   text: string
 }
 
-const MemoryDetail = ({ backgroundImage, youtubeUrl, text }: MemoryProps) => {
+const MemoryDetail = ({ backgroundImage, videoId, text, createdAt }: MemoryProps) => {
   return (
     <>
       <h1>Memory Detail Page</h1>
+      <p>{createdAt}</p>
       <p>{text}</p>
+      <YouTubePlayer videoId={videoId} isAutoPlay={true} />
     </>
   )
 }
