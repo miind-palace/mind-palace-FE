@@ -13,7 +13,7 @@ const Card = forwardRef<HTMLDivElement, { memory: MemoryType }>(({ memory }, ref
     </S.CardComponentWrapper>
   )
 })
-Card.displayName = 'Input'
+Card.displayName = 'Card'
 
 export default Card
 
