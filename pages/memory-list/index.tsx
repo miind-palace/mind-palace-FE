@@ -3,6 +3,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
+import Modal from '@/components/Modal'
+import useControlModal from '@/lib/hooks/useControlModal'
 
 /**mock data */
 const MockMemoryType = (currentPage: number) => {
@@ -60,6 +62,9 @@ export const getServerSideProps: GetServerSideProps<{
 export default function MemoryList({ initMemoryList }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [memoryList, setMemoryList] = useState<MemoryListType>(initMemoryList)
 
+  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
+  const [memory, setMemory] = useState<MemoryType>()
+
   const targetRef = useRef<HTMLDivElement>(null)
   const mockNumber = useRef(2)
 
@@ -110,11 +115,24 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     }
   }, [handleIntersect, targetRef.current])
 
+  const handleOpenMemoryDetailModal = (memory: MemoryType) => {
+    setMemory(memory)
+    handleOpenModal()
+  }
+
   return (
     <S.Wrapper>
+      <button onClick={handleOpenModal}>{isOpen ? '닫기' : '열기'}</button>
+      {isOpen && (
+        <Modal onClose={handleCloseModal}>
+          <h1>test</h1>
+        </Modal>
+      )}
       <S.Title>My Palace</S.Title>
       {memoryList?.data.map((memory, index) => (
-        <Card key={index} memory={memory} ref={targetRef} />
+        <div key={index} onClick={() => handleOpenMemoryDetailModal(memory)}>
+          <Card memory={memory} ref={targetRef} />
+        </div>
       ))}
     </S.Wrapper>
   )
