@@ -34,7 +34,7 @@ const ModalOverlay = styled.div`
 `
 
 const ModalContent = styled.div`
-  background-color: ${(props) => props.theme.mainColor};
+  background-color: white;
   border-radius: 10px;
   width: 60%;
   height: 80%;
