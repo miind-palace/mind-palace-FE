@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout/Layout'
 import globalStyles from '@/styles/globalStyles'
 import theme from '@/styles/theme'
 import { Global, ThemeProvider } from '@emotion/react'
@@ -7,7 +8,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   )
 }
