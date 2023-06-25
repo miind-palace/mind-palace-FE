@@ -17,6 +17,19 @@ export const BounceCubeWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: rotateX(-45deg) rotateY(-45deg);
+    animation: assembly-r 6s ease-in-out;
+  }
+
+  @keyframes assembly-r {
+    0% {
+      transform: rotateX(-45deg) rotateY(-45deg);
+    }
+    50% {
+      transform: rotateX(45deg) rotateY(45deg);
+    }
+    100% {
+      transform: rotateX(-45deg) rotateY(-45deg);
+    }
   }
 
   .comp-3d {
