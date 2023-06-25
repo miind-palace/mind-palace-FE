@@ -3,6 +3,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
+import MemoryDetail from '@/components/MemoryDetail'
+import Modal from '@/components/Modal'
+import useControlModal from '@/lib/hooks/useControlModal'
+import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 
 /**mock data */
 const MockMemoryType = (currentPage: number) => {
@@ -10,16 +14,16 @@ const MockMemoryType = (currentPage: number) => {
     data: [
       {
         id: currentPage,
-        backgroundImage: '',
-        youtubeUrl: '',
+        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
+        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
       },
       {
         id: currentPage,
-        backgroundImage: '',
-        youtubeUrl: '',
+        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
+        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
@@ -59,6 +63,10 @@ export const getServerSideProps: GetServerSideProps<{
 
 export default function MemoryList({ initMemoryList }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [memoryList, setMemoryList] = useState<MemoryListType>(initMemoryList)
+
+  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
+
+  const [memory, setMemory] = useState<MemoryType>()
 
   const targetRef = useRef<HTMLDivElement>(null)
   const mockNumber = useRef(2)
@@ -110,11 +118,33 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     }
   }, [handleIntersect, targetRef.current])
 
+  const handleOpenMemoryDetailModal = (memory: MemoryType) => {
+    setMemory(memory)
+    handleOpenModal()
+  }
+
+  const youtubeUrl = 'https://youtu.be/2T6KhOl-g8w'
+  const videoId = makeYouTubeVideoId(youtubeUrl)
+
   return (
     <S.Wrapper>
+      <button onClick={handleOpenModal}>{isOpen ? '닫기' : '열기'}</button>
+      {isOpen && memory && (
+        <Modal onClose={handleCloseModal}>
+          <MemoryDetail
+            createdAt={memory.createdAt}
+            backgroundImage={memory.backgroundImage}
+            videoId={videoId}
+            text={memory.text}
+            onClickCloseModal={handleCloseModal}
+          />
+        </Modal>
+      )}
       <S.Title>My Palace</S.Title>
       {memoryList?.data.map((memory, index) => (
-        <Card key={index} memory={memory} ref={targetRef} />
+        <div key={index} onClick={() => handleOpenMemoryDetailModal(memory)}>
+          <Card memory={memory} ref={targetRef} />
+        </div>
       ))}
     </S.Wrapper>
   )
