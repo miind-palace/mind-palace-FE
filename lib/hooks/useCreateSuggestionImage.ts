@@ -16,7 +16,24 @@ const useCreateSuggestionImage = () => {
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
     onSuccess(resData) {
-      const imageUrls = resData.images.map((el: any) => el.image)
+      const imageUrls = resData.images.map((el: any) => {
+        const decodedData = atob(el.image)
+
+        const byteArray = new Uint8Array(decodedData.length)
+
+        for (let i = 0; i < decodedData.length; i++) {
+          byteArray[i] = decodedData.charCodeAt(i)
+        }
+
+        const blob = new Blob([byteArray], { type: 'image/png' })
+        const file = new File([blob], 'image.png', { type: 'image/png' })
+
+        const pngUrl = URL.createObjectURL(blob)
+
+        return [file, pngUrl]
+      })
+
+      console.log(imageUrls)
 
       setIsError(false)
       setImages(imageUrls)
