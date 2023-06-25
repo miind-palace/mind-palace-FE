@@ -38,7 +38,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay }) =>
   return (
     <>
       <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} style={{ display: 'none' }} />
-      <Button onClick={toggleVideoStatus}>{isPlaying ? <PauseIcon width={30} /> : <PlayIcon width={30} />}</Button>
+      <Button onClick={toggleVideoStatus}>{isPlaying ? <PauseIcon width={40} /> : <PlayIcon width={40} />}</Button>
     </>
   )
 }
@@ -48,8 +48,4 @@ export default YouTubePlayer
 const Button = styled.button`
   all: unset;
   cursor: pointer;
-  background-color: white;
-  border-radius: 50%;
-  padding: 8px;
-  opacity: 0.7;
 `
