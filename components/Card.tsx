@@ -4,17 +4,46 @@ import styled from '@emotion/styled'
 import { MemoryType } from '@/pages/memory-list'
 import CardPlayButton from './button/CardPlayButton'
 
-const Card = forwardRef<HTMLDivElement, { memory: MemoryType }>(({ memory }, ref) => {
+import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
+import useControlModal from '@/lib/hooks/useControlModal'
+import MemoryDetail from './MemoryDetail'
+import Modal from './Modal'
+
+import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
+
+type CardProps = {
+  memory: MemoryType
+} & React.ComponentProps<'div'>
+
+const Card = forwardRef<HTMLDivElement, CardProps>(({ memory }, ref) => {
+  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
+
+  const convertedTitle = createdAtToTitleDate(memory.createdAt)
+  const slicedVideoId = makeYouTubeVideoId(memory.videoId)
+
   return (
-    <S.CardComponentWrapper ref={ref} backgroundImage={memory.backgroundImage}>
-      <S.CardComponentTitle>{memory.createdAt}</S.CardComponentTitle>
-      <S.CardComponentDesc>{memory.text}</S.CardComponentDesc>
-      <S.CardComponentPlayerWrapper>
-        <CardPlayButton youtubeUrl={memory.youtubeUrl} />
-      </S.CardComponentPlayerWrapper>
-      {/* 임시 */}
-      <p style={{ marginTop: '24px' }}>memoryId: {memory.id}</p>
-    </S.CardComponentWrapper>
+    <>
+      {isOpen && memory && (
+        <Modal onClose={handleCloseModal}>
+          <MemoryDetail
+            createdAt={convertedTitle}
+            backgroundImage={memory.backgroundImage}
+            videoId={slicedVideoId}
+            text={memory.text}
+            onClickCloseModal={handleCloseModal}
+          />
+        </Modal>
+      )}
+      <S.CardComponentContainer ref={ref} backgroundImage={memory.backgroundImage}>
+        <S.CardComponentPlayerWrapper>
+          <CardPlayButton videoId={slicedVideoId} />
+        </S.CardComponentPlayerWrapper>
+        <S.CardComponentWrapper onClick={() => handleOpenModal()}>
+          <S.CardComponentTitle>{convertedTitle}</S.CardComponentTitle>
+          <S.CardComponentDesc>{memory.text}</S.CardComponentDesc>
+        </S.CardComponentWrapper>
+      </S.CardComponentContainer>
+    </>
   )
 })
 Card.displayName = 'Card'
@@ -22,13 +51,13 @@ Card.displayName = 'Card'
 export default Card
 
 const S = {
-  CardComponentWrapper: styled.div<{ backgroundImage: MemoryType['backgroundImage'] }>`
+  CardComponentContainer: styled.div<{ backgroundImage: MemoryType['backgroundImage'] }>`
     box-sizing: border-box;
     position: relative;
 
     height: 185px;
     margin: 11px 35px;
-    padding: 22px;
+
     border-radius: 16px;
     color: #fff;
     opacity: 1;
@@ -38,9 +67,11 @@ const S = {
     }
     object-fit: cover;
     background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
-
-    /* 임시 */
-    background: #b6e6b0;
+  `,
+  CardComponentWrapper: styled.div`
+    height: 100%;
+    width: 100%;
+    padding: 22px;
   `,
   CardComponentTitle: styled.h2`
     font-size: 24px;
@@ -57,5 +88,6 @@ const S = {
     position: absolute;
     top: 14px;
     right: 14px;
+    z-index: 1000;
   `,
 }

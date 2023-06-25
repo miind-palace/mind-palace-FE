@@ -40,9 +40,9 @@ const switchCardPlayButton = (isPlayed: boolean) => {
   else return <CardPlayStartButton />
 }
 
-type CardPlayButtonProps = Pick<MemoryType, 'youtubeUrl'>
+type CardPlayButtonProps = Pick<MemoryType, 'videoId'>
 
-const CardPlayButton = ({ youtubeUrl }: CardPlayButtonProps) => {
+const CardPlayButton = ({ videoId }: CardPlayButtonProps) => {
   const [playerStatus, setPlayerStatus] = useState({ isPlayed: false })
   const playerRef = useRef<YouTubeEvent['target']>(null)
 
@@ -62,7 +62,7 @@ const CardPlayButton = ({ youtubeUrl }: CardPlayButtonProps) => {
   return (
     <>
       <YouTube
-        videoId={youtubeUrl}
+        videoId={videoId}
         opts={{
           width: '0',
           height: '0',
