@@ -1,7 +1,8 @@
 import YouTubePlayer from './YouTubePlayer'
 import downloadILmage from '@/lib/utils/downloadImage'
 import { useRef, useState } from 'react'
-import Image from 'next/image'
+import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
+import styled from '@emotion/styled'
 
 interface MemoryProps {
   backgroundImage: string
@@ -29,21 +30,109 @@ const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseM
     //TODO:추억삭제하는 api연결
   }
   return (
-    <>
-      <h1>Memory Detail Page</h1>
-      <span>{createdAt}</span>
-      <button onClick={handleRemoveMemory}>추억삭제하기</button>
-      <div ref={downloadImageRef} id={downloadImageId}>
-        <Image width={300} height={400} src={'/downloadTest.png'} alt={'test'} onLoad={handleImageLoad} />
-        <p>{text}</p>
-      </div>
-      <button onClick={handleCapture} disabled={!isImageLoad}>
-        추억내려받기
-      </button>
-      <button onClick={onClickCloseModal}>닫기</button>
-      <YouTubePlayer videoId={videoId} isAutoPlay={true} />
-    </>
+    <Container>
+      <Header>
+        <RemoveMemoryButton onClick={handleRemoveMemory}>
+          <TrashIcon width={30} />
+        </RemoveMemoryButton>
+        <Date>{createdAt}</Date>
+        <BackButton onClick={onClickCloseModal}>
+          <XMarkIcon width={30} />
+        </BackButton>
+      </Header>
+      <Main ref={downloadImageRef} id={downloadImageId}>
+        <ImageWrapper>
+          <MemoryImage src={'/cat.jpg'} alt={'test'} onLoad={handleImageLoad} />
+        </ImageWrapper>
+        <Text>{text}</Text>
+      </Main>
+      <DownloadButton onClick={handleCapture} disabled={!isImageLoad}>
+        <CameraIcon width={50} />
+      </DownloadButton>
+      <PlayerButton>
+        <YouTubePlayer videoId={videoId} isAutoPlay={true} />
+      </PlayerButton>
+    </Container>
   )
 }
 
 export default MemoryDetail
+const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  position: relative;
+  background: linear-gradient(pink, white);
+  opacity: 0.9
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  min-height: 663px;
+`
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  margin-bottom: 20px;
+`
+
+const PlayerButton = styled.div`
+  position: absolute;
+  right: 45px;
+  top: 105px;
+`
+const BackButton = styled(Button)``
+
+const DownloadButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`
+
+const RemoveMemoryButton = styled(Button)``
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  min-height: 435px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+`
+
+const MemoryImage = styled.img`
+  width: 100%;
+  height: 100%;
+  max-height: 435px;
+  object-fit: contain;
+`
+
+const Date = styled.span`
+  font-size: 30px;
+`
+const Main = styled.div`
+  display: flex;
+  min-height: 553px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 20px 15px 40px 25px;
+`
+
+const Text = styled.p`
+  font-family: 'Yoonwoo';
+  font-size: 30px;
+  transform: rotate(0.98turn);
+  max-width: 400px;
+  margin-top: 20px;
+`
