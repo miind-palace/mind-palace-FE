@@ -31,9 +31,7 @@ const TempPage = () => {
 
 export default TempPage
 
-const Temp = styled.div`
-  background: gray;
-`
+const Temp = styled.div``
 
 const Container = styled.div`
   width: 100%;
@@ -41,7 +39,6 @@ const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   background: white;
-  overflow: hidden;
 `
 
 const Wrapper = styled.div`
@@ -59,12 +56,11 @@ const DimBg = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  /* z-index: 1; */
   background: linear-gradient(
     transparent 0%,
-    rgba(176, 176, 176, 0.5) 10%,
+    rgba(176, 176, 176, 0.5) 25%,
     rgba(0, 0, 0, 0.37) 50%,
-    rgba(176, 176, 176, 0.5) 90%,
+    rgba(176, 176, 176, 0.5) 75%,
     transparent 100%
   );
   transition: all 1s ease-in-out;
@@ -74,7 +70,7 @@ const DimBg = styled.div`
 const InputBox = styled.div`
   position: relative;
   background: rgba(255, 255, 255, 0.6);
-  width: 80%;
+  width: 70%;
   height: auto;
   min-height: 140px;
   padding: 40px 30px;
