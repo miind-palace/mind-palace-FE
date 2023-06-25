@@ -1,12 +1,9 @@
 import styled from '@emotion/styled'
 
 export const BounceCubeWrapper = styled.div`
-  /* overflow: hidden; */
-  /* margin: 0; */
   width: 100%;
   height: 100vh;
   perspective: 32em;
-  /* background: #e9e9e9; */
 
   div {
     position: absolute;
@@ -38,13 +35,10 @@ export const BounceCubeWrapper = styled.div`
 
   .comp-3d--i {
     animation-name: ri;
-    /* border: 10px solid red; */
   }
 
   .comp-3d--o {
     animation-name: ro;
-    /* animation-name: ri; */
-    /* border: 10px solid blue; */
   }
 
   @keyframes ri {
@@ -122,12 +116,10 @@ export const BounceCubeWrapper = styled.div`
   }
 
   div :not(.pos) > .cube:nth-child(13) {
-    /* transform: translate3d(0em, 4em, 0em); */
     transform: translate3d(0em, 4em, 0em);
   }
 
   div :not(.pos) > .cube:nth-child(14) {
-    /* transform: translate3d(0em, 4em, 4em); */
     transform: translate3d(0em, 4em, 4em);
   }
 
@@ -140,12 +132,10 @@ export const BounceCubeWrapper = styled.div`
   }
 
   div :not(.pos) > .cube:nth-child(17) {
-    /* transform: translate3d(4em, 0em, 0em); */
     transform: translate3d(4em, 0em, 0em);
   }
 
   div :not(.pos) > .cube:nth-child(18) {
-    /* transform: translate3d(4em, 0em, 4em); */
     transform: translate3d(4em, 0em, 4em);
   }
 
@@ -189,15 +179,35 @@ export const BounceCubeWrapper = styled.div`
     animation: m 6s ease-out;
   }
 
-  // 각각의 cube를 이루는 면에 대한 style
-
   .cube__face {
     margin: -2em;
     width: 4em;
     height: 4em;
+
     box-shadow: 0 0 2em rgba(220, 220, 220, 0.5) inset;
-    backface-visibility: hidden;
     background: whitesmoke;
+    backface-visibility: hidden;
+    animation: face_border 6s ease-in-out;
+
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+
+  @keyframes face_border {
+    0% {
+      border-color: rgba(255, 255, 255, 0);
+      background: rgba(72, 72, 72, 1);
+      box-shadow: 0 0 2em rgba(72, 72, 72, 1) inset;
+    }
+    50% {
+      border-color: rgba(255, 255, 255, 0.17);
+      background: rgba(72, 72, 72, 1);
+      box-shadow: 0 0 2em rgba(72, 72, 72, 1) inset;
+    }
+    100% {
+      border-color: rgba(255, 255, 255, 0);
+      background: whitesmoke;
+      box-shadow: 0 0 2em rgba(220, 220, 220, 0.5) inset;
+    }
   }
 
   .cube__face:nth-child(2n) {
@@ -223,24 +233,6 @@ export const BounceCubeWrapper = styled.div`
   }
   .cube__face:nth-child(6) {
     transform: rotateX(-90deg) translateZ(2em);
-  }
-
-  .comp-3d--i .cube__face {
-    /* background: red; */
-    /* animation-name: ri; */
-    /* border: 10px solid red; */
-  }
-
-  .comp-3d--o .pos:nth-child(6) .cube__face {
-    /* background: red; */
-  }
-
-  .comp-3d--o .pos:nth-child(7) .cube__face {
-    /* background: green; */
-  }
-
-  .comp-3d--o .pos:nth-child(8) .cube__face {
-    /* background: blue; */
   }
 
   @keyframes m {
