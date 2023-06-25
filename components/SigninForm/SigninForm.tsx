@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -14,6 +14,13 @@ const sendForSigninFunction = async (body: {}) => {
 };
 
 export default function SigninForm() {
+  useEffect(() => {
+    // 마운트시 토큰 존재하면 업로드 페이지 이동 -> ( api 받으면 추후 세션 방식으로 바꿔야 한다 ) - 자동 로그인 되어있을 경우 업로드로 라우팅도 구현해야
+    if (localStorage.getItem("token")) {
+      router.push("/upload");
+    }
+  }, []);
+
   const [signinConditions, setSigninConditions] = useState({
     email: "",
     password: "",
