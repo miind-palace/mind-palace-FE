@@ -11,7 +11,7 @@ const usePickImageColor = (imgSrc: string) => {
     img.onload = async function () {
       const colorThief = new ColorThief()
       const result = await colorThief.getColor(img)
-      setColor(`rgb(${result[0]}, ${result[1]}, ${result[2]})`)
+      setColor(`rgba(${result[0]}, ${result[1]}, ${result[2]},0.9)`)
     }
   }, [imgSrc])
 
