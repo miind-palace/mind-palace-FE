@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import YouTube from 'react-youtube'
+import { PauseIcon, PlayIcon } from './Icons'
+import styled from '@emotion/styled'
 
 interface YouTubePlayerProps {
   videoId: string
@@ -35,10 +37,19 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay }) =>
 
   return (
     <>
-      <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} />
-      <button onClick={toggleVideoStatus}>{isPlaying ? '일시정지' : '시작'}</button>
+      <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} style={{ display: 'none' }} />
+      <Button onClick={toggleVideoStatus}>{isPlaying ? <PauseIcon width={30} /> : <PlayIcon width={30} />}</Button>
     </>
   )
 }
 
 export default YouTubePlayer
+
+const Button = styled.button`
+  all: unset;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 50%;
+  padding: 8px;
+  opacity: 0.7;
+`

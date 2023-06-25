@@ -30,13 +30,10 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
 `
 
 const ModalContent = styled.div`
-  background-color: white;
-  border-radius: 10px;
-  width: 60%;
-  height: 80%;
+  width: 85%;
+  max-width: 550px;
   overflow: hidden;
 `
