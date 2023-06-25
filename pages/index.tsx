@@ -1,7 +1,11 @@
+import BounceCube from '@/components/Intro/BounceCube/BounceCube'
+import ScatteredCube from '@/components/Intro/ScatterredCube/ScatterredCube'
+
 export default function Home() {
   return (
     <>
-      <h1>Main</h1>
+      <BounceCube />
+      {/* <ScatteredCube /> */}
     </>
   )
 }
