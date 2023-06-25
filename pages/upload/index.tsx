@@ -1,12 +1,14 @@
-import useInput from '@/hooks/useInput'
-import styled from '@emotion/styled'
+import { useState } from 'react'
 import { useChangePreviewImage } from '@/hooks/useChangePreviewImage'
+import useInput from '@/hooks/useInput'
+import { useHorizontalScroll } from '@/hooks/useHorizontalScroll'
+import { useDebounce } from '@/hooks/useDebounce'
+
+import Link from 'next/link'
+import styled from '@emotion/styled'
 import { Props } from '@/lib/types/uploadPageProps'
 
 import { Props as UploadProps } from '@/lib/types/uploadPageProps'
-import { useHorizontalScroll } from '@/hooks/useHorizontalScroll'
-import { useDebounce } from '@/hooks/useDebounce'
-import { useState } from 'react'
 
 //useSuggestion return값 임시 대체
 export const fakeGeneratedImageSrcArr = [
@@ -289,7 +291,7 @@ export default function Upload({ url }: UploadProps) {
         <input type="submit" className="form__submit--btn" />
 
         <footer className="upload__footer">
-          <div className="upload__footer--btn">
+          <Link href="/memory-list" className="upload__footer--btn">
             <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="39" height="39" fill="white" />
               <path
@@ -299,8 +301,8 @@ export default function Upload({ url }: UploadProps) {
                 fill="black"
               />
             </svg>
-          </div>
-          <div className="upload__footer--btn">
+          </Link>
+          <Link href="/memory-list" className="upload__footer--btn">
             <svg width="44" height="36" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M16.8989 35.8202L43.987 1.67295L0.416795 0.474207L6.80967 14.2277L33.8882 6.38212L10.4724 22.0824L16.8989 35.8202Z"
@@ -308,7 +310,7 @@ export default function Upload({ url }: UploadProps) {
                 fillOpacity="0.7"
               />
             </svg>
-          </div>
+          </Link>
         </footer>
       </form>
     </FormContainer>
