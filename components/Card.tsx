@@ -2,12 +2,16 @@ import { forwardRef } from 'react'
 import styled from '@emotion/styled'
 
 import { MemoryType } from '@/pages/memory-list'
+import CardPlayButton from './button/CardPlayButton'
 
 const Card = forwardRef<HTMLDivElement, { memory: MemoryType }>(({ memory }, ref) => {
   return (
     <S.CardComponentWrapper ref={ref} backgroundImage={memory.backgroundImage}>
       <S.CardComponentTitle>{memory.createdAt}</S.CardComponentTitle>
       <S.CardComponentDesc>{memory.text}</S.CardComponentDesc>
+      <S.CardComponentPlayerWrapper>
+        <CardPlayButton youtubeUrl={memory.youtubeUrl} />
+      </S.CardComponentPlayerWrapper>
       {/* 임시 */}
       <p style={{ marginTop: '24px' }}>memoryId: {memory.id}</p>
     </S.CardComponentWrapper>
@@ -20,6 +24,7 @@ export default Card
 const S = {
   CardComponentWrapper: styled.div<{ backgroundImage: MemoryType['backgroundImage'] }>`
     box-sizing: border-box;
+    position: relative;
 
     height: 185px;
     margin: 11px 35px;
@@ -47,5 +52,10 @@ const S = {
     font-weight: 300;
     line-height: 18px;
     letter-spacing: -0.3px;
+  `,
+  CardComponentPlayerWrapper: styled.div`
+    position: absolute;
+    top: 14px;
+    right: 14px;
   `,
 }

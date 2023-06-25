@@ -11,7 +11,7 @@ const MockMemoryType = (currentPage: number) => {
       {
         id: currentPage,
         backgroundImage: '',
-        youtubeUrl: '',
+        youtubeUrl: 'lMhJWg9QwJ8',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
@@ -19,7 +19,7 @@ const MockMemoryType = (currentPage: number) => {
       {
         id: currentPage,
         backgroundImage: '',
-        youtubeUrl: '',
+        youtubeUrl: 'lMhJWg9QwJ8',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
         deletedAt: 'July 23',
