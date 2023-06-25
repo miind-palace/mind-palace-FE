@@ -3,13 +3,13 @@ import Image from 'next/image'
 import { ChangeEvent, FormEvent } from 'react'
 import SearchIcon from '/public/images/search-icon.svg'
 
-interface Props {
+interface KeywordFiledProps {
   keywordValue: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onSubmit: () => void
 }
 
-const KeywordFiled = ({ keywordValue, onChange, onSubmit }: Props) => {
+const KeywordFiled = ({ keywordValue, onChange, onSubmit }: KeywordFiledProps) => {
   return (
     <Container>
       <Image src={SearchIcon} alt="돋보기 아이콘" />
