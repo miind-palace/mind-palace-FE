@@ -136,6 +136,7 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
             backgroundImage={memory.backgroundImage}
             videoId={videoId}
             text={memory.text}
+            onClickCloseModal={handleCloseModal}
           />
         </Modal>
       )}
