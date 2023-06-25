@@ -28,10 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     )
 
     text = response.data.message.result.translatedText
-  } catch (error) {
-    console.log(error)
-
-    return res.status(500).json({ message: '키워드 영변환에 실패했습니다.' })
+  } catch (error: any) {
+    return res.send({ ...error })
   }
 
   try {
@@ -52,11 +50,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     )
 
     return res.status(200).json({ ...response.data })
-  } catch (error) {
+  } catch (error: any) {
     console.log(error)
 
-    return res.status(500).json({
-      message: '이미지 추천에 실패했습니다. 다른 키워드를 입력해 주세요.',
-    })
+    return res.send({ ...error })
   }
 }
