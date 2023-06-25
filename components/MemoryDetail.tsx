@@ -3,6 +3,7 @@ import downloadILmage from '@/lib/utils/downloadImage'
 import { useRef, useState } from 'react'
 import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
 import styled from '@emotion/styled'
+import usePickImageColor from '@/lib/hooks/usePickImageColor'
 
 interface MemoryProps {
   backgroundImage: string
@@ -29,8 +30,10 @@ const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseM
   const handleRemoveMemory = () => {
     //TODO:추억삭제하는 api연결
   }
+  const pickColor = usePickImageColor(backgroundImage)
+
   return (
-    <Container>
+    <Container pickColor={pickColor}>
       <Header>
         <RemoveMemoryButton onClick={handleRemoveMemory}>
           <TrashIcon width={30} />
@@ -62,12 +65,12 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-const Container = styled.div`
+const Container = styled.div<{ pickColor: string }>`
   display: flex;
   flex-direction: column;
   padding: 20px 15px;
   position: relative;
-  background: linear-gradient(pink, white);
+  background: linear-gradient(${(props) => props.pickColor}, white);
   opacity: 0.9
 
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
