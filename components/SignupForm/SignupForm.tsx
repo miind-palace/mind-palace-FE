@@ -91,9 +91,9 @@ export default function SignupForm() {
 
         const res = await sendForSignupFunction(signupConditions)
 
-        if (res.status === 201) {
-          router.push('/upload')
-        }
+        // if (res.status === 201) {
+        //   router.push('/upload')
+        // }
       } else {
         alert('작성하신 Email 을 사용하실 수 없습니다.')
       }
