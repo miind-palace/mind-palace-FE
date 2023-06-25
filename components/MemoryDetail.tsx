@@ -1,8 +1,9 @@
 import YouTubePlayer from './YouTubePlayer'
-import downloadILmage from '@/lib/utils/downloadImage'
 import { useRef, useState } from 'react'
-import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
 import styled from '@emotion/styled'
+
+import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
+import downloadILmage from '@/lib/utils/downloadImage'
 import usePickImageColor from '@/lib/hooks/usePickImageColor'
 
 interface MemoryProps {
@@ -71,7 +72,6 @@ const Container = styled.div<{ pickColor: string }>`
   padding: 20px 15px;
   position: relative;
   background: linear-gradient(${(props) => props.pickColor}, white);
-  opacity: 0.9
 
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
