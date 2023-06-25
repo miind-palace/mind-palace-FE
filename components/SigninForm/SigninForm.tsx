@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent, useEffect } from "react";
+import { useState, FormEvent, ChangeEvent, MouseEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -49,6 +49,13 @@ export default function SigninForm() {
 
   // console.log(signinConditions);
 
+  const goToSignupPage = (e: MouseEvent<HTMLAnchorElement>) => {
+    // Make an Account 클릭시 회원가입 페이지로 이동
+    e.preventDefault();
+
+    router.push("/sign-up");
+  };
+
   return (
     <form onSubmit={signinFunction}>
       <label>
@@ -73,7 +80,9 @@ export default function SigninForm() {
 
       <button>Log in</button>
 
-      <a href="#">Make an account</a>
+      <a href="#" onClick={goToSignupPage}>
+        Make an account
+      </a>
     </form>
   );
 }
