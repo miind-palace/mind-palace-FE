@@ -57,11 +57,11 @@ const DimBg = styled.div`
   top: 0;
   left: 0;
   background: linear-gradient(
-    transparent 0%,
-    rgba(176, 176, 176, 0.5) 25%,
-    rgba(0, 0, 0, 0.37) 50%,
-    rgba(176, 176, 176, 0.5) 75%,
-    transparent 100%
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(176, 176, 176, 0.5) 10%,
+    transparent 50%,
+    rgba(176, 176, 176, 0.5) 90%,
+    rgba(0, 0, 0, 0.3) 100%
   );
   transition: all 1s ease-in-out;
   opacity: ${(props: { isShow: boolean }) => (props.isShow ? 1 : 0)};
