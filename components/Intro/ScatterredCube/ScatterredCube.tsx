@@ -28,7 +28,6 @@ const Assembly = styled(Container)`
 
 const Cube = styled(Container)`
   animation: a ${t} cubic-bezier(0.65, 0.05, 0.35, 1) infinite alternate;
-  /* ${(props) => props.drag && 'animation-play-state: paused;'} */
 
   ${(props) => {
     let styles = ''
