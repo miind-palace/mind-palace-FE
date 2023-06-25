@@ -48,7 +48,7 @@ const FormContainer = styled.div<Props>`
 
       background: no-repeat url(${({ url }) => url});
       background-size: ${({ hasImage }) => (hasImage ? '100% 100%' : '0')};
-      background-color: gray;
+      background-color: #d9d9d9;
       border-radius: 1em;
 
       display: flex;
@@ -87,7 +87,7 @@ const FormContainer = styled.div<Props>`
           width: 10.3em;
           height: 10.3em;
           margin: 10px;
-          background-color: gray;
+          background-color: #d9d9d9;
         }
       }
     }
@@ -96,10 +96,11 @@ const FormContainer = styled.div<Props>`
       width: 100%;
       height: 160px;
 
-      background-color: gray;
+      background-color: #d9d9d9;
       border-radius: 1em;
       position: relative;
       text-align: center;
+      border: none;
 
       ::placeholder {
         color: white;
@@ -123,8 +124,9 @@ const FormContainer = styled.div<Props>`
         align-items: center;
         text-align: center;
 
-        background-color: gray;
+        background-color: #d9d9d9;
         border-radius: 1em;
+        border: none;
         position: relative;
 
         ::placeholder {
@@ -146,9 +148,10 @@ const FormContainer = styled.div<Props>`
 
     .form__submit--btn {
       height: 50px;
-      background-color: gray;
+      background-color: #d9d9d9;
       border-radius: 1em;
       color: white;
+      border: none;
     }
 
     .upload__footer {
