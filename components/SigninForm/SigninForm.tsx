@@ -5,8 +5,8 @@ import axios from "axios";
 const sendForSigninFunction = async (body: {}) => {
   // 로그인 버튼에 들어가는 함수
   try {
-    const res = await axiosAuthAPI.post("/auth/signin", body); // 백엔드에서 API path 오면 axiosAuthAPI.create 모듈화 해야함 및 경로 재지정 필요 !!
-    return res;
+    // const res = await axiosAuthAPI.post("/auth/signin", body); // 백엔드에서 API path 오면 axiosAuthAPI.create 모듈화 해야함 및 경로 재지정 필요 !!
+    // return res;
   } catch (error) {
     console.log(error);
     alert("sendForSigninFunction Error : 로그인에 실패하였습니다!");
