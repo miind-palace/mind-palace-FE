@@ -1,3 +1,4 @@
+import useLockBodyScroll from '@/lib/hooks/useLockBodyScroll'
 import styled from '@emotion/styled'
 import { createPortal } from 'react-dom'
 
@@ -8,6 +9,7 @@ interface ModalProps {
 
 const Modal = ({ children, onClose }: ModalProps) => {
   const modalRoot = document.querySelector('#modal-root')
+  useLockBodyScroll()
 
   if (!modalRoot) return null
 
