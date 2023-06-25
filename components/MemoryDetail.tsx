@@ -37,11 +37,11 @@ const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseM
     <Container pickColor={pickColor}>
       <Header>
         <RemoveMemoryButton onClick={handleRemoveMemory}>
-          <TrashIcon width={30} />
+          <TrashIcon width={18} height={20} />
         </RemoveMemoryButton>
         <Date>{createdAt}</Date>
         <BackButton onClick={onClickCloseModal}>
-          <XMarkIcon width={30} />
+          <XMarkIcon width={18} />
         </BackButton>
       </Header>
       <Main ref={downloadImageRef} id={downloadImageId}>
@@ -88,7 +88,7 @@ const Header = styled.div`
 const PlayerButton = styled.div`
   position: absolute;
   right: 45px;
-  top: 105px;
+  top: 110px;
 `
 const BackButton = styled(Button)``
 
@@ -119,7 +119,12 @@ const MemoryImage = styled.img`
 `
 
 const Date = styled.span`
+  font-family: 'Inter';
   font-size: 30px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.025em;
+  text-align: left;
 `
 const Main = styled.div`
   display: flex;
