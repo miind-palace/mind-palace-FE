@@ -14,7 +14,7 @@ const MockMemoryType = (currentPage: number) => {
     data: [
       {
         id: currentPage,
-        backgroundImage: '',
+        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
         youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
@@ -22,7 +22,7 @@ const MockMemoryType = (currentPage: number) => {
       },
       {
         id: currentPage,
-        backgroundImage: '',
+        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
         youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
         text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: 'July 23',
