@@ -1,13 +1,15 @@
+const sliceYouTubeUrlType = (youtubeUrl: string) => youtubeUrl.slice()
+
+const isUrlContainsVParam = (youtubeUrl: string) => {
+  const regex = /\?v=/
+  return regex.test(youtubeUrl)
+}
+
+
 const makeYouTubeVideoId = (youtubeUrl: string) => {
-  if (youtubeUrl.includes('youtu.be/')) {
-    return youtubeUrl.slice(youtubeUrl.lastIndexOf('/') + 1)
-  }
+  if (isUrlContainsVParam(youtubeUrl)) return new URL(youtubeUrl).searchParams.get('v') as string
+  else return youtubeUrl.slice(youtubeUrl.lastIndexOf('/') + 1)
 
-  if (youtubeUrl.includes('youtube.com')) {
-    return new URL(youtubeUrl).searchParams.get('v')
-  }
-
-  return ''
 }
 
 export default makeYouTubeVideoId
