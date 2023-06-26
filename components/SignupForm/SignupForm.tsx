@@ -1,6 +1,9 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import styled from '@emotion/styled'
+import Input from '@/pages/temp/SigninForm/Input'
+import { SecurityIcon } from '../Icons'
 
 export default function SignupForm() {
   useEffect(() => {
@@ -101,36 +104,95 @@ export default function SignupForm() {
 
   return (
     <>
-      <form onSubmit={signupFunction}>
-        <label>
-          Email
-          <input id="Email" value={signupConditions.email} type="text" name="email" onChange={updateSignupConditions} />
-        </label>
+      <Wrapper>
+        <form onSubmit={signupFunction}>
+          <InputBox>
+            <Input
+              value={signupConditions.email}
+              inputLabel="Email"
+              id="Email"
+              type="text"
+              name="email"
+              onChange={updateSignupConditions}
+            />
+          </InputBox>
 
-        <label>
-          Password
-          <input
-            id="Password"
-            value={signupConditions.password}
-            type="password"
-            name="password"
-            onChange={updateSignupConditions}
-          />
-        </label>
+          <InputBox>
+            <Input
+              value={signupConditions.password}
+              inputLabel="Password"
+              type="password"
+              name="password"
+              id="password"
+              onChange={updateSignupConditions}
+              svgIcon={<SecurityIcon width="16" height="17" />}
+            />
+          </InputBox>
 
-        <label>
-          Confirm Password
-          <input
-            id="PasswordCheck"
-            value={signupConditions.passwordCheck}
-            type="password"
-            name="passwordCheck"
-            onChange={updateSignupConditions}
-          />
-        </label>
+          <InputBox>
+            <Input
+              value={signupConditions.passwordCheck}
+              inputLabel="Confirm Password"
+              type="password"
+              name="passwordCheck"
+              id="PasswordCheck"
+              onChange={updateSignupConditions}
+              svgIcon={<SecurityIcon width="16" height="17" />}
+            />
+          </InputBox>
 
-        <button>Sign up</button>
-      </form>
+          <ButtonBox>
+            <StyledButton>Sign up</StyledButton>
+          </ButtonBox>
+        </form>
+      </Wrapper>
     </>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const InputBox = styled.div`
+  margin: 20px 0;
+`
+
+const ButtonBox = styled.div`
+  margin: 70px 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const StyledButton = styled.button`
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+  }
+  &:active {
+    transition: all 0.2s ease-in-out;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+  }
+`
+
+const StyledLink = styled.a`
+  margin: 10px;
+  padding: 10px;
+  text-decoration: underline;
+  color: #777777;
+  font-weight: 600;
+`

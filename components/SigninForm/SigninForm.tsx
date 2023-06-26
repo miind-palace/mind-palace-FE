@@ -1,6 +1,9 @@
 import { useState, FormEvent, ChangeEvent, MouseEvent, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import styled from '@emotion/styled'
+import Input from './Input'
+import { SecurityIcon } from '../Icons'
 
 export default function SigninForm() {
   useEffect(() => {
@@ -54,22 +57,82 @@ export default function SigninForm() {
   }
 
   return (
-    <form onSubmit={signinFunction}>
-      <label>
-        Email
-        <input value={signinConditions.email} type="text" name="email" onChange={updateSigninConditions} />
-      </label>
+    <Wrapper>
+      <form onSubmit={signinFunction}>
+        <InputBox>
+          <Input
+            value={signinConditions.email}
+            inputLabel="Email"
+            type="text"
+            name="email"
+            onChange={updateSigninConditions}
+          />
+        </InputBox>
+        <InputBox>
+          <Input
+            value={signinConditions.password}
+            inputLabel="Password"
+            type="password"
+            name="password"
+            onChange={updateSigninConditions}
+            svgIcon={<SecurityIcon width="16" height="17" />}
+          />
+        </InputBox>
 
-      <label>
-        Password
-        <input value={signinConditions.password} type="password" name="password" onChange={updateSigninConditions} />
-      </label>
-
-      <button>Log in</button>
-
-      <a href="#" onClick={goToSignupPage}>
-        Make an account
-      </a>
-    </form>
+        <ButtonBox>
+          <StyledButton>Log in</StyledButton>
+          <StyledLink href="#" onClick={goToSignupPage}>
+            Make an account
+          </StyledLink>
+        </ButtonBox>
+      </form>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const InputBox = styled.div`
+  margin: 20px 0;
+`
+
+const ButtonBox = styled.div`
+  margin: 70px 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const StyledButton = styled.button`
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+  }
+  &:active {
+    transition: all 0.2s ease-in-out;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+  }
+`
+
+const StyledLink = styled.a`
+  margin: 10px;
+  padding: 10px;
+  text-decoration: underline;
+  color: #777777;
+  font-weight: 600;
+`
