@@ -22,7 +22,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ memory }, ref) => {
     const data = await response.json()
   }
   const convertedTitle = createdAtToTitleDate(memory.createdAt)
-  const slicedVideoId = makeYouTubeVideoId(memory.videoId)
+  const slicedVideoId =
+    !memory.videoId.includes('youtu.be/') && !memory.videoId.includes('youtube.com')
+      ? memory.videoId
+      : makeYouTubeVideoId(memory.videoId)
 
   return (
     <>
@@ -39,9 +42,11 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ memory }, ref) => {
         </Modal>
       )}
       <S.CardComponentContainer ref={ref} backgroundImage={memory.backgroundImage}>
-        <S.CardComponentPlayerWrapper>
-          <CardPlayButton videoId={slicedVideoId} />
-        </S.CardComponentPlayerWrapper>
+        {!!memory.videoId && (
+          <S.CardComponentPlayerWrapper>
+            <CardPlayButton videoId={slicedVideoId} />
+          </S.CardComponentPlayerWrapper>
+        )}
         <S.CardComponentWrapper onClick={() => handleOpenModal()}>
           <S.CardComponentTitle>{convertedTitle}</S.CardComponentTitle>
           <S.CardComponentDesc>{memory.text}</S.CardComponentDesc>
