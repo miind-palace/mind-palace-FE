@@ -122,8 +122,6 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
 const S = {
   Wrapper: styled.div`
     padding: 24px 0;
-    /* 임시 */
-    margin-top: 800px;
   `,
   Title: styled.h1`
     color: #000;
