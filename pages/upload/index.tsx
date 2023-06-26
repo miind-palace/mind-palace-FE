@@ -221,7 +221,7 @@ export default function Upload({ url }: UploadProps) {
         <KeywordFiled onChange={onChangeHandler} onSubmit={onSubmitHandler} keywordValue={convertedKeyword} />
 
         <label className="form__bgImage--label" htmlFor="bgImage">
-          {images && changeBg && <img className="form__bgImage--label" src={images[0]?.[1]} />}
+          {images && changeBg && <img className="form__bgImage--label" src={images[0]?.[1] as string} />}
         </label>
         <input
           id="bgImage"
