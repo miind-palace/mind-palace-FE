@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
 
-const GET_MEMORY_LIST_DEFAULT_SIZE = 4
+const GET_MEMORY_LIST_DEFAULT_SIZE = 3
 
 // memory types
 
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async () => {
   /** fetch data */
   const getMemoryList = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/paging?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=1`
+    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=1`
   )
   const getMemoryListRes: GetMemoryListRes = await getMemoryList.json()
 
@@ -74,7 +74,7 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
 
         /** fetch data */
         const getMemoryList = axios.get<GetMemoryListRes>(
-          `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/paging?page=${
+          `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=${
             memoryList.currentPage + 2
           }&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=${memberId}`
         )
