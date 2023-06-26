@@ -1,5 +1,5 @@
 import YouTubePlayer from './YouTubePlayer'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import styled from '@emotion/styled'
 
 import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
@@ -8,26 +8,23 @@ import usePickImageColor from '@/lib/hooks/usePickImageColor'
 
 interface MemoryProps {
   backgroundImage: string
-  videoId: string
+  videoId?: string | null
   createdAt: string
   text: string
   onClickCloseModal: () => void
 }
 
 const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseModal }: MemoryProps) => {
-  const [isImageLoad, setIsImageLoad] = useState(false)
   const downloadImageRef = useRef<HTMLDivElement>(null)
   const downloadImageId = 'download-image'
   const handleCapture = async () => {
-    if (isImageLoad && downloadImageRef.current) {
+    if (downloadImageRef.current) {
       downloadILmage(downloadImageRef.current)
     } else {
       window.alert('이미지가 로드되지 않았습니다.')
     }
   }
-  const handleImageLoad = () => {
-    setIsImageLoad(true)
-  }
+
   const handleRemoveMemory = () => {
     //TODO:추억삭제하는 api연결
   }
@@ -37,25 +34,27 @@ const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseM
     <Container pickColor={pickColor}>
       <Header>
         <RemoveMemoryButton onClick={handleRemoveMemory}>
-          <TrashIcon width={30} />
+          <TrashIcon width={18} height={20} />
         </RemoveMemoryButton>
         <Date>{createdAt}</Date>
         <BackButton onClick={onClickCloseModal}>
-          <XMarkIcon width={30} />
+          <XMarkIcon width={18} />
         </BackButton>
       </Header>
       <Main ref={downloadImageRef} id={downloadImageId}>
         <ImageWrapper>
-          <MemoryImage src={'/cat.jpg'} alt={'test'} onLoad={handleImageLoad} />
+          <MemoryImage src={'/tv.png'} />
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
-      <DownloadButton onClick={handleCapture} disabled={!isImageLoad}>
+      <DownloadButton onClick={handleCapture}>
         <CameraIcon width={50} />
       </DownloadButton>
-      <PlayerButton>
-        <YouTubePlayer videoId={videoId} isAutoPlay={true} />
-      </PlayerButton>
+      {!!videoId && (
+        <PlayerButton>
+          <YouTubePlayer videoId={videoId} isAutoPlay={true} />
+        </PlayerButton>
+      )}
     </Container>
   )
 }
@@ -76,6 +75,7 @@ const Container = styled.div<{ pickColor: string }>`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   min-height: 663px;
+  min-width: 400px;
 `
 
 const Header = styled.div`
@@ -88,7 +88,7 @@ const Header = styled.div`
 const PlayerButton = styled.div`
   position: absolute;
   right: 45px;
-  top: 105px;
+  top: 110px;
 `
 const BackButton = styled(Button)``
 
@@ -110,16 +110,23 @@ const ImageWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
 `
-
-const MemoryImage = styled.img`
+const MemoryImage = styled.div<{ src: string }>`
+  background-image: url(${(props) => props.src});
   width: 100%;
-  height: 100%;
-  max-height: 435px;
-  object-fit: contain;
+  min-width: 307px;
+  height: 435px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 `
 
 const Date = styled.span`
+  font-family: 'Inter';
   font-size: 30px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.025em;
+  text-align: left;
 `
 const Main = styled.div`
   display: flex;
