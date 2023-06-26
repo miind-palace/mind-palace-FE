@@ -1,38 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# My-Pal: Mind Place
 
-First, run the development server:
+당신의 기억이 사라지지 않도록 보관하세요.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<img width="508" alt="스크린샷 2023-06-26 오후 3 54 51" src="https://github.com/miind-palace/mind-palace-FE/assets/76601773/a667a918-0135-4142-a1b5-606ea327a6ab">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- My-Pal 팀의 프론트엔드 레포입니다 😊
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 👨‍💻 프론트엔드 팀원 소개 
+|    곰곰    |    네모    |    누누    |    담    |    아론    |    플루토    |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|    [@곰곰](https://github.com/Jooeun-K)    |    [@네모](https://github.com/brother1-4752)    |    [@누누](https://github.com/angenehms)    |    [@담](https://github.com/j2h30728)    |    [@아론](https://github.com/yunwoo-yu)    |    [@iHoHyeon](https://github.com/eunbae0)    |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 👨‍💻 백엔드 팀원 소개  
+|    오원    |    리히트    |
+|:---:|:---:|
+|    [@오원](https://github.com/signalzero96)    |    [@리히트](https://github.com/RE-Heat)    |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🖌️ 디자이너 소개  
+|    허니비    |
+|:---:|
+|    [@허니비](https://github.com/hyeonheebee)    |
 
-## Learn More
+## 🛠️ 개발 언어 및 활용 기술  
+#### 🧊 개발 환경     
+- TypeScript   
+- Next.js
+- @emotion/styled 
+- Eslint / Prettier
 
-To learn more about Next.js, take a look at the following resources:
+## ℹ️ 배포 상태
+[mind-palace-fe.vercel.app](mind-palace-fe.vercel.app)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🔗 백엔드 깃 레포지토리  
+[mind-palace-BACKEND](https://github.com/miind-palace/mind-palace-BACKEND)
