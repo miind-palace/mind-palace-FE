@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
 import downloadILmage from '@/lib/utils/downloadImage'
 import usePickImageColor from '@/lib/hooks/usePickImageColor'
+import { useRouter } from 'next/router'
 
 interface MemoryProps {
   backgroundImage: string
@@ -12,9 +13,17 @@ interface MemoryProps {
   createdAt: string
   text: string
   onClickCloseModal: () => void
+  onClickRemoveMemory: () => void
 }
 
-const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseModal }: MemoryProps) => {
+const MemoryDetail = ({
+  backgroundImage,
+  videoId,
+  text,
+  createdAt,
+  onClickCloseModal,
+  onClickRemoveMemory,
+}: MemoryProps) => {
   const downloadImageRef = useRef<HTMLDivElement>(null)
   const downloadImageId = 'download-image'
   const handleCapture = async () => {
@@ -24,9 +33,16 @@ const MemoryDetail = ({ backgroundImage, videoId, text, createdAt, onClickCloseM
       window.alert('이미지가 로드되지 않았습니다.')
     }
   }
+  const router = useRouter()
 
   const handleRemoveMemory = () => {
-    //TODO:추억삭제하는 api연결
+    if (window.confirm('추억을 삭제하시겠습니까?')) {
+      onClickRemoveMemory()
+      onClickCloseModal()
+      router.reload()
+    } else {
+      onClickCloseModal()
+    }
   }
   const pickColor = usePickImageColor(backgroundImage)
 
