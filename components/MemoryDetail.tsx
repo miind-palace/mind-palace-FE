@@ -59,7 +59,7 @@ const MemoryDetail = ({
       </Header>
       <Main ref={downloadImageRef} id={downloadImageId}>
         <ImageWrapper>
-          <MemoryImage src={'/tv.png'} />
+          <MemoryImage src={backgroundImage} />
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
