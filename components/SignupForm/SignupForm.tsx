@@ -6,6 +6,7 @@ import Input from '@/pages/temp/SigninForm/Input'
 import { SecurityIcon } from '../Icons'
 
 export default function SignupForm() {
+  console.log('env:', process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT)
   useEffect(() => {
     // 마운트시 토큰 있으면 upload 페이지로 !! ( 사용자가 url 에 직접 sign-up 로 접근하였을 경우 대비 )
     if (localStorage.getItem('token')) {
