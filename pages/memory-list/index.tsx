@@ -48,17 +48,14 @@ export const getServerSideProps: GetServerSideProps<{
   initMemoryList: MemoryListType
 }> = async () => {
   /** fetch data */
-  // const getMemoryList = await fetch(
-  //   `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}/post/paging?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=1`
-  // )
-
-  /** 임시: 데이터 채워질 때 교체 예정 */
-  const getMemoryList = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}/post/paging?page=1`)
-  const res: GetMemoryListRes = await getMemoryList.json()
+  const getMemoryList = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/paging?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=1`
+  )
+  const getMemoryListRes: GetMemoryListRes = await getMemoryList.json()
 
   const initMemoryList: MemoryListType = {
-    memoryList: res.content,
-    currentPage: res.pageable.page,
+    memoryList: getMemoryListRes.content,
+    currentPage: getMemoryListRes.pageable.page,
   }
   return { props: { initMemoryList } }
 }
@@ -71,12 +68,16 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
   const handleIntersect = useCallback(
     ([entry]: IntersectionObserverEntry[]) => {
       if (entry.isIntersecting && typeof window !== 'undefined') {
-        const memberId = localStorage.getItem('memberId')
-        /** fetch data */
-        // const getMemoryList = axios.get<GetMemoryListRes>(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}/post/paging?page=${memoryList.currentPage + 2}&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=${memberId}`)
+        // const memberId = localStorage.getItem('memberId')
+        /** TODO: 로그인 로컬스토리지 구현 확인되면 변경 */
+        const memberId = 14
 
-        /** 임시: 데이터 채워질 때 교체 예정 */
-        const getMemoryList = axios.get<GetMemoryListRes>(`/post/paging?page=${memoryList.currentPage + 2}`)
+        /** fetch data */
+        const getMemoryList = axios.get<GetMemoryListRes>(
+          `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/paging?page=${
+            memoryList.currentPage + 2
+          }&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=${memberId}`
+        )
         getMemoryList
           .then((res) => {
             if (res.status !== 200) return
