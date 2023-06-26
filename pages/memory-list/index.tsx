@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async () => {
   /** fetch data */
   const getMemoryList = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=1`
+    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=14`
   )
   const getMemoryListRes: GetMemoryListRes = await getMemoryList.json()
 
