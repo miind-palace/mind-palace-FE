@@ -1,51 +1,46 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import axios from 'axios'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
-import MemoryDetail from '@/components/MemoryDetail'
-import Modal from '@/components/Modal'
-import useControlModal from '@/lib/hooks/useControlModal'
-import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 
-/**mock data */
-const MockMemoryType = (currentPage: number) => {
-  return {
-    data: [
-      {
-        id: currentPage,
-        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
-        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
-        text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        createdAt: 'July 23',
-        deletedAt: 'July 23',
-      },
-      {
-        id: currentPage,
-        backgroundImage: 'https://cdn.discordapp.com/attachments/602352601719111699/1122243032356499587/cat.png',
-        youtubeUrl: 'https://youtu.be/2T6KhOl-g8w',
-        text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        createdAt: 'July 23',
-        deletedAt: 'July 23',
-      },
-    ],
-    currentPage: currentPage,
+const GET_MEMORY_LIST_DEFAULT_SIZE = 3
+
+// memory types
+
+/** memoryList를 가져오는 api의 response type */
+export type GetMemoryListRes = {
+  total: number
+  content: Array<MemoryType>
+  pageable: {
+    sort: {
+      orders: [
+        {
+          direction: string
+          property: string
+          ignoreCase: boolean
+          nullHandling: string
+        }
+      ]
+    }
+    page: number
+    size: number
   }
 }
 
-// memory types
 export type MemoryType = {
   id: number
   backgroundImage: string
-  youtubeUrl: string
   text: string
+  videoId: string
   createdAt: string
-  deletedAt: string
+  deletedAt?: string
 }
 
 export type MemoryListType = {
-  data: MemoryType[]
-  currentPage: number
+  memoryList: GetMemoryListRes['content']
+  currentPage: GetMemoryListRes['pageable']['page']
 }
 
 // server data fetching
@@ -53,52 +48,48 @@ export const getServerSideProps: GetServerSideProps<{
   initMemoryList: MemoryListType
 }> = async () => {
   /** fetch data */
-  // const getMemoryListRes = await fetch(`https://-?memoryList=1`)
-  // const initMemoryList = await getMemoryListRes.json()
+  const getMemoryList = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=1&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=14`
+  )
+  const getMemoryListRes: GetMemoryListRes = await getMemoryList.json()
 
-  // mock data
-  const initMemoryList = MockMemoryType(1)
+  const initMemoryList: MemoryListType = {
+    memoryList: getMemoryListRes.content,
+    currentPage: getMemoryListRes.pageable.page,
+  }
   return { props: { initMemoryList } }
 }
 
 export default function MemoryList({ initMemoryList }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [memoryList, setMemoryList] = useState<MemoryListType>(initMemoryList)
 
-  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
-
-  const [memory, setMemory] = useState<MemoryType>()
-
   const targetRef = useRef<HTMLDivElement>(null)
-  const mockNumber = useRef(2)
 
   const handleIntersect = useCallback(
     ([entry]: IntersectionObserverEntry[]) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && typeof window !== 'undefined') {
+        // const memberId = localStorage.getItem('memberId')
+        /** TODO: 로그인 로컬스토리지 구현 확인되면 변경 */
+        const memberId = 14
+
         /** fetch data */
-        // const getMemoryList = axios.get<MemoryListType>(`https://-?memoryList=${memoryList.currentPage}`)
-        // getMemoryList.then((res) => {
-        //   if (res.status !== 200) return
-
-        //   setMemoryList((prev) => {
-        //     if (prev && prev.currentPage === 1) return
-        //     else
-        //       return {
-        //         ...prev,
-        //         data: [...prev.data, ...res.data.data],
-        //         currentPage: res.data.currentPage,
-        //       }
-        //   })
-        // })
-
-        /** mock data */
-        setMemoryList((prev) => {
-          return {
-            ...prev,
-            data: [...prev.data, ...MockMemoryType(mockNumber.current).data],
-            currentPage: MockMemoryType(mockNumber.current).currentPage,
-          }
-        })
-        mockNumber.current++
+        const getMemoryList = axios.get<GetMemoryListRes>(
+          `${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/page?page=${
+            memoryList.currentPage + 2
+          }&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=${memberId}`
+        )
+        getMemoryList
+          .then((res) => {
+            if (res.status !== 200) return
+            setMemoryList((prev) => {
+              return {
+                ...prev,
+                memoryList: [...prev.memoryList, ...res.data.content],
+                currentPage: res.data.pageable.page,
+              }
+            })
+          })
+          .catch((error) => console.error(error))
       }
     },
     [targetRef.current]
@@ -118,33 +109,11 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     }
   }, [handleIntersect, targetRef.current])
 
-  const handleOpenMemoryDetailModal = (memory: MemoryType) => {
-    setMemory(memory)
-    handleOpenModal()
-  }
-
-  const youtubeUrl = 'https://youtu.be/2T6KhOl-g8w'
-  const videoId = makeYouTubeVideoId(youtubeUrl)
-
   return (
     <S.Wrapper>
-      <button onClick={handleOpenModal}>{isOpen ? '닫기' : '열기'}</button>
-      {isOpen && memory && (
-        <Modal onClose={handleCloseModal}>
-          <MemoryDetail
-            createdAt={memory.createdAt}
-            backgroundImage={memory.backgroundImage}
-            videoId={videoId}
-            text={memory.text}
-            onClickCloseModal={handleCloseModal}
-          />
-        </Modal>
-      )}
       <S.Title>My Palace</S.Title>
-      {memoryList?.data.map((memory, index) => (
-        <div key={index} onClick={() => handleOpenMemoryDetailModal(memory)}>
-          <Card memory={memory} ref={targetRef} />
-        </div>
+      {memoryList?.memoryList.map((memory, index) => (
+        <Card key={index} memory={memory} ref={targetRef} />
       ))}
     </S.Wrapper>
   )
@@ -152,9 +121,9 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
 
 const S = {
   Wrapper: styled.div`
+    padding: 24px 0;
     /* 임시 */
-    margin: 800px auto;
-    width: 414px;
+    margin-top: 800px;
   `,
   Title: styled.h1`
     color: #000;
