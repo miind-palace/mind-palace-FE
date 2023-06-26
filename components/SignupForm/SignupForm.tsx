@@ -79,6 +79,9 @@ export default function SignupForm() {
     // 회원가입 시켜주는 함수 그 후 upload 페이지 이동
     e.preventDefault()
 
+    alert('회원 가입 기능은 준비중입니다. 테스트 계정을 제공받아 로그인 해주세요!')
+    return
+
     if (validityResult) {
       const response = await axios.post('/member/save', {
         memberEmail: signupConditions.email,
