@@ -33,7 +33,7 @@ export type MemoryType = {
   id: number
   backgroundImage: string
   text: string
-  videoId?: string
+  videoId: string
   createdAt: string
   deletedAt?: string
 }
