@@ -7,7 +7,6 @@ const downloadILmage = async (element: HTMLDivElement | null) => {
   }
 
   try {
-    console.log(element)
     const canvas = await html2canvas(element)
     const imageUrl = canvas.toDataURL('image/png')
 
