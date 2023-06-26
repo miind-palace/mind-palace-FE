@@ -6,6 +6,8 @@ const makeYouTubeVideoId = (youtubeUrl: string) => {
   if (youtubeUrl.includes('youtube.com')) {
     return new URL(youtubeUrl).searchParams.get('v')
   }
+
+  return ''
 }
 
 export default makeYouTubeVideoId
