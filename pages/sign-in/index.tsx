@@ -1,3 +1,12 @@
-export default function SignIn() {
-  return <h1>Sign In</h1>
+import React from 'react'
+import SigninForm from '../../components/SigninForm/SigninForm'
+
+const index = () => {
+  return (
+    <div>
+      <SigninForm />
+    </div>
+  )
 }
+
+export default index
