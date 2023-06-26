@@ -8,7 +8,7 @@ import usePickImageColor from '@/lib/hooks/usePickImageColor'
 
 interface MemoryProps {
   backgroundImage: string
-  videoId?: string | null
+  videoId?: string
   createdAt: string
   text: string
   onClickCloseModal: () => void
