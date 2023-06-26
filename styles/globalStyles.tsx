@@ -28,6 +28,11 @@ const globalStyles = css`
   time, mark, audio, video {
     font-family: 'Pretendard', sans-serif;
   }
+
+  @font-face {
+    font-family: 'Yoonwoo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105@1.1/Yoonwoo.woff') format('woff');
+  }
 `
 
 export default globalStyles
