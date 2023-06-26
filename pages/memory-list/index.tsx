@@ -68,11 +68,10 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
 
   const targetRef = useRef<HTMLDivElement>(null)
 
-  const memberId = localStorage.getItem('memberId')
-
   const handleIntersect = useCallback(
     ([entry]: IntersectionObserverEntry[]) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && typeof window !== 'undefined') {
+        const memberId = localStorage.getItem('memberId')
         /** fetch data */
         // const getMemoryList = axios.get<GetMemoryListRes>(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}/post/paging?page=${memoryList.currentPage + 2}&size=${GET_MEMORY_LIST_DEFAULT_SIZE}&memberId=${memberId}`)
 
