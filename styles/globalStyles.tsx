@@ -4,9 +4,8 @@ import { css } from '@emotion/react'
 emotionReset.styles
 
 const globalStyles = css`
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css');
   ${emotionReset}
-
-  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css");
 
   * {
     box-sizing: border-box;
