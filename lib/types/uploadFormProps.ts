@@ -1,5 +1,5 @@
 export interface UploadFormProps {
   backgroundImage: string
-  youtubeUrl?: string
+  videoId?: string
   text?: string
 }

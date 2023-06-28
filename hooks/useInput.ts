@@ -6,16 +6,20 @@ const useInput = () => {
   const { register, handleSubmit } = useForm<UploadFormProps>()
   const [youtubeUrl, setYoutubeUrl] = useState<string>('')
 
-  const onChangeText = (event: React.SyntheticEvent<HTMLInputElement>) => {
+  console.log(youtubeUrl)
+
+  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log('text 변하는중')
     //...
   }
 
-  const onChangeYoutubeUrl = (event: React.SyntheticEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.currentTarget.value)
+  const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setYoutubeUrl(event.target.value)
   }
 
-  const onValid: SubmitHandler<UploadFormProps> = (data) => console.log(data)
+  const onValid: SubmitHandler<UploadFormProps> = (data) => {
+    console.log(data)
+  }
 
   return {
     onChangeYoutubeUrl,

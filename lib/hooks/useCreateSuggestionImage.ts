@@ -12,7 +12,8 @@ const useCreateSuggestionImage = () => {
   const [convertedKeyword, setConvertedKeyword] = useState<string>('')
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const [images, setImages] = useState<string[]>([])
+  const [images, setImages] = useState<string[][] | File[][]>([])
+  const [isSendKeyword, setIsSendKeyword] = useState<boolean>(false)
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
     onSuccess(resData) {
@@ -54,6 +55,7 @@ const useCreateSuggestionImage = () => {
     if (0 >= convertedKeyword.trim().length) return alert('키워드를 입력해주세요!')
 
     createSuggestionImageMutation.mutate(convertedKeyword.trim())
+    setIsSendKeyword(true)
   }
 
   return {
@@ -63,6 +65,7 @@ const useCreateSuggestionImage = () => {
     images,
     isError,
     errorMessage,
+    isSendKeyword,
   }
 }
 

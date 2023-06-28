@@ -1,11 +1,9 @@
-import { fakeGeneratedImageSrcArr } from '@/pages/upload'
 import { useState, useEffect } from 'react'
 
 export const useChangePreviewImage = () => {
   const [imgFile, setImgFile] = useState<File | null>()
   const [preview, setPreview] = useState<string | null>('')
   const [hasImage, setHasImage] = useState(false)
-  const backgroundImageSrc = fakeGeneratedImageSrcArr[0]
 
   const onChangeBackgroundImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files !== null) {
@@ -27,10 +25,8 @@ export const useChangePreviewImage = () => {
         setPreview(reader.result as string)
       }
       reader.readAsDataURL(imgFile)
-    } else {
-      setPreview(backgroundImageSrc)
     }
-  }, [imgFile, backgroundImageSrc])
+  }, [imgFile])
 
   return {
     preview,
@@ -38,5 +34,7 @@ export const useChangePreviewImage = () => {
     setPreview,
     setHasImage,
     hasImage,
+    setImgFile,
+    imgFile,
   }
 }

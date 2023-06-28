@@ -11,7 +11,7 @@ const CardPlayStartButton = () => {
       <path
         d="M3 6H0V27C0 28.65 1.35 30 3 30H24V27H3V6ZM27 0H9C7.35 0 6 1.35 6 3V21C6 22.65 7.35 24 9 24H27C28.65 24 30 22.65 30 21V3C30 1.35 28.65 0 27 0ZM15 18.75V5.25L24 12L15 18.75Z"
         fill="white"
-        fill-opacity="0.7"
+        fillOpacity="0.7"
       />
     </svg>
   )
@@ -24,12 +24,12 @@ const CardPlayStopButton = () => {
       <path
         d="M3 6H0V27C0 28.65 1.35 30 3 30H24V27H3V6ZM27 0H9C7.35 0 6 1.35 6 3V21C6 22.65 7.35 24 9 24H27C28.65 24 30 22.65 30 21V3C30 1.35 28.65 0 27 0ZM14.25 17.25V7.5H17.25L18 12L19.5 17.25V7.5H22.5V17.25H19.5L18 12L17.25 7.5V17.25H14.25Z"
         fill="white"
-        fill-opacity="0.4"
+        fillOpacity="0.4"
       />
       <path
         d="M3 6H0V27C0 28.65 1.35 30 3 30H24V27H3V6ZM27 0H9C7.35 0 6 1.35 6 3V21C6 22.65 7.35 24 9 24H27C28.65 24 30 22.65 30 21V3C30 1.35 28.65 0 27 0ZM14.25 17.25V7.5H17.25L18 12L19.5 17.25V7.5H22.5V17.25H19.5L18 12L17.25 7.5V17.25H14.25Z"
         fill="white"
-        fill-opacity="0.4"
+        fillOpacity="0.4"
       />
     </svg>
   )

@@ -35,7 +35,7 @@ export default function SigninForm() {
     if (!signinConditions.email || !signinConditions.password) return alert('아이디나 비밀번호를 입력하세요!')
 
     try {
-      const response = await axios.post('/member/login', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}member/login`, {
         memberEmail: signinConditions.email,
         memberPassword: signinConditions.password,
       })
