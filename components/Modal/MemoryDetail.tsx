@@ -1,8 +1,8 @@
-import YouTubePlayer from './YouTubePlayer'
+import YouTubePlayer from '../button/YouTubePlayerButton'
 import { useRef } from 'react'
 import styled from '@emotion/styled'
 
-import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
+import { CameraIcon, TrashIcon, XMarkIcon } from '../Icons'
 import downloadILmage from '@/lib/utils/downloadImage'
 import usePickImageColor from '@/lib/hooks/usePickImageColor'
 import { useRouter } from 'next/router'

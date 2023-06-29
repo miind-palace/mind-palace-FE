@@ -5,7 +5,7 @@ const downloadILmage = async (element: HTMLDivElement | null) => {
     console.error('찾을수 없습니다.')
     return
   }
-
+  console.log(element)
   try {
     const canvas = await html2canvas(element)
     const imageUrl = canvas.toDataURL('image/png')

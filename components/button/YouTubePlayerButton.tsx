@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import YouTube from 'react-youtube'
-import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from './Icons'
+import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from '../Icons'
 import styled from '@emotion/styled'
 
 interface YouTubePlayerProps {
@@ -12,8 +12,6 @@ interface YouTubePlayerProps {
 const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay, isInMemoryList }) => {
   const [player, setPlayer] = useState<YT.Player | undefined>(undefined)
   const [isPlaying, setIsPlaying] = useState(true)
-
-  console.log(videoId)
 
   const opts = {
     height: '0',
