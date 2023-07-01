@@ -1,5 +1,5 @@
 import { debounce } from 'lodash'
-import { WheelEvent, useRef, useCallback, useMemo } from 'react'
+import { WheelEvent, useMemo, useRef } from 'react'
 
 const useHorizontalWheel = () => {
   const wheelRef = useRef<null | HTMLDivElement>(null)
