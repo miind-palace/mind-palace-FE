@@ -1,4 +1,4 @@
-import useLockBodyScroll from '@/lib/hooks/useLockBodyScroll'
+import useLockBodyScroll from '@/hooks/useLockBodyScroll'
 import styled from '@emotion/styled'
 import { createPortal } from 'react-dom'
 

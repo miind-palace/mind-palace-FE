@@ -4,8 +4,9 @@ import styled from '@emotion/styled'
 
 import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
 import downloadILmage from '@/lib/utils/downloadImage'
-import usePickImageColor from '@/lib/hooks/usePickImageColor'
+
 import { useRouter } from 'next/router'
+import usePickImageColor from '@/hooks/usePickImageColor'
 
 interface MemoryProps {
   backgroundImage: string
