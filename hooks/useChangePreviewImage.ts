@@ -1,5 +1,5 @@
-import { ImagesTypes } from '@/lib/hooks/useCreateSuggestionImage'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { ImagesTypes } from './useCreateSuggestionImage'
 
 export const useChangePreviewImage = () => {
   const [imgFile, setImgFile] = useState<File | null>()
