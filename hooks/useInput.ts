@@ -1,34 +1,15 @@
-import { UploadFormProps } from '@/lib/types/uploadFormProps'
-import { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 
-const useInput = () => {
-  const { register, handleSubmit } = useForm<UploadFormProps>()
-  const [youtubeUrl, setYoutubeUrl] = useState<string>('')
+type InputReturnTypes<T> = [T, Dispatch<SetStateAction<T>>, (e: ChangeEvent<HTMLInputElement>) => void]
 
-  console.log(youtubeUrl)
+const useInput = <T>(initialValue: T): InputReturnTypes<T> => {
+  const [value, setValue] = useState(initialValue)
 
-  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('text 변하는중')
-    //...
+  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value as T)
   }
 
-  const onChangeYoutubeUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setYoutubeUrl(event.target.value)
-  }
-
-  const onValid: SubmitHandler<UploadFormProps> = (data) => {
-    console.log(data)
-  }
-
-  return {
-    onChangeYoutubeUrl,
-    onChangeText,
-    handleSubmit,
-    onValid,
-    register,
-    youtubeUrl,
-  }
+  return [value, setValue, onChangeHandler]
 }
 
 export default useInput
