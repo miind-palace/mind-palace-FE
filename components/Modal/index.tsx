@@ -35,7 +35,7 @@ const ModalOverlay = styled.div`
 `
 
 const ModalContent = styled.div`
-  width: 85%;
-  max-width: 550px;
+  width: 80%;
+  max-width: 520px;
   overflow: hidden;
 `

@@ -1,11 +1,12 @@
 import YouTubePlayer from '../button/YouTubePlayerButton'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
 import { CameraIcon, TrashIcon, XMarkIcon } from '../Icons'
 import downloadILmage from '@/lib/utils/downloadImage'
 import usePickImageColor from '@/lib/hooks/usePickImageColor'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 interface MemoryProps {
   backgroundImage: string
@@ -24,10 +25,11 @@ const MemoryDetail = ({
   onClickCloseModal,
   onClickRemoveMemory,
 }: MemoryProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
   const downloadImageRef = useRef<HTMLDivElement>(null)
   const downloadImageId = 'download-image'
   const handleCapture = async () => {
-    if (downloadImageRef.current) {
+    if (isImageLoaded && downloadImageRef.current) {
       downloadILmage(downloadImageRef.current)
     } else {
       window.alert('이미지가 로드되지 않았습니다.')
@@ -59,12 +61,20 @@ const MemoryDetail = ({
       </Header>
       <Main ref={downloadImageRef} id={downloadImageId}>
         <ImageWrapper>
-          <MemoryImage src={backgroundImage} />
+          <Image
+            alt={text}
+            src={backgroundImage}
+            fill={true}
+            style={{
+              objectFit: 'contain',
+            }}
+            onLoad={() => setIsImageLoaded(true)}
+          />
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
-      <DownloadButton onClick={handleCapture}>
-        <CameraIcon width={50} />
+      <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
+        <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
       </DownloadButton>
       {!!videoId && (
         <PlayerButton>
@@ -118,23 +128,26 @@ const RemoveMemoryButton = styled(Button)``
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  max-width: 500px;
+  height: 435px;
   border-radius: 5px;
-  min-height: 435px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  object-fit: contain;
 `
-const MemoryImage = styled.div<{ src: string }>`
-  background-image: url(${(props) => props.src});
-  width: 100%;
-  min-width: 307px;
-  height: 435px;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-`
+// const MemoryImage = styled.div<{ src: string }>`
+//   background-image: url(${(props) => props.src});
+//   width: 100%;
+//   min-width: 307px;
+//   height: 435px;
+//   background-size: contain;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+// `
 
 const Date = styled.span`
   font-family: 'Inter';
@@ -146,6 +159,7 @@ const Date = styled.span`
 `
 const Main = styled.div`
   display: flex;
+  max-width: 500px;
   min-height: 553px;
   flex-direction: column;
   justify-content: center;
