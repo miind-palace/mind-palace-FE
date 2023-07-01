@@ -5,7 +5,7 @@ import { MemoryType } from '@/pages/memory-list'
 import CardPlayButton from './button/CardPlayButton'
 
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
-import useControlModal from '@/lib/hooks/useControlModal'
+import useControlModal from '@/hooks/useControlModal'
 import MemoryDetail from './MemoryDetail'
 import Modal from './Modal'
 
