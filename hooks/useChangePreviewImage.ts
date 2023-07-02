@@ -3,32 +3,32 @@ import { ImagesTypes } from './useCreateSuggestionImage'
 
 export const useChangePreviewImage = () => {
   const [imgFile, setImgFile] = useState<File | null>()
-  const [preview, setPreview] = useState('')
+  const [previewImageUrl, setPreviewImageUrl] = useState('')
 
   const onChangeBackgroundImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       // 이전 생성한 프리뷰 URL 제거 (메모리 확보)
       if (imgFile) {
-        URL.revokeObjectURL(preview)
+        URL.revokeObjectURL(previewImageUrl)
       }
 
       const file = event.target.files[0]
 
       setImgFile(file)
-      setPreview(URL.createObjectURL(file))
+      setPreviewImageUrl(URL.createObjectURL(file))
     }
   }
 
   const onClickSuggestionImage = ([file, imageUrl]: ImagesTypes) => {
     setImgFile(file)
-    setPreview(imageUrl)
+    setPreviewImageUrl(imageUrl)
   }
 
   return {
-    preview,
+    previewImageUrl,
     onChangeBackgroundImage,
     onClickSuggestionImage,
-    setPreview,
+    setPreviewImageUrl,
     setImgFile,
     imgFile,
   }
