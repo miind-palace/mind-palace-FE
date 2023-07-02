@@ -12,10 +12,7 @@ const createSuggestionImage = async (keyword: string) => {
 
 const useCreateSuggestionImage = () => {
   const [convertedKeyword, setConvertedKeyword] = useState<string>('')
-  const [isError, setIsError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
   const [images, setImages] = useState<ImagesTypes[]>([])
-  const [isSendKeyword, setIsSendKeyword] = useState<boolean>(false)
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
     onSuccess(resData) {
@@ -35,13 +32,9 @@ const useCreateSuggestionImage = () => {
         return [file, pngUrl]
       })
 
-      setIsError(false)
       setImages(imageUrls)
     },
     onError(error: any) {
-      setIsError(true)
-      setErrorMessage('키워드 생성에 실패했습니다!')
-
       console.log(error)
     },
   })
@@ -54,7 +47,6 @@ const useCreateSuggestionImage = () => {
     if (0 >= convertedKeyword.trim().length) return alert('키워드를 입력해주세요!')
 
     createSuggestionImageMutation.mutate(convertedKeyword.trim())
-    setIsSendKeyword(true)
   }
 
   return {
@@ -62,9 +54,6 @@ const useCreateSuggestionImage = () => {
     onSubmitHandler,
     convertedKeyword,
     images,
-    isError,
-    errorMessage,
-    isSendKeyword,
   }
 }
 
