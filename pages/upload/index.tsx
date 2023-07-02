@@ -9,20 +9,21 @@ import { FormEvent, useEffect } from 'react'
 
 import KeywordFiled from '@/components/KeywordFiled'
 import YouTubePlayer from '@/components/YouTubePlayer'
+import useCreateMemoryPost from '@/hooks/useCreateMemoryPost'
 import useCreateSuggestionImage from '@/hooks/useCreateSuggestionImage'
 import useHorizontalWheel from '@/hooks/useHorizontalWheel'
 import { DUMMY_SUGGESTION_IMAGE } from '@/lib/constant/constant'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
-import axios from 'axios'
 import Image from 'next/image'
 
 export default function Upload() {
   const [textArea, , onChangeTextInput] = useInput('')
   const [youtubeUrl, , onChangeYoutubeUrl] = useInput('')
   const { wheelRef, onWheelHandler } = useHorizontalWheel()
-  const { preview, setPreview, onChangeBackgroundImage, onClickSuggestionImage, setImgFile, imgFile } =
+  const { previewImageUrl, setPreviewImageUrl, onChangeBackgroundImage, onClickSuggestionImage, setImgFile, imgFile } =
     useChangePreviewImage()
   const { onChangeHandler, onSubmitHandler, convertedKeyword, images } = useCreateSuggestionImage()
+  const { createMemoryMutation } = useCreateMemoryPost()
 
   const onSubmitUploadHandler = async (e: FormEvent) => {
     e.preventDefault()
@@ -30,44 +31,31 @@ export default function Upload() {
     const isRequiredValue = imgFile && convertedKeyword
     const formData = new FormData()
 
-    if (!isRequiredValue) return alert('키워드와 이미지를 확인 해주세요!')
+    if (!isRequiredValue) return alert('키워드와 이미지를 입력 해주세요.')
 
-    if (textArea && youtubeUrl) {
-      formData.append('file', imgFile)
-      formData.append('keyword', convertedKeyword)
-      formData.append('text', textArea)
-      formData.append('videoId', makeYouTubeVideoId(youtubeUrl) || '')
-      formData.append('memberId', '14')
-    }
+    formData.append('file', imgFile)
+    formData.append('keyword', convertedKeyword)
+    formData.append('text', textArea)
+    formData.append('videoId', makeYouTubeVideoId(youtubeUrl) || '')
+    formData.append('memberId', '14')
 
-    try {
-      const response = await axios.post('/post/save', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-
-      return alert(`${response.data}`) // 추후 성공 시 커스텀 모달 추가 필요
-    } catch (error) {
-      console.error(error)
-      // 추후 업로드 실패 시 모달 추가 필요
-    }
+    createMemoryMutation.mutate(formData)
   }
 
   useEffect(() => {
-    if (images[0] && !preview) {
+    if (images[0] && !previewImageUrl) {
       setImgFile(images[0][0])
-      setPreview(images[0][1])
+      setPreviewImageUrl(images[0][1])
     }
-  }, [images, preview, setImgFile, setPreview])
+  }, [images, previewImageUrl, setImgFile, setPreviewImageUrl])
 
   return (
     <Container>
       <FormWrapper onSubmit={onSubmitUploadHandler} className="form__wrapper">
         <KeywordFiled onChange={onChangeHandler} onSubmit={onSubmitHandler} keywordValue={convertedKeyword} />
-        <PreviewLabel htmlFor="bgImage" previewUrl={preview ? preview : '/images/images-icon.svg'}>
-          {!preview && <span className="input__title">Upload Image</span>}
-          {!preview && <span className="preview__placeholder">그날의 추억을 기록하세요</span>}
+        <PreviewLabel htmlFor="bgImage" previewUrl={previewImageUrl ? previewImageUrl : '/images/images-icon.svg'}>
+          {!previewImageUrl && <span className="input__title">Upload Image</span>}
+          {!previewImageUrl && <span className="preview__placeholder">그날의 추억을 기록하세요</span>}
         </PreviewLabel>
         <input
           id="bgImage"
