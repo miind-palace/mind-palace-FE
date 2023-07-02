@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useMutation } from 'react-query'
 
-const createMemory = async (formData: FormData) => {
+const createMemoryPost = async (formData: FormData) => {
   const response = await axios.post('/post/save', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -11,8 +11,8 @@ const createMemory = async (formData: FormData) => {
   return response.data
 }
 
-const useCreateMemory = () => {
-  const createMemoryMutation = useMutation(createMemory, {
+const useCreateMemoryPost = () => {
+  const createMemoryMutation = useMutation(createMemoryPost, {
     onSuccess(resData) {
       alert(resData)
     },
@@ -24,4 +24,4 @@ const useCreateMemory = () => {
   return { createMemoryMutation }
 }
 
-export default useCreateMemory
+export default useCreateMemoryPost
