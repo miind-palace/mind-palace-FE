@@ -8,13 +8,13 @@ import UploadIcon from 'public/images/upload-icon.svg'
 import { FormEvent, useEffect } from 'react'
 
 import KeywordFiled from '@/components/KeywordFiled'
-import YouTubePlayer from '@/components/YouTubePlayer'
 import useCreateMemoryPost from '@/hooks/useCreateMemoryPost'
 import useCreateSuggestionImage from '@/hooks/useCreateSuggestionImage'
 import useHorizontalWheel from '@/hooks/useHorizontalWheel'
 import { DUMMY_SUGGESTION_IMAGE } from '@/lib/constant/constant'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import Image from 'next/image'
+import YouTubePlayer from '@/components/button/YouTubePlayerButton'
 
 export default function Upload() {
   const [textArea, , onChangeTextInput] = useInput('')
@@ -110,7 +110,7 @@ export default function Upload() {
             value={youtubeUrl}
             onChange={onChangeYoutubeUrl}
           />
-          <YouTubePlayer videoId={makeYouTubeVideoId(youtubeUrl)} isAutoPlay={true} />
+          <YouTubePlayer videoId={makeYouTubeVideoId(youtubeUrl) || ''} isAutoPlay={true} />
         </YouTubeWrapper>
 
         <MenuTabBarWrapper className="upload__bar">

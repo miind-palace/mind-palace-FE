@@ -6,9 +6,9 @@ import styled from '@emotion/styled'
 import Card from '@/components/Card'
 import Modal from '@/components/Modal'
 import MemoryDetail from '@/components/Modal/MemoryDetail'
-import useControlModal from '@/lib/hooks/useControlModal'
 import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
+import useControlModal from '@/hooks/useControlModal'
 
 const GET_MEMORY_LIST_DEFAULT_SIZE = 3
 
