@@ -37,7 +37,9 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay, isIn
   }
 
   const PlayerControlButton = (
-    <Button onClick={toggleVideoStatus}>{isPlaying ? <PauseIcon width={40} /> : <PlayIcon width={40} />}</Button>
+    <Button type="button" onClick={toggleVideoStatus}>
+      {isPlaying ? <PauseIcon width={40} /> : <PlayIcon width={40} />}
+    </Button>
   )
 
   const PlayerControlButtonInMemoryList = (

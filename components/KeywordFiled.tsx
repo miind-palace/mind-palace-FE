@@ -50,5 +50,10 @@ const Container = styled.div`
     background-color: transparent;
     border: none;
     color: #868686;
+    cursor: pointer;
+
+    & :hover {
+      color: #000;
+    }
   }
 `

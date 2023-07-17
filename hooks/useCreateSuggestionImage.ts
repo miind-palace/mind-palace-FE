@@ -1,6 +1,8 @@
 import axios from 'axios'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useMutation } from 'react-query'
+
+export type ImagesTypes = [File, string]
 
 const createSuggestionImage = async (keyword: string) => {
   const response = await axios.post('api/suggestion-image', { keyword })
@@ -10,16 +12,12 @@ const createSuggestionImage = async (keyword: string) => {
 
 const useCreateSuggestionImage = () => {
   const [convertedKeyword, setConvertedKeyword] = useState<string>('')
-  const [isError, setIsError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [images, setImages] = useState<string[][] | File[][]>([])
-  const [isSendKeyword, setIsSendKeyword] = useState<boolean>(false)
+  const [images, setImages] = useState<ImagesTypes[]>([])
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
     onSuccess(resData) {
       const imageUrls = resData.images.map((el: any) => {
         const decodedData = atob(el.image)
-
         const byteArray = new Uint8Array(decodedData.length)
 
         for (let i = 0; i < decodedData.length; i++) {
@@ -34,15 +32,9 @@ const useCreateSuggestionImage = () => {
         return [file, pngUrl]
       })
 
-      console.log(imageUrls)
-
-      setIsError(false)
       setImages(imageUrls)
     },
     onError(error: any) {
-      setIsError(true)
-      setErrorMessage(error.response.data.message)
-
       console.log(error)
     },
   })
@@ -55,7 +47,6 @@ const useCreateSuggestionImage = () => {
     if (0 >= convertedKeyword.trim().length) return alert('키워드를 입력해주세요!')
 
     createSuggestionImageMutation.mutate(convertedKeyword.trim())
-    setIsSendKeyword(true)
   }
 
   return {
@@ -63,9 +54,6 @@ const useCreateSuggestionImage = () => {
     onSubmitHandler,
     convertedKeyword,
     images,
-    isError,
-    errorMessage,
-    isSendKeyword,
   }
 }
 
