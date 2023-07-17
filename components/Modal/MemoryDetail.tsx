@@ -30,7 +30,7 @@ const MemoryDetail = ({
   const downloadImageId = 'download-image'
   const handleCapture = async () => {
     if (isImageLoaded && downloadImageRef.current) {
-      downloadILmage(downloadImageRef.current)
+      await downloadILmage(downloadImageRef.current)
     } else {
       window.alert('이미지가 로드되지 않았습니다.')
     }
@@ -64,7 +64,7 @@ const MemoryDetail = ({
           <Image
             alt={text}
             src={backgroundImage}
-            fill={true}
+            fill
             style={{
               objectFit: 'contain',
             }}

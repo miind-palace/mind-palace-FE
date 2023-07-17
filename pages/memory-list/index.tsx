@@ -128,7 +128,7 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     <S.Wrapper>
       <S.Title>My Palace</S.Title>
       {memoryList?.memoryList.map((memory, index) => (
-        <div key={memory.id} onClick={() => handleClickMemory(memory)}>
+        <div key={`${memory.id}${index}`} onClick={() => handleClickMemory(memory)}>
           <Card memory={memory} ref={targetRef} />
         </div>
       ))}
