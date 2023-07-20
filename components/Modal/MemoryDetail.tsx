@@ -1,4 +1,4 @@
-import YouTubePlayer from '../button/YouTubePlayerButton'
+import YouTubePlayerButton from '../button/YouTubePlayerButton'
 import { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
@@ -54,7 +54,7 @@ const MemoryDetail = ({
         <RemoveMemoryButton onClick={handleRemoveMemory}>
           <TrashIcon width={18} height={20} />
         </RemoveMemoryButton>
-        <Date>{createdAt}</Date>
+        <DateSpan>{createdAt}</DateSpan>
         <BackButton onClick={onClickCloseModal}>
           <XMarkIcon width={18} />
         </BackButton>
@@ -65,6 +65,7 @@ const MemoryDetail = ({
             alt={text}
             src={backgroundImage}
             fill
+            sizes="100vw"
             style={{
               objectFit: 'contain',
             }}
@@ -78,7 +79,7 @@ const MemoryDetail = ({
       </DownloadButton>
       {!!videoId && (
         <PlayerButton>
-          <YouTubePlayer videoId={videoId} isAutoPlay={true} />
+          <YouTubePlayerButton videoId={videoId} isAutoPlay={true} />
         </PlayerButton>
       )}
     </Container>
@@ -139,17 +140,8 @@ const ImageWrapper = styled.div`
   position: relative;
   object-fit: contain;
 `
-// const MemoryImage = styled.div<{ src: string }>`
-//   background-image: url(${(props) => props.src});
-//   width: 100%;
-//   min-width: 307px;
-//   height: 435px;
-//   background-size: contain;
-//   background-position: center center;
-//   background-repeat: no-repeat;
-// `
 
-const Date = styled.span`
+const DateSpan = styled.span`
   font-family: 'Inter';
   font-size: 30px;
   font-weight: 800;

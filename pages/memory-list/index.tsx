@@ -1,5 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import styled from '@emotion/styled'
 

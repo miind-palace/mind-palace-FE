@@ -14,7 +14,7 @@ import useHorizontalWheel from '@/hooks/useHorizontalWheel'
 import { DUMMY_SUGGESTION_IMAGE } from '@/lib/constant/constant'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import Image from 'next/image'
-import YouTubePlayer from '@/components/button/YouTubePlayerButton'
+import YouTubePlayerButton from '@/components/button/YouTubePlayerButton'
 
 export default function Upload() {
   const [textArea, , onChangeTextInput] = useInput('')
@@ -110,7 +110,7 @@ export default function Upload() {
             value={youtubeUrl}
             onChange={onChangeYoutubeUrl}
           />
-          <YouTubePlayer videoId={makeYouTubeVideoId(youtubeUrl) || ''} isAutoPlay={true} />
+          <YouTubePlayerButton videoId={makeYouTubeVideoId(youtubeUrl) || ''} isAutoPlay={true} />
         </YouTubeWrapper>
 
         <MenuTabBarWrapper className="upload__bar">
