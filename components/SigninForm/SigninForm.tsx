@@ -9,18 +9,19 @@ import BasicButton from '../common/Button/BasicButton'
 import Spacing from '../common/Spacing/Spacing'
 
 export default function SigninForm() {
+  const router = useRouter()
+
   useEffect(() => {
     // 마운트 시 토큰 존재하면 업로드 페이지 이동 -> ( api 받으면 추후 세션 방식으로 바꿔야 한다 ) - 자동 로그인 되어있을 경우 업로드로 라우팅도 구현해야
     if (localStorage.getItem('memberId')) {
       router.push('/upload')
     }
-  }, [])
+  }, [router])
 
   const [signinConditions, setSigninConditions] = useState({
     email: '',
     password: '',
   })
-  const router = useRouter()
 
   const updateSigninConditions = (e: ChangeEvent<HTMLInputElement>) => {
     // input 값에 onChange 를 통해 Conditions 을 변화시키는 함수

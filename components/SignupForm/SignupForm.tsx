@@ -15,15 +15,16 @@ const initialFormState = {
 }
 
 export default function SignupForm() {
+  const router = useRouter()
+
   useEffect(() => {
     // 마운트시 토큰 있으면 upload 페이지로 !! ( 사용자가 url 에 직접 sign-up 로 접근하였을 경우 대비 )
     if (localStorage.getItem('token')) {
       router.push('/upload')
     }
-  }, [])
+  }, [router])
 
   const [signupConditions, setSignupConditions] = useState(initialFormState)
-  const router = useRouter()
 
   const [emailValidity, setEmailValidity] = useState(false)
   const [passwordValidity, setPasswordValidity] = useState(false)
