@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styled from '@emotion/styled'
-import Input from '@/components/common/Input'
+import Input from '@/components/common/Input/Input'
 import { SecurityIcon } from '../Icons'
 
 const initialFormState = {
@@ -119,6 +119,7 @@ export default function SignupForm() {
               type="text"
               name="email"
               onChange={updateSignupConditions}
+              colorType="PENETRATED_WHITE"
             />
           </InputBox>
 
@@ -130,7 +131,8 @@ export default function SignupForm() {
               name="password"
               id="password"
               onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" />}
+              svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+              colorType="PENETRATED_WHITE"
             />
           </InputBox>
 
@@ -142,7 +144,8 @@ export default function SignupForm() {
               name="passwordCheck"
               id="PasswordCheck"
               onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" />}
+              svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+              colorType="PENETRATED_WHITE"
             />
           </InputBox>
 
@@ -192,12 +195,4 @@ const StyledButton = styled.button`
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.9);
   }
-`
-
-const StyledLink = styled.a`
-  margin: 10px;
-  padding: 10px;
-  text-decoration: underline;
-  color: #777777;
-  font-weight: 600;
 `
