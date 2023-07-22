@@ -98,9 +98,9 @@ export function PauseIconInMemoryList(props: SVGAttributes<SVGElement>) {
   )
 }
 
-export function SecurityIcon(props: SVGAttributes<SVGElement>) {
+export function SecurityIcon({ color = 'white', ...props }: SVGAttributes<SVGElement>) {
   return (
-    <svg width="16" height="17" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg color={color} width="16" height="17" viewBox="0 0 16 17" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
