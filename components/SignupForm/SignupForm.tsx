@@ -4,6 +4,8 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 import Input from '@/components/common/Input/Input'
 import { SecurityIcon } from '../Icons'
+import BasicButton from '../common/Button/BasicButton'
+import Spacing from '../common/Spacing/Spacing'
 
 const initialFormState = {
   email: '',
@@ -148,10 +150,8 @@ export default function SignupForm() {
               colorType="PENETRATED_WHITE"
             />
           </InputBox>
-
-          <ButtonBox>
-            <StyledButton>Sign up</StyledButton>
-          </ButtonBox>
+          <Spacing size={70} />
+          <BasicButton>Sign up</BasicButton>
         </form>
       </Wrapper>
     </>
@@ -172,27 +172,4 @@ const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
-const StyledButton = styled.button`
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.75);
-  width: 100%;
-  color: white;
-  font-weight: 600;
-  font-size: 17px;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
-  &:active {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
 `
