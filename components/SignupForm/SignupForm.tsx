@@ -2,8 +2,15 @@ import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styled from '@emotion/styled'
-import Input from '@/pages/temp/SigninForm/Input'
+import Input from '@/components/common/Input'
 import { SecurityIcon } from '../Icons'
+
+const initialFormState = {
+  email: '',
+  password: '',
+  passwordCheck: '',
+  memberName: '',
+}
 
 export default function SignupForm() {
   useEffect(() => {
@@ -13,12 +20,7 @@ export default function SignupForm() {
     }
   }, [])
 
-  const [signupConditions, setSignupConditions] = useState({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    memberName: '',
-  })
+  const [signupConditions, setSignupConditions] = useState(initialFormState)
   const router = useRouter()
 
   const [emailValidity, setEmailValidity] = useState(false)

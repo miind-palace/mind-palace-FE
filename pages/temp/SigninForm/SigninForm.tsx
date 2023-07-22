@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Input from './Input'
+import Input from '../../../components/common/Input'
 import { SecurityIcon } from '@/components/Icons'
 
 const SigninForm = () => {
