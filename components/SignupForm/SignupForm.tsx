@@ -113,43 +113,38 @@ export default function SignupForm() {
     <>
       <Wrapper>
         <form onSubmit={signupFunction}>
-          <InputBox>
-            <Input
-              value={signupConditions.email}
-              inputLabel="Email"
-              id="Email"
-              type="text"
-              name="email"
-              onChange={updateSignupConditions}
-              colorType="PENETRATED_WHITE"
-            />
-          </InputBox>
-
-          <InputBox>
-            <Input
-              value={signupConditions.password}
-              inputLabel="Password"
-              type="password"
-              name="password"
-              id="password"
-              onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
-              colorType="PENETRATED_WHITE"
-            />
-          </InputBox>
-
-          <InputBox>
-            <Input
-              value={signupConditions.passwordCheck}
-              inputLabel="Confirm Password"
-              type="password"
-              name="passwordCheck"
-              id="PasswordCheck"
-              onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
-              colorType="PENETRATED_WHITE"
-            />
-          </InputBox>
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.email}
+            inputLabel="Email"
+            id="Email"
+            type="text"
+            name="email"
+            onChange={updateSignupConditions}
+            colorType="PENETRATED_WHITE"
+          />
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.password}
+            inputLabel="Password"
+            type="password"
+            name="password"
+            id="password"
+            onChange={updateSignupConditions}
+            svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+            colorType="PENETRATED_WHITE"
+          />
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.passwordCheck}
+            inputLabel="Confirm Password"
+            type="password"
+            name="passwordCheck"
+            id="PasswordCheck"
+            onChange={updateSignupConditions}
+            svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+            colorType="PENETRATED_WHITE"
+          />
           <Spacing size={70} />
           <BasicButton>Sign up</BasicButton>
         </form>
@@ -161,15 +156,4 @@ export default function SignupForm() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const InputBox = styled.div`
-  margin: 20px 0;
-`
-
-const ButtonBox = styled.div`
-  margin: 70px 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `
