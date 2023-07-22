@@ -2,8 +2,8 @@ import { useState, FormEvent, ChangeEvent, MouseEvent, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styled from '@emotion/styled'
-import Input from './Input'
 import { SecurityIcon } from '../Icons'
+import Input from '@/components/common/Input/Input'
 
 export default function SigninForm() {
   useEffect(() => {
@@ -66,6 +66,7 @@ export default function SigninForm() {
             type="text"
             name="email"
             onChange={updateSigninConditions}
+            colorType="PENETRATED_BLACK"
           />
         </InputBox>
         <InputBox>
@@ -75,7 +76,8 @@ export default function SigninForm() {
             type="password"
             name="password"
             onChange={updateSigninConditions}
-            svgIcon={<SecurityIcon width="16" height="17" />}
+            svgIcon={<SecurityIcon width="16" height="17" color="white" />}
+            colorType="PENETRATED_BLACK"
           />
         </InputBox>
 
