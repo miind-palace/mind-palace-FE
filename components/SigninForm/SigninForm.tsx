@@ -4,6 +4,9 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 import { SecurityIcon } from '../Icons'
 import Input from '@/components/common/Input/Input'
+import Link from 'next/link'
+import BasicButton from '../common/Button/BasicButton'
+import Spacing from '../common/Spacing/Spacing'
 
 export default function SigninForm() {
   useEffect(() => {
@@ -59,34 +62,31 @@ export default function SigninForm() {
   return (
     <Wrapper>
       <form onSubmit={signinFunction}>
-        <InputBox>
-          <Input
-            value={signinConditions.email}
-            inputLabel="Email"
-            type="text"
-            name="email"
-            onChange={updateSigninConditions}
-            colorType="PENETRATED_BLACK"
-          />
-        </InputBox>
-        <InputBox>
-          <Input
-            value={signinConditions.password}
-            inputLabel="Password"
-            type="password"
-            name="password"
-            onChange={updateSigninConditions}
-            svgIcon={<SecurityIcon width="16" height="17" color="white" />}
-            colorType="PENETRATED_BLACK"
-          />
-        </InputBox>
-
-        <ButtonBox>
-          <StyledButton>Log in</StyledButton>
-          <StyledLink href="#" onClick={goToSignupPage}>
-            Make an account
-          </StyledLink>
-        </ButtonBox>
+        <Spacing size={20} />
+        <Input
+          value={signinConditions.email}
+          inputLabel="Email"
+          type="text"
+          name="email"
+          onChange={updateSigninConditions}
+          colorType="PENETRATED_BLACK"
+        />
+        <Spacing size={20} />
+        <Input
+          value={signinConditions.password}
+          inputLabel="Password"
+          type="password"
+          name="password"
+          onChange={updateSigninConditions}
+          svgIcon={<SecurityIcon width="16" height="17" color="white" />}
+          colorType="PENETRATED_BLACK"
+        />
+        <Spacing size={70} />
+        <BasicButton>Log in</BasicButton>
+        <Spacing size={20} />
+        <StyledLink href="#" onClick={goToSignupPage}>
+          Make an account
+        </StyledLink>
       </form>
     </Wrapper>
   )
@@ -95,43 +95,11 @@ export default function SigninForm() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
 `
 
-const InputBox = styled.div`
-  margin: 20px 0;
-`
-
-const ButtonBox = styled.div`
-  margin: 70px 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const StyledButton = styled.button`
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.75);
-  width: 100%;
-  color: white;
-  font-weight: 600;
-  font-size: 17px;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
-  &:active {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
-`
-
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   margin: 10px;
   padding: 10px;
   text-decoration: underline;
