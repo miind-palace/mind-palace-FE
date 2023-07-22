@@ -102,7 +102,7 @@ const Wrapper = styled.div`
 const StyledLink = styled(Link)`
   margin: 10px;
   padding: 10px;
-  text-decoration: underline;
+  text-decoration: none;
   color: #777777;
   font-weight: 600;
 `
