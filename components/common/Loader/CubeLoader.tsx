@@ -1,9 +1,13 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 
-const CubeLoader = () => {
+interface CubeLoaderProps {
+  size?: number
+}
+
+const CubeLoader = ({ size = 60 }: CubeLoaderProps) => {
   return (
-    <Container className="container">
+    <Container size={size}>
       <div className="cube">
         <div className="wraaper-half-1">
           <div className="box-fragment box-fragment-1"></div>
@@ -116,7 +120,12 @@ const halfFoldAnimation = keyframes`
 
 `
 
-const Container = styled.div`
+const Container = styled.div<CubeLoaderProps>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   &,
   .cube,
   .wraaper-half-1,
@@ -133,65 +142,58 @@ const Container = styled.div`
     position: absolute;
     opacity: 0.7;
   }
-  .container {
-    position: relative;
-    width: 600px;
-    height: 600px;
-    margin: 450px auto 0;
-    perspective: 900px;
-  }
   .cube {
-    width: 300px;
-    height: 300px;
+    width: ${(props) => props.size && props.size * 5}px;
+    height: ${(props) => props.size && props.size * 5}px;
     animation: ${cubeAnimation} 7s forwards infinite;
-    transform-origin: center 150px;
+    transform-origin: center ${(props) => props.size && (props.size * 5) / 2}px;
     transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg);
   }
   .wraaper-half-1 {
-    height: 120px;
+    height: ${(props) => props.size && props.size * 2}px;
     top: 0;
     position: absolute;
     animation: ${halfFoldAnimation} 7s forwards infinite;
     transform-origin: 50% 100%;
   }
   .box-fragment {
-    width: 60px;
-    height: 60px;
+    width: ${(props) => props.size && props.size}px;
+    height: ${(props) => props.size && props.size}px;
     background-color: #000;
   }
 
   .box-fragment-1 {
     top: 0;
-    left: 120px;
+    left: ${(props) => props.size && props.size * 2}px;
     transform-origin: 50% 100%;
     transform: translateY(0px);
     animation: ${fragmentAni1} 7s forwards infinite;
   }
   .box-fragment-2 {
-    top: 60px;
-    left: 120px;
+    top: ${(props) => props.size && props.size}px;
+    left: ${(props) => props.size && props.size * 2}px;
     transform-origin: 50% 0%;
   }
   .box-fragment-3 {
-    top: 120px;
-    left: 120px;
+    top: ${(props) => props.size && props.size * 2}px;
+    left: ${(props) => props.size && props.size * 2}px;
     transform-origin: 50% 0%;
   }
   .box-fragment-4 {
-    top: 180px;
-    left: 120px;
+    top: ${(props) => props.size && props.size * 3}px;
+    left: ${(props) => props.size && props.size * 2}px;
     transform-origin: 50% 0%;
     animation: ${fragmentAni4} 7s forwards infinite;
   }
   .box-fragment-5 {
-    left: 60px;
-    top: 60px;
+    left: ${(props) => props.size && props.size}px;
+    top: ${(props) => props.size && props.size}px;
     transform-origin: 100% 50%;
     animation: ${fragmentAni5} 7s forwards infinite;
   }
   .box-fragment-6 {
-    left: 180px;
-    top: 120px;
+    left: ${(props) => props.size && props.size * 3}px;
+    top: ${(props) => props.size && props.size * 2}px;
     transform-origin: 0% 50%;
     animation: ${fragmentAni6} 7s forwards infinite;
   }
