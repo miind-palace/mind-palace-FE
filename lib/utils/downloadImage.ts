@@ -1,14 +1,12 @@
-import html2canvas from 'html2canvas'
+import { toPng } from 'html-to-image'
 
-const downloadILmage = async (element: HTMLDivElement | null) => {
-  if (!element) {
+const downloadILmage = async (element: React.RefObject<HTMLDivElement>) => {
+  if (!element.current) {
     console.error('찾을수 없습니다.')
     return
   }
   try {
-    const canvas = await html2canvas(element)
-    const imageUrl = canvas.toDataURL('image/png')
-
+    const imageUrl = await toPng(element.current, { includeQueryParams: true })
     const imageLink = document.createElement('a')
     imageLink.href = imageUrl
     imageLink.download = 'my_memory.png'

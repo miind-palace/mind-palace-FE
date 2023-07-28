@@ -27,15 +27,19 @@ const MemoryDetail = ({
 }: MemoryProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
   const downloadImageRef = useRef<HTMLDivElement>(null)
-  const downloadImageId = 'download-image'
+  const [isDownloadImageLoading, setIsDownloadImageLoading] = useState(false)
+
   const handleCapture = async () => {
-    if (isImageLoaded && downloadImageRef.current) {
-      await downloadILmage(downloadImageRef.current)
+    if (isImageLoaded) {
+      setIsDownloadImageLoading(true)
+      await downloadILmage(downloadImageRef)
+      setIsDownloadImageLoading(false)
     } else {
       window.alert('이미지가 로드되지 않았습니다.')
     }
   }
   const router = useRouter()
+  const downloadImageId = 'download-image'
 
   const handleRemoveMemory = () => {
     if (window.confirm('추억을 삭제하시겠습니까?')) {
@@ -69,14 +73,18 @@ const MemoryDetail = ({
             style={{
               objectFit: 'contain',
             }}
-            onLoad={() => setIsImageLoaded(true)}
+            onLoadingComplete={() => setIsImageLoaded(true)}
           />
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
-      <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
-        <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
-      </DownloadButton>
+      {isDownloadImageLoading ? (
+        <span>사진 다운로드 중...</span>
+      ) : (
+        <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
+          <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
+        </DownloadButton>
+      )}
       {!!videoId && (
         <PlayerButton>
           <YouTubePlayerButton videoId={videoId} isAutoPlay={true} />
