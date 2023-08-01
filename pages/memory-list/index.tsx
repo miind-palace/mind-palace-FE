@@ -4,11 +4,11 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
-import Modal from '@/components/Modal'
-import MemoryDetail from '@/components/Modal/MemoryDetail'
+import MemoryDetail from '@/components/memory-list/MemoryDetail'
 import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import useControlModal from '@/hooks/useControlModal'
+import Modal from '@/components/common/Modal'
 
 const GET_MEMORY_LIST_DEFAULT_SIZE = 3
 
