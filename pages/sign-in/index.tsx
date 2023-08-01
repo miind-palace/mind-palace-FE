@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import SigninForm from '../../components/SigninForm/SigninForm'
-import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
+import SigninForm from '@/components/SigninForm/SigninForm'
 import BounceCube from '@/components/Intro/BounceCube/BounceCube'
+import styled from '@emotion/styled'
 
-const TRANSITION_DELAY = 3700
-
-const TempPage = () => {
+const SignInPage = () => {
   const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
@@ -16,25 +14,23 @@ const TempPage = () => {
   }, [])
 
   return (
-    <Temp>
-      <Container>
-        <Wrapper>
-          <CubeBox>
-            <BounceCube />
-          </CubeBox>
-          <DimBg isShow={isShow} />
-          <InputBox isShow={isShow}>
-            <SigninForm />
-          </InputBox>
-        </Wrapper>
-      </Container>
-    </Temp>
+    <Container>
+      <Wrapper>
+        <CubeBox>
+          <BounceCube />
+        </CubeBox>
+        <DimBg isShow={isShow} />
+        <InputBox isShow={isShow}>
+          <SigninForm />
+        </InputBox>
+      </Wrapper>
+    </Container>
   )
 }
 
-export default TempPage
+export default SignInPage
 
-const Temp = styled.div``
+const TRANSITION_DELAY = 3700
 
 const Container = styled.div`
   width: 100%;

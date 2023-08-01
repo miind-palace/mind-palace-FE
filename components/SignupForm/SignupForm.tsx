@@ -2,24 +2,29 @@ import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styled from '@emotion/styled'
-import Input from '@/pages/temp/SigninForm/Input'
+import Input from '@/components/common/Input/Input'
 import { SecurityIcon } from '../Icons'
+import BasicButton from '../common/Button/BasicButton'
+import Spacing from '../common/Spacing/Spacing'
+
+const initialFormState = {
+  email: '',
+  password: '',
+  passwordCheck: '',
+  memberName: '',
+}
 
 export default function SignupForm() {
+  const router = useRouter()
+
   useEffect(() => {
     // 마운트시 토큰 있으면 upload 페이지로 !! ( 사용자가 url 에 직접 sign-up 로 접근하였을 경우 대비 )
     if (localStorage.getItem('token')) {
       router.push('/upload')
     }
-  }, [])
+  }, [router])
 
-  const [signupConditions, setSignupConditions] = useState({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    memberName: '',
-  })
-  const router = useRouter()
+  const [signupConditions, setSignupConditions] = useState(initialFormState)
 
   const [emailValidity, setEmailValidity] = useState(false)
   const [passwordValidity, setPasswordValidity] = useState(false)
@@ -109,44 +114,40 @@ export default function SignupForm() {
     <>
       <Wrapper>
         <form onSubmit={signupFunction}>
-          <InputBox>
-            <Input
-              value={signupConditions.email}
-              inputLabel="Email"
-              id="Email"
-              type="text"
-              name="email"
-              onChange={updateSignupConditions}
-            />
-          </InputBox>
-
-          <InputBox>
-            <Input
-              value={signupConditions.password}
-              inputLabel="Password"
-              type="password"
-              name="password"
-              id="password"
-              onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" />}
-            />
-          </InputBox>
-
-          <InputBox>
-            <Input
-              value={signupConditions.passwordCheck}
-              inputLabel="Confirm Password"
-              type="password"
-              name="passwordCheck"
-              id="PasswordCheck"
-              onChange={updateSignupConditions}
-              svgIcon={<SecurityIcon width="16" height="17" />}
-            />
-          </InputBox>
-
-          <ButtonBox>
-            <StyledButton>Sign up</StyledButton>
-          </ButtonBox>
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.email}
+            inputLabel="Email"
+            id="Email"
+            type="text"
+            name="email"
+            onChange={updateSignupConditions}
+            colorType="PENETRATED_WHITE"
+          />
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.password}
+            inputLabel="Password"
+            type="password"
+            name="password"
+            id="password"
+            onChange={updateSignupConditions}
+            svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+            colorType="PENETRATED_WHITE"
+          />
+          <Spacing size={20} />
+          <Input
+            value={signupConditions.passwordCheck}
+            inputLabel="Confirm Password"
+            type="password"
+            name="passwordCheck"
+            id="PasswordCheck"
+            onChange={updateSignupConditions}
+            svgIcon={<SecurityIcon width="16" height="17" fill="gray" />}
+            colorType="PENETRATED_WHITE"
+          />
+          <Spacing size={70} />
+          <BasicButton>Sign up</BasicButton>
         </form>
       </Wrapper>
     </>
@@ -156,46 +157,4 @@ export default function SignupForm() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const InputBox = styled.div`
-  margin: 20px 0;
-`
-
-const ButtonBox = styled.div`
-  margin: 70px 0 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const StyledButton = styled.button`
-  background: rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.75);
-  width: 100%;
-  color: white;
-  font-weight: 600;
-  font-size: 17px;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
-  &:active {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.9);
-  }
-`
-
-const StyledLink = styled.a`
-  margin: 10px;
-  padding: 10px;
-  text-decoration: underline;
-  color: #777777;
-  font-weight: 600;
 `

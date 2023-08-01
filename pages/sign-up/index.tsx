@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import SignupForm from '../../components/SignupForm/SignupForm'
-import styled from '@emotion/styled'
+import SignupForm from '@/components/SignupForm/SignupForm'
 import BounceCube from '@/components/Intro/BounceCube/BounceCube'
-
-const TRANSITION_DELAY = 3700
+import styled from '@emotion/styled'
 
 const SignUpPage = () => {
-  // const [isShow, setIsShow] = useState(false)
-
   return (
-    <Temp>
-      <Container>
-        <Wrapper>
-          <CubeBox>
-            <BounceCube />
-          </CubeBox>
-          <DimBg isShow={true} />
-          <InputBox isShow={true}>
-            <SignupForm />
-          </InputBox>
-        </Wrapper>
-      </Container>
-    </Temp>
+    <Container>
+      <Wrapper>
+        <CubeBox>
+          <BounceCube />
+        </CubeBox>
+        <DimBg isShow={true} />
+        <InputBox isShow={true}>
+          <SignupForm />
+        </InputBox>
+      </Wrapper>
+    </Container>
   )
 }
 
 export default SignUpPage
-
-const Temp = styled.div``
 
 const Container = styled.div`
   width: 100%;
