@@ -7,6 +7,7 @@ import downloadILmage from '@/lib/utils/downloadImage'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import usePickImageColor from '@/hooks/usePickImageColor'
+import CubeLoader from '../CubeLoader'
 
 interface MemoryProps {
   backgroundImage: string
@@ -78,17 +79,18 @@ const MemoryDetail = ({
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
-      {isDownloadImageLoading ? (
-        <span>사진 다운로드 중...</span>
-      ) : (
-        <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
-          <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
-        </DownloadButton>
-      )}
+      <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
+        <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
+      </DownloadButton>
       {!!videoId && (
         <PlayerButton>
           <YouTubePlayerButton videoId={videoId} isAutoPlay={true} />
         </PlayerButton>
+      )}
+      {isDownloadImageLoading && (
+        <ImageLoaderOverlay>
+          <CubeLoader />
+        </ImageLoaderOverlay>
       )}
     </Container>
   )
@@ -110,7 +112,7 @@ const Container = styled.div<{ pickColor: string }>`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   min-height: 663px;
-  min-width: 400px;
+  min-width: 490px;
 `
 
 const Header = styled.div`
@@ -175,4 +177,17 @@ const Text = styled.p`
   transform: rotate(0.98turn);
   max-width: 400px;
   margin-top: 20px;
+`
+
+const ImageLoaderOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
