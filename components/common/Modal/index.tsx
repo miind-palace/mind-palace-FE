@@ -15,15 +15,14 @@ const Modal = ({ children, onClose }: ModalProps) => {
 
   return createPortal(
     <ModalOverlay onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>{children}</ModalContent>
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </ModalOverlay>,
     modalRoot
   )
 }
 export default Modal
 
-const ModalOverlay = styled.div`
-  z-index: 10;
+const ModalOverlay = styled.dialog`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,10 +31,5 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
-
-const ModalContent = styled.div`
-  width: 80%;
-  max-width: 520px;
-  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0);
 `
