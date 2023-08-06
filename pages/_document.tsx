@@ -33,6 +33,7 @@ export default function Document() {
       <body>
         <Main />
         <div id="modal-root"></div>
+        <div id="loader-root" />
         <NextScript />
       </body>
     </Html>
