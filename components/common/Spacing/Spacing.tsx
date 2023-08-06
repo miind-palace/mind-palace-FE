@@ -2,7 +2,7 @@ import { HTMLAttributes, memo } from 'react'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   children?: never
-  direction?: 'horizontal' | 'vertical'
+  direction?: SpacingDirectionType
   size: number
 }
 
@@ -11,8 +11,8 @@ const Spacing = ({ direction = 'vertical', size, ...props }: Props) => {
     <div
       style={{
         flex: 'none',
-        width: direction === 'horizontal' ? `${size}px` : undefined,
-        height: direction === 'vertical' ? `${size}px` : undefined,
+        width: direction === SpacingDirection.horizontal ? `${size}px` : undefined,
+        height: direction === SpacingDirection.vertical ? `${size}px` : undefined,
       }}
       {...props}
     />
@@ -20,3 +20,10 @@ const Spacing = ({ direction = 'vertical', size, ...props }: Props) => {
 }
 
 export default memo(Spacing)
+
+export const SpacingDirection = {
+  horizontal: 'horizontal',
+  vertical: 'vertical',
+}
+
+export type SpacingDirectionType = keyof typeof SpacingDirection
