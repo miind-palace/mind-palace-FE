@@ -112,7 +112,7 @@ const Container = styled.div<{ pickColor: string }>`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   min-height: 663px;
-  min-width: 490px;
+  width: 100%;
 `
 
 const Header = styled.div`
