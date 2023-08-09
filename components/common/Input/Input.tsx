@@ -1,7 +1,6 @@
 import { ElementRef, InputHTMLAttributes, Ref, forwardRef } from 'react'
 import { Icon, StyledBox, StyledInput, StyledLabel, StyledSpan } from './Input.style'
 
-// export type InputColorType = 'PENETRATED_WHITE' | 'PENETRATED_BLACK' | 'GRAY'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputLabel: string
   svgIcon?: JSX.Element
