@@ -15,7 +15,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
 
   return createPortal(
     <ModalOverlay onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>{children}</ModalContent>{' '}
+      <ModalContent onClick={(e) => e.stopPropagation()}>{children}</ModalContent>
     </ModalOverlay>,
     modalRoot
   )
@@ -35,7 +35,10 @@ const ModalOverlay = styled.div`
 `
 
 const ModalContent = styled.div`
-  width: 80%;
+  position: relative;
+  width: calc(100% - 24px);
+  height: calc(100% - 36px);
   max-width: 520px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
 `

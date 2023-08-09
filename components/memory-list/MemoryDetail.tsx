@@ -40,7 +40,6 @@ const MemoryDetail = ({
     }
   }
   const router = useRouter()
-  const downloadImageId = 'download-image'
 
   const handleRemoveMemory = () => {
     if (window.confirm('추억을 삭제하시겠습니까?')) {
@@ -64,7 +63,8 @@ const MemoryDetail = ({
           <XMarkIcon width={18} />
         </BackButton>
       </Header>
-      <Main ref={downloadImageRef} id={downloadImageId}>
+
+      <Main ref={downloadImageRef}>
         <ImageWrapper>
           <Image
             alt={text}
@@ -105,27 +105,30 @@ const Button = styled.button`
 const Container = styled.div<{ pickColor: string }>`
   display: flex;
   flex-direction: column;
+  justify-contents: space-around;
   padding: 20px 15px;
   position: relative;
-  background: linear-gradient(${(props) => props.pickColor}, white);
-
+  background: linear-gradient(${(props) => props.pickColor}, rgba(255, 255, 255, 0.9));
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  min-height: 663px;
   width: 100%;
+  height: calc(100%);
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px 20px;
   margin-bottom: 20px;
+  height: 9%;
 `
 
 const PlayerButton = styled.div`
   position: absolute;
-  right: 45px;
-  top: 110px;
+  z-index: 11;
+  right: 12%;
+  top: 18%;
 `
 const BackButton = styled(Button)``
 
@@ -133,6 +136,7 @@ const DownloadButton = styled(Button)`
   display: flex;
   justify-content: center;
   margin: 20px;
+  bottom: 32px;
 `
 
 const RemoveMemoryButton = styled(Button)``
@@ -140,7 +144,7 @@ const RemoveMemoryButton = styled(Button)``
 const ImageWrapper = styled.div`
   width: 100%;
   max-width: 500px;
-  height: 435px;
+  height: 100%;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -161,8 +165,7 @@ const DateSpan = styled.span`
 `
 const Main = styled.div`
   display: flex;
-  max-width: 500px;
-  min-height: 553px;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
