@@ -41,6 +41,7 @@ export const Container = styled.div<FlippingLoaderProps>`
   height: ${(props) => props.size && props.size * 2}px;
   transform: translate(-50%, -50%);
   text-align: center;
+  z-index: 100;
 
   &:after {
     content: '';
