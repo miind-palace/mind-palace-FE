@@ -102,7 +102,7 @@ export const Container = styled.div<CubeLoaderProps>`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.isBackColor && props.backColor};
+  background-color: ${(props) => props.showBackColor && props.backColor};
   z-index: 9000;
 
   .cube-wrapper {
