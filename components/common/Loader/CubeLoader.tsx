@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react'
 
 export interface CubeLoaderProps {
   size?: number
-  isBackColor?: boolean
+  showBackColor?: boolean
   backColor?: string
   cubeColor?: string
 }
 
 const CubeLoader = ({
   size = 60,
-  isBackColor,
+  showBackColor,
   backColor = 'rgba(0, 0, 0, 0.2)',
   cubeColor = '#000',
 }: CubeLoaderProps) => {
@@ -39,7 +39,7 @@ const CubeLoader = ({
 
   return createPortal(
     <>
-      <Container size={size} backColor={backColor} cubeColor={cubeColor} isBackColor={isBackColor}>
+      <Container size={size} backColor={backColor} cubeColor={cubeColor} showBackColor={showBackColor}>
         <div className="cube-wrapper">
           <div className="cube">
             <div className="wraaper-half-1">
