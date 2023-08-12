@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import YouTube from 'react-youtube'
-import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from './Icons'
 import styled from '@emotion/styled'
 
-interface YouTubePlayerProps {
+import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from '@/components/Icons'
+
+interface YouTubePlayerButtonProps {
   videoId: string
   isAutoPlay: boolean
   isInMemoryList?: boolean
 }
 
-const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay, isInMemoryList }) => {
+const YouTubePlayerButton: React.FC<YouTubePlayerButtonProps> = ({ videoId, isAutoPlay, isInMemoryList }) => {
   const [player, setPlayer] = useState<YT.Player | undefined>(undefined)
   const [isPlaying, setIsPlaying] = useState(true)
 
@@ -56,7 +57,7 @@ const YouTubePlayer: React.FC<YouTubePlayerProps> = ({ videoId, isAutoPlay, isIn
   )
 }
 
-export default YouTubePlayer
+export default YouTubePlayerButton
 
 const Button = styled.button`
   all: unset;

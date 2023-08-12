@@ -1,12 +1,13 @@
-import YouTubePlayer from './YouTubePlayer'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { CameraIcon, TrashIcon, XMarkIcon } from './Icons'
+import { CameraIcon, TrashIcon, XMarkIcon } from '../Icons'
 import downloadILmage from '@/lib/utils/downloadImage'
-
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import usePickImageColor from '@/hooks/usePickImageColor'
+import CubeLoader from '../CubeLoader'
+import YouTubePlayerButton from '../common/Button/YouTubePlayerButton'
 
 interface MemoryProps {
   backgroundImage: string
@@ -25,11 +26,15 @@ const MemoryDetail = ({
   onClickCloseModal,
   onClickRemoveMemory,
 }: MemoryProps) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false)
   const downloadImageRef = useRef<HTMLDivElement>(null)
-  const downloadImageId = 'download-image'
+  const [isDownloadImageLoading, setIsDownloadImageLoading] = useState(false)
+
   const handleCapture = async () => {
-    if (downloadImageRef.current) {
-      downloadILmage(downloadImageRef.current)
+    if (isImageLoaded) {
+      setIsDownloadImageLoading(true)
+      await downloadILmage(downloadImageRef)
+      setIsDownloadImageLoading(false)
     } else {
       window.alert('이미지가 로드되지 않았습니다.')
     }
@@ -53,24 +58,39 @@ const MemoryDetail = ({
         <RemoveMemoryButton onClick={handleRemoveMemory}>
           <TrashIcon width={18} height={20} />
         </RemoveMemoryButton>
-        <Date>{createdAt}</Date>
+        <DateSpan>{createdAt}</DateSpan>
         <BackButton onClick={onClickCloseModal}>
           <XMarkIcon width={18} />
         </BackButton>
       </Header>
-      <Main ref={downloadImageRef} id={downloadImageId}>
+
+      <Main ref={downloadImageRef}>
         <ImageWrapper>
-          <MemoryImage src={backgroundImage} />
+          <Image
+            alt={text}
+            src={backgroundImage}
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: 'contain',
+            }}
+            onLoadingComplete={() => setIsImageLoaded(true)}
+          />
         </ImageWrapper>
         <Text>{text}</Text>
       </Main>
-      <DownloadButton onClick={handleCapture}>
-        <CameraIcon width={50} />
+      <DownloadButton onClick={handleCapture} disabled={!isImageLoaded}>
+        <CameraIcon fill={isImageLoaded ? 'black' : 'LightGray'} width={50} />
       </DownloadButton>
       {!!videoId && (
         <PlayerButton>
-          <YouTubePlayer videoId={videoId} isAutoPlay={true} />
+          <YouTubePlayerButton videoId={videoId} isAutoPlay={true} />
         </PlayerButton>
+      )}
+      {isDownloadImageLoading && (
+        <ImageLoaderOverlay>
+          <CubeLoader />
+        </ImageLoaderOverlay>
       )}
     </Container>
   )
@@ -87,25 +107,27 @@ const Container = styled.div<{ pickColor: string }>`
   flex-direction: column;
   padding: 20px 15px;
   position: relative;
-  background: linear-gradient(${(props) => props.pickColor}, white);
-
+  background: linear-gradient(${(props) => props.pickColor}, rgba(255, 255, 255, 0.9));
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  min-height: 663px;
-  min-width: 400px;
+  width: 100%;
+  height: calc(100%);
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px 20px;
   margin-bottom: 20px;
+  height: 9%;
 `
 
 const PlayerButton = styled.div`
   position: absolute;
-  right: 45px;
-  top: 110px;
+  z-index: 11;
+  right: 12%;
+  top: 18%;
 `
 const BackButton = styled(Button)``
 
@@ -113,31 +135,26 @@ const DownloadButton = styled(Button)`
   display: flex;
   justify-content: center;
   margin: 20px;
+  bottom: 32px;
 `
 
 const RemoveMemoryButton = styled(Button)``
 
 const ImageWrapper = styled.div`
   width: 100%;
+  max-width: 500px;
   height: 100%;
   border-radius: 5px;
-  min-height: 435px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
-`
-const MemoryImage = styled.div<{ src: string }>`
-  background-image: url(${(props) => props.src});
-  width: 100%;
-  min-width: 307px;
-  height: 435px;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
+  object-fit: contain;
 `
 
-const Date = styled.span`
+const DateSpan = styled.span`
   font-family: 'Inter';
   font-size: 30px;
   font-weight: 800;
@@ -147,7 +164,7 @@ const Date = styled.span`
 `
 const Main = styled.div`
   display: flex;
-  min-height: 553px;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -162,4 +179,17 @@ const Text = styled.p`
   transform: rotate(0.98turn);
   max-width: 400px;
   margin-top: 20px;
+`
+
+const ImageLoaderOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

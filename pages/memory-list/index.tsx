@@ -4,6 +4,11 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
+import MemoryDetail from '@/components/memory-list/MemoryDetail'
+import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
+import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
+import useControlModal from '@/hooks/useControlModal'
+import Modal from '@/components/common/Modal'
 
 const GET_MEMORY_LIST_DEFAULT_SIZE = 3
 
@@ -109,12 +114,36 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     }
   }, [handleIntersect, targetRef.current])
 
+  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
+  const handleRemoveMemory = async (id: number) => {
+    await axios.get(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/delete?postId=${id}`)
+  }
+  const [clickedMemory, setClickedMemory] = useState<MemoryType>()
+  const handleClickMemory = (memory: MemoryType) => {
+    setClickedMemory(memory)
+    handleOpenModal()
+  }
+
   return (
     <S.Wrapper>
       <S.Title>My Palace</S.Title>
       {memoryList?.memoryList.map((memory, index) => (
-        <Card key={index} memory={memory} ref={targetRef} />
+        <div key={`${memory.id}${index}`} onClick={() => handleClickMemory(memory)}>
+          <Card memory={memory} ref={targetRef} />
+        </div>
       ))}
+      {isOpen && clickedMemory && (
+        <Modal onClose={handleCloseModal}>
+          <MemoryDetail
+            createdAt={createdAtToTitleDate(clickedMemory.createdAt)}
+            backgroundImage={clickedMemory.backgroundImage}
+            videoId={makeYouTubeVideoId(clickedMemory.videoId) || clickedMemory.videoId}
+            text={clickedMemory.text}
+            onClickCloseModal={handleCloseModal}
+            onClickRemoveMemory={() => handleRemoveMemory(clickedMemory.id)}
+          />
+        </Modal>
+      )}
     </S.Wrapper>
   )
 }
