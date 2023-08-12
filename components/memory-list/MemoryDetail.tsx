@@ -1,4 +1,3 @@
-import YouTubePlayerButton from '../button/YouTubePlayerButton'
 import { useRef, useState } from 'react'
 import styled from '@emotion/styled'
 
@@ -8,6 +7,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import usePickImageColor from '@/hooks/usePickImageColor'
 import CubeLoader from '../CubeLoader'
+import YouTubePlayerButton from '../common/Button/YouTubePlayerButton'
 
 interface MemoryProps {
   backgroundImage: string
@@ -105,7 +105,6 @@ const Button = styled.button`
 const Container = styled.div<{ pickColor: string }>`
   display: flex;
   flex-direction: column;
-  justify-contents: space-around;
   padding: 20px 15px;
   position: relative;
   background: linear-gradient(${(props) => props.pickColor}, rgba(255, 255, 255, 0.9));

@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 import styled from '@emotion/styled'
 
 import { MemoryType } from '@/pages/memory-list'
-import CardPlayButton from './button/CardPlayButton'
+import CardPlayButton from './common/Button/CardPlayButton'
 
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
