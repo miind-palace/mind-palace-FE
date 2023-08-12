@@ -14,7 +14,7 @@ import useHorizontalWheel from '@/hooks/useHorizontalWheel'
 import { DUMMY_SUGGESTION_IMAGE } from '@/lib/constant/constant'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import Image from 'next/image'
-import YouTubePlayerButton from '@/components/button/YouTubePlayerButton'
+import YouTubePlayerButton from '@/components/common/Button/YouTubePlayerButton'
 
 export default function Upload() {
   const [textArea, , onChangeTextInput] = useInput('')

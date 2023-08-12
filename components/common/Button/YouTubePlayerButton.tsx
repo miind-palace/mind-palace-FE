@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import YouTube from 'react-youtube'
-import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from '../Icons'
 import styled from '@emotion/styled'
+
+import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from '@/components/Icons'
 
 interface YouTubePlayerButtonProps {
   videoId: string
