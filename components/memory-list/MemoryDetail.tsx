@@ -6,7 +6,8 @@ import downloadILmage from '@/lib/utils/downloadImage'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import usePickImageColor from '@/hooks/usePickImageColor'
-import CubeLoader from '../CubeLoader'
+import CubeLoader from '../common/Loader/CubeLoader'
+
 import YouTubePlayerButton from '../common/Button/YouTubePlayerButton'
 
 interface MemoryProps {
