@@ -66,112 +66,111 @@ export const BounceCubeWrapper = styled.div`
     }
   }
 
-  div :not(.pos) > .cube:nth-child(1) {
+  div :not(.pos) > .cube:nth-of-type(1) {
     transform: translate3d(-4em, -4em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(2) {
-    /* transform: translate3d(-4em, 0em, -4em); */
+  div :not(.pos) > .cube:nth-of-type(2) {
     transform: translate3d(-4em, 0em, -4em);
   }
 
-  div :not(.pos) > .cube:nth-child(3) {
+  div :not(.pos) > .cube:nth-of-type(3) {
     transform: translate3d(-4em, 0em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(4) {
+  div :not(.pos) > .cube:nth-of-type(4) {
     transform: translate3d(-4em, 0em, 4em);
   }
 
-  div :not(.pos) > .cube:nth-child(5) {
+  div :not(.pos) > .cube:nth-of-type(5) {
     transform: translate3d(-4em, 4em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(6) {
+  div :not(.pos) > .cube:nth-of-type(6) {
     transform: translate3d(0em, -4em, -4em);
   }
 
-  div :not(.pos) > .cube:nth-child(7) {
+  div :not(.pos) > .cube:nth-of-type(7) {
     transform: translate3d(0em, -4em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(8) {
+  div :not(.pos) > .cube:nth-of-type(8) {
     transform: translate3d(0em, -4em, 4em);
   }
 
-  div :not(.pos) > .cube:nth-child(9) {
+  div :not(.pos) > .cube:nth-of-type(9) {
     transform: translate3d(0em, 0em, -4em);
   }
 
-  div :not(.pos) > .cube:nth-child(10) {
+  div :not(.pos) > .cube:nth-of-type(10) {
     transform: translate3d(0em, 0em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(11) {
+  div :not(.pos) > .cube:nth-of-type(11) {
     transform: translate3d(0em, 0em, 4em);
   }
 
-  div :not(.pos) > .cube:nth-child(12) {
+  div :not(.pos) > .cube:nth-of-type(12) {
     transform: translate3d(0em, 4em, -4em);
   }
 
-  div :not(.pos) > .cube:nth-child(13) {
+  div :not(.pos) > .cube:nth-of-type(13) {
     transform: translate3d(0em, 4em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(14) {
+  div :not(.pos) > .cube:nth-of-type(14) {
     transform: translate3d(0em, 4em, 4em);
   }
 
-  div :not(.pos) > .cube:nth-child(15) {
+  div :not(.pos) > .cube:nth-of-type(15) {
     transform: translate3d(4em, -4em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(16) {
+  div :not(.pos) > .cube:nth-of-type(16) {
     transform: translate3d(4em, 0em, -4em);
   }
 
-  div :not(.pos) > .cube:nth-child(17) {
+  div :not(.pos) > .cube:nth-of-type(17) {
     transform: translate3d(4em, 0em, 0em);
   }
 
-  div :not(.pos) > .cube:nth-child(18) {
+  div :not(.pos) > .cube:nth-of-type(18) {
     transform: translate3d(4em, 0em, 4em);
   }
 
-  div :not(.pos) > .cube:nth-child(19) {
+  div :not(.pos) > .cube:nth-of-type(19) {
     transform: translate3d(4em, 4em, 0em);
   }
 
-  .pos:nth-child(1) {
+  .pos:nth-of-type(1) {
     transform: scale3d(1, 1, 1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(2) {
+  .pos:nth-of-type(2) {
     transform: scale3d(1, 1, -1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(3) {
+  .pos:nth-of-type(3) {
     transform: scale3d(1, -1, 1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(4) {
+  .pos:nth-of-type(4) {
     transform: scale3d(1, -1, -1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(5) {
+  .pos:nth-of-type(5) {
     transform: scale3d(-1, 1, 1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(6) {
+  .pos:nth-of-type(6) {
     transform: scale3d(-1, 1, -1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(7) {
+  .pos:nth-of-type(7) {
     transform: scale3d(-1, -1, 1) translate3d(4em, 4em, 4em);
   }
 
-  .pos:nth-child(8) {
+  .pos:nth-of-type(8) {
     transform: scale3d(-1, -1, -1) translate3d(4em, 4em, 4em);
   }
 
@@ -210,28 +209,28 @@ export const BounceCubeWrapper = styled.div`
     }
   }
 
-  .cube__face:nth-child(2n) {
+  .cube__face:nth-of-type(2n) {
     filter: brightness(0.97);
   }
-  .cube__face:nth-child(n + 5) {
+  .cube__face:nth-of-type(n + 5) {
     filter: brightness(1.03);
   }
-  .cube__face:nth-child(1) {
+  .cube__face:nth-of-type(1) {
     transform: rotateY(0deg) translateZ(2em);
   }
-  .cube__face:nth-child(2) {
+  .cube__face:nth-of-type(2) {
     transform: rotateY(90deg) translateZ(2em);
   }
-  .cube__face:nth-child(3) {
+  .cube__face:nth-of-type(3) {
     transform: rotateY(180deg) translateZ(2em);
   }
-  .cube__face:nth-child(4) {
+  .cube__face:nth-of-type(4) {
     transform: rotateY(270deg) translateZ(2em);
   }
-  .cube__face:nth-child(5) {
+  .cube__face:nth-of-type(5) {
     transform: rotateX(90deg) translateZ(2em);
   }
-  .cube__face:nth-child(6) {
+  .cube__face:nth-of-type(6) {
     transform: rotateX(-90deg) translateZ(2em);
   }
 
