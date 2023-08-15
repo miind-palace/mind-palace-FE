@@ -1,10 +1,12 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 
 import CubeLoader from '@/components/common/Loader/CubeLoader'
 import CustomSuspense from '@/components/common/Suspense/CustomSuspense'
-import MainRoom from '@/components/main/MainRoom'
+
+const MainRoom = dynamic(() => import('../../components/main/MainRoom'))
 
 export default function Main() {
   return (
