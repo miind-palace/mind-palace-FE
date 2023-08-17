@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react'
-import { CustomSuspenseProps } from '../../../lib/types/mainTypes'
+import { useEffect, useState, ReactNode } from 'react'
+
+export interface CustomSuspenseProps {
+  fallback: ReactNode
+  maxDuration?: number
+  children: ReactNode
+}
 
 export default function CustomSuspense({ fallback, maxDuration, children }: CustomSuspenseProps) {
-  const [loadingDone, setLoadingDone] = useState(false)
+  const [isLoadingDone, setIsLoadingDone] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoadingDone(true)
+      setIsLoadingDone(true)
     }, maxDuration)
 
     return () => clearTimeout(timer)
   }, [maxDuration])
 
-  return <>{loadingDone ? children : fallback}</>
+  return <>{isLoadingDone ? children : fallback}</>
 }
