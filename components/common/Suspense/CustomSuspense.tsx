@@ -7,15 +7,15 @@ interface CustomSuspenseProps {
 }
 
 export default function CustomSuspense({ fallback, maxDuration, children }: CustomSuspenseProps) {
-  const [loadingDone, setLoadingDone] = useState(false)
+  const [isLoadingDone, setIsLoadingDone] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoadingDone(true)
+      setIsLoadingDone(true)
     }, maxDuration)
 
     return () => clearTimeout(timer)
   }, [maxDuration])
 
-  return <>{loadingDone ? children : fallback}</>
+  return <>{isLoadingDone ? children : fallback}</>
 }
