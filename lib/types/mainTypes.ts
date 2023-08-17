@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { GLTF } from 'three-stdlib'
 
 export type GLTFResult = GLTF & {
@@ -105,10 +104,4 @@ export type GLTFResult = GLTF & {
     ['Material.031']: THREE.MeshStandardMaterial
     ['Material.033']: THREE.MeshStandardMaterial
   }
-}
-
-export interface CustomSuspenseProps {
-  fallback: ReactNode
-  maxDuration?: number
-  children: ReactNode
 }

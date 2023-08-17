@@ -1,5 +1,10 @@
-import { useEffect, useState } from 'react'
-import { CustomSuspenseProps } from '../../../lib/types/mainTypes'
+import { useEffect, useState, ReactNode } from 'react'
+
+interface CustomSuspenseProps {
+  fallback: ReactNode
+  maxDuration?: number
+  children: ReactNode
+}
 
 export default function CustomSuspense({ fallback, maxDuration, children }: CustomSuspenseProps) {
   const [loadingDone, setLoadingDone] = useState(false)
