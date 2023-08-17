@@ -1,6 +1,6 @@
 import { useEffect, useState, ReactNode } from 'react'
 
-export interface CustomSuspenseProps {
+interface CustomSuspenseProps {
   fallback: ReactNode
   maxDuration?: number
   children: ReactNode
