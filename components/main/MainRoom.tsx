@@ -6,6 +6,7 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { GLTFResult } from '../../lib/types/mainTypes'
+import { randomDummyMemory } from '@/lib/constant/dummyMemoryList'
 
 export default function MainRoom(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/main_room.gltf') as GLTFResult
@@ -72,6 +73,11 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
       }
     })
   })
+
+  const routeToRandomCardModal = () => {
+    sessionStorage.setItem('dummyMemory', JSON.stringify(randomDummyMemory))
+    router.push('/memory-list')
+  }
 
   return (
     <group {...props} dispose={null}>
@@ -440,6 +446,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         rotation={[0, -0.175, Math.PI]}
         onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
         onPointerOut={() => setBookDummyHovered(false)}
+        onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
         <mesh geometry={nodes.Cube063_1.geometry} material={materials['Material.021']} />
@@ -450,6 +457,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         rotation={[0, -0.175, Math.PI]}
         onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
         onPointerOut={() => setBookDummyHovered(false)}
+        onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
         <mesh geometry={nodes.Cube064_1.geometry} material={materials['Material.024']} />
@@ -460,6 +468,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         rotation={[0, -0.175, Math.PI]}
         onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
         onPointerOut={() => setBookDummyHovered(false)}
+        onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
         <mesh geometry={nodes.Cube066.geometry} material={materials['Material.026']} />
@@ -472,6 +481,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         scale={0.077}
         onPointerOver={(e) => (e.stopPropagation(), setYellowBookHovered(true))}
         onPointerOut={() => setYellowBookHovered(false)}
+        onClick={() => routeToRandomCardModal()}
       >
         <mesh geometry={nodes.Cube067.geometry} material={materials['Material.014']} />
         <mesh geometry={nodes.Cube067_1.geometry} material={materials['Material.031']} />
@@ -483,6 +493,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         scale={0.077}
         onPointerOver={(e) => (e.stopPropagation(), setBlueBookHovered(true))}
         onPointerOut={() => setBlueBookHovered(false)}
+        onClick={() => routeToRandomCardModal()}
       >
         <mesh geometry={nodes.Cube068.geometry} material={materials['Material.026']} />
         <mesh geometry={nodes.Cube068_1.geometry} material={materials['Material.033']} />

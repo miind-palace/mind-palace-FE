@@ -101,7 +101,18 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
   )
 
   /** control observer */
+  /* mount시 sessionStorage 검증 진행
+    dummyMemory있을 경우, 랜덤으로 유저 카드 open되도록 실행 */
   useEffect(() => {
+    //sessionStorage 검증
+    const storedDummyMemoryJSON = sessionStorage.getItem('dummyMemory') as string
+    if (storedDummyMemoryJSON) {
+      const storedDummyMemory = JSON.parse(storedDummyMemoryJSON)
+      handleClickMemory(storedDummyMemory)
+      sessionStorage.removeItem('dummyMemory')
+    }
+
+    //control observer
     const observer = new IntersectionObserver(handleIntersect, {
       threshold: 0.9,
       root: null,
