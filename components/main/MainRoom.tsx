@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { MemoryType } from '@/pages/memory-list'
 import { GLTF } from 'three-stdlib'
 
-export type GLTFResult = GLTF & {
+type GLTFResult = GLTF & {
   nodes: {
     Cube001: THREE.Mesh
     Cube002: THREE.Mesh
