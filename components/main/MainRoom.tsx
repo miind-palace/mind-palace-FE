@@ -32,7 +32,7 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
       )
     }
 
-    //화분
+    //잎파리
     const leafsMaterialName = ['Material.015', 'Material.016', 'Material.017'] as const
     leafsMaterialName.forEach((leafName) => {
       if (materials[leafName]) {
