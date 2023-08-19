@@ -5,9 +5,114 @@ import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { GLTFResult } from '../../lib/types/mainTypes'
 import { MemoryType } from '@/pages/memory-list'
-// import { randomDummyMemory } from '@/lib/constant/dummyMemoryList'
+import { GLTF } from 'three-stdlib'
+
+export type GLTFResult = GLTF & {
+  nodes: {
+    Cube001: THREE.Mesh
+    Cube002: THREE.Mesh
+    Cube003: THREE.Mesh
+    Cube004: THREE.Mesh
+    Cube005: THREE.Mesh
+    Cube006: THREE.Mesh
+    Cube007: THREE.Mesh
+    Cube009: THREE.Mesh
+    Cube010: THREE.Mesh
+    Cube012: THREE.Mesh
+    Cube011: THREE.Mesh
+    Cube013: THREE.Mesh
+    Cube014: THREE.Mesh
+    Cube015: THREE.Mesh
+    Cube008: THREE.Mesh
+    Cube017: THREE.Mesh
+    Cube019: THREE.Mesh
+    Circle: THREE.Mesh
+    Plane001: THREE.Mesh
+    Plane002: THREE.Mesh
+    Plane003: THREE.Mesh
+    Cube024: THREE.Mesh
+    Cube025: THREE.Mesh
+    Cube027: THREE.Mesh
+    Cube028: THREE.Mesh
+    Cube029: THREE.Mesh
+    Cube030: THREE.Mesh
+    Cube031: THREE.Mesh
+    Cube032: THREE.Mesh
+    Cube033: THREE.Mesh
+    Cube034: THREE.Mesh
+    Cube035: THREE.Mesh
+    Cube036: THREE.Mesh
+    Cube037: THREE.Mesh
+    Cube038: THREE.Mesh
+    Cube039: THREE.Mesh
+    Cube040: THREE.Mesh
+    Cube041: THREE.Mesh
+    Cube042: THREE.Mesh
+    Cube043: THREE.Mesh
+    Cube044: THREE.Mesh
+    Cube045: THREE.Mesh
+    Cube046: THREE.Mesh
+    Cube047: THREE.Mesh
+    Cube048: THREE.Mesh
+    Cube049: THREE.Mesh
+    Cube050: THREE.Mesh
+    Cube051: THREE.Mesh
+    Cube052: THREE.Mesh
+    Cube061_1: THREE.Mesh
+    Cube061_2: THREE.Mesh
+    Plane002_1: THREE.Mesh
+    Plane002_2: THREE.Mesh
+    Cube026: THREE.Mesh
+    Cube059: THREE.Mesh
+    Cube063_1: THREE.Mesh
+    Cube063_2: THREE.Mesh
+    Cube064_1: THREE.Mesh
+    Cube064_2: THREE.Mesh
+    Cube066: THREE.Mesh
+    Cube066_1: THREE.Mesh
+    Cube067: THREE.Mesh
+    Cube067_1: THREE.Mesh
+    Cube068: THREE.Mesh
+    Cube068_1: THREE.Mesh
+  }
+  materials: {
+    ['Material.001']: THREE.MeshStandardMaterial
+    ['Material.028']: THREE.MeshStandardMaterial
+    ['Material.007']: THREE.MeshStandardMaterial
+    ['Material.004']: THREE.MeshStandardMaterial
+    ['Material.005']: THREE.MeshStandardMaterial
+    ['Material.002']: THREE.MeshStandardMaterial
+    ['Material.019']: THREE.MeshStandardMaterial
+    ['Material.034']: THREE.MeshStandardMaterial
+    ['Material.018']: THREE.MeshStandardMaterial
+    ['Material.016']: THREE.MeshStandardMaterial
+    ['Material.015']: THREE.MeshStandardMaterial
+    ['Material.017']: THREE.MeshStandardMaterial
+    ['Material.014']: THREE.MeshStandardMaterial
+    ['Material.024']: THREE.MeshStandardMaterial
+    ['Material.008']: THREE.MeshStandardMaterial
+    ['Material.009']: THREE.MeshStandardMaterial
+    ['Material.012']: THREE.MeshStandardMaterial
+    ['Material.026']: THREE.MeshStandardMaterial
+    ['Material.003']: THREE.MeshStandardMaterial
+    ['Material.013']: THREE.MeshStandardMaterial
+    ['Material.010']: THREE.MeshStandardMaterial
+    ['Material.029']: THREE.MeshStandardMaterial
+    ['Material.006']: THREE.MeshStandardMaterial
+    ['Material.032']: THREE.MeshStandardMaterial
+    ['Material.011']: THREE.MeshStandardMaterial
+    ['Material.023']: THREE.MeshStandardMaterial
+    ['Material.022']: THREE.MeshStandardMaterial
+    ['Material.020']: THREE.MeshStandardMaterial
+    ['Material.021']: THREE.MeshStandardMaterial
+    ['Material.025']: THREE.MeshStandardMaterial
+    ['Material.027']: THREE.MeshStandardMaterial
+    ['Material.030']: THREE.MeshStandardMaterial
+    ['Material.031']: THREE.MeshStandardMaterial
+    ['Material.033']: THREE.MeshStandardMaterial
+  }
+}
 
 export default function MainRoom(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/main_room.gltf') as GLTFResult
