@@ -1,8 +1,77 @@
+import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
+
+import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+
 import { GLTFResult } from '../../lib/types/mainTypes'
 
 export default function MainRoom(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/main_room.gltf') as GLTFResult
+  const bookshelfRef = useRef<THREE.Mesh>(null!)
+  const router = useRouter()
+
+  const [bookshelfHovered, setBookshelfHovered] = useState(false)
+  const [bookDummyHovered, setBookDummyHovered] = useState(false)
+  const [yellowBookHovered, setYellowBookHovered] = useState(false)
+  const [blueBookHovered, setBlueBookHovered] = useState(false)
+  const [leafHovered, setLeafHovered] = useState(false)
+
+  useFrame(() => {
+    //책장
+    if (bookshelfRef.current !== undefined) {
+      //Ref는 책장 밀리는 애니메이션 적용을 위함
+      bookshelfRef.current.position.z = bookshelfHovered
+        ? THREE.MathUtils.lerp(bookshelfRef.current.position.z, -1, 0.025)
+        : THREE.MathUtils.lerp(bookshelfRef.current.position.z, -1.03, 0.025)
+
+      materials['Material.007'].color.lerp(
+        bookshelfHovered ? new THREE.Color(Math.floor(Math.random() * 16777216)) : new THREE.Color('#D69034'),
+        0.01
+      )
+    }
+
+    //화분
+    const leafsMaterialName = ['Material.015', 'Material.016', 'Material.017'] as const
+    leafsMaterialName.forEach((leafName) => {
+      if (materials[leafName]) {
+        materials[leafName].color.lerp(leafHovered ? new THREE.Color('green') : new THREE.Color('#CAE783'), 0.01)
+      }
+    })
+
+    //책더미
+    const bookDummyKeys = ['Material.024', 'Material.021'] as const
+    bookDummyKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          bookDummyHovered ? new THREE.Color(Math.floor(Math.random() * 16777216)) : new THREE.Color('#34495e'),
+          0.01
+        )
+      }
+    })
+
+    //노란책
+    const yellowBookKeys = ['Material.014', 'Material.031'] as const
+    yellowBookKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          yellowBookHovered ? new THREE.Color(Math.floor(Math.random() * 16777216)) : new THREE.Color('yellow'),
+          0.01
+        )
+      }
+    })
+    //파란책
+    const blueBookKeys = ['Material.026', 'Material.033'] as const
+    blueBookKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          blueBookHovered ? new THREE.Color(Math.floor(Math.random() * 16777216)) : new THREE.Color('#2980b9'),
+          0.01
+        )
+      }
+    })
+  })
 
   return (
     <group {...props} dispose={null}>
@@ -24,7 +93,11 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Cube003.geometry}
         material={materials['Material.007']}
         position={[1.404, 3.387, -1.132]}
+        ref={bookshelfRef}
         scale={0.645}
+        onPointerOver={(e) => (e.stopPropagation(), setBookshelfHovered(true))}
+        onPointerOut={(e) => setBookshelfHovered(false)}
+        onClick={() => router.push('/memory-list')}
       />
       <mesh
         geometry={nodes.Cube004.geometry}
@@ -129,6 +202,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.453, 1.367]}
         rotation={[1.029, -0.021, -0.033]}
         scale={[0.369, 0.459, 0.332]}
+        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
+        onPointerOut={(e) => setLeafHovered(false)}
       />
       <mesh
         geometry={nodes.Plane002.geometry}
@@ -136,6 +211,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.474, 1.388]}
         rotation={[2.178, 0.569, -2.19]}
         scale={[0.369, 0.459, 0.332]}
+        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
+        onPointerOut={(e) => setLeafHovered(false)}
       />
       <mesh
         geometry={nodes.Plane003.geometry}
@@ -143,6 +220,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.457, 1.367]}
         rotation={[0.657, -0.423, -0.528]}
         scale={[0.245, 0.304, 0.22]}
+        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
+        onPointerOut={(e) => setLeafHovered(false)}
       />
       <mesh
         geometry={nodes.Cube024.geometry}
@@ -356,25 +435,55 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         scale={0.077}
       />
       {/* 더미책 */}
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
+        onPointerOut={() => setBookDummyHovered(false)}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube063_1.geometry} material={materials['Material.021']} />
         <mesh geometry={nodes.Cube063_2.geometry} material={materials['Material.025']} />
       </group>
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
+        onPointerOut={() => setBookDummyHovered(false)}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube064_1.geometry} material={materials['Material.024']} />
         <mesh geometry={nodes.Cube064_2.geometry} material={materials['Material.027']} />
       </group>
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
+        onPointerOut={() => setBookDummyHovered(false)}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube066.geometry} material={materials['Material.026']} />
         <mesh geometry={nodes.Cube066_1.geometry} material={materials['Material.030']} />
       </group>
       {/* 노랑 */}
-      <group position={[0.57, 1.135, 1.596]} rotation={[0, 0.506, -1.082]} scale={0.077}>
+      <group
+        position={[0.57, 1.135, 1.596]}
+        rotation={[0, 0.506, -1.082]}
+        scale={0.077}
+        onPointerOver={(e) => (e.stopPropagation(), setYellowBookHovered(true))}
+        onPointerOut={() => setYellowBookHovered(false)}
+      >
         <mesh geometry={nodes.Cube067.geometry} material={materials['Material.014']} />
         <mesh geometry={nodes.Cube067_1.geometry} material={materials['Material.031']} />
       </group>
       {/* 파랑 */}
-      <group position={[0.57, 1.135, 1.596]} rotation={[0, 0.506, -1.082]} scale={0.077}>
+      <group
+        position={[0.57, 1.135, 1.596]}
+        rotation={[0, 0.506, -1.082]}
+        scale={0.077}
+        onPointerOver={(e) => (e.stopPropagation(), setBlueBookHovered(true))}
+        onPointerOut={() => setBlueBookHovered(false)}
+      >
         <mesh geometry={nodes.Cube068.geometry} material={materials['Material.026']} />
         <mesh geometry={nodes.Cube068_1.geometry} material={materials['Material.033']} />
       </group>
