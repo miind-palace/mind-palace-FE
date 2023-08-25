@@ -4,7 +4,7 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 
 import Card from '@/components/Card'
-import MemoryDetail from '@/components/memory-list/MemoryDetail'
+import MemoryDetail from '@/components/MemoryList/MemoryDetail'
 import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import useControlModal from '@/hooks/useControlModal'
