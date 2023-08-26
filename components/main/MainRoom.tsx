@@ -2,7 +2,7 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { GLTF } from 'three-stdlib'
@@ -117,13 +117,14 @@ type GLTFResult = GLTF & {
 export default function MainRoom(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/main_room.gltf') as GLTFResult
   const bookshelfRef = useRef<THREE.Mesh>(null!)
+
   const router = useRouter()
 
-  const [bookshelfHovered, setBookshelfHovered] = useState(false)
-  const [bookDummyHovered, setBookDummyHovered] = useState(false)
-  const [yellowBookHovered, setYellowBookHovered] = useState(false)
-  const [blueBookHovered, setBlueBookHovered] = useState(false)
-  const [leafHovered, setLeafHovered] = useState(false)
+  let bookshelfHovered = false
+  let bookDummyHovered = false
+  let yellowBookHovered = false
+  let blueBookHovered = false
+  let leafHovered = false
 
   useFrame(() => {
     //책장
@@ -210,8 +211,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[1.404, 3.387, -1.132]}
         ref={bookshelfRef}
         scale={0.645}
-        onPointerOver={(e) => (e.stopPropagation(), setBookshelfHovered(true))}
-        onPointerOut={(e) => setBookshelfHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (bookshelfHovered = true))}
+        onPointerOut={(e) => (bookshelfHovered = false)}
         onClick={() => router.push('/memory-list')}
       />
       <mesh
@@ -317,8 +318,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.453, 1.367]}
         rotation={[1.029, -0.021, -0.033]}
         scale={[0.369, 0.459, 0.332]}
-        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
-        onPointerOut={(e) => setLeafHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (leafHovered = true))}
+        onPointerOut={(e) => (leafHovered = true)}
       />
       <mesh
         geometry={nodes.Plane002.geometry}
@@ -326,8 +327,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.474, 1.388]}
         rotation={[2.178, 0.569, -2.19]}
         scale={[0.369, 0.459, 0.332]}
-        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
-        onPointerOut={(e) => setLeafHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (leafHovered = true))}
+        onPointerOut={(e) => (leafHovered = true)}
       />
       <mesh
         geometry={nodes.Plane003.geometry}
@@ -335,8 +336,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.457, 1.367]}
         rotation={[0.657, -0.423, -0.528]}
         scale={[0.245, 0.304, 0.22]}
-        onPointerOver={(e) => (e.stopPropagation(), setLeafHovered(true))}
-        onPointerOut={(e) => setLeafHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (leafHovered = true))}
+        onPointerOut={(e) => (leafHovered = true)}
       />
       <mesh
         geometry={nodes.Cube024.geometry}
@@ -553,8 +554,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
       <group
         position={[1.054, 2.79, 0.001]}
         rotation={[0, -0.175, Math.PI]}
-        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
-        onPointerOut={() => setBookDummyHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (bookDummyHovered = true))}
+        onPointerOut={() => (bookDummyHovered = false)}
         onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
@@ -564,8 +565,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
       <group
         position={[1.054, 2.79, 0.001]}
         rotation={[0, -0.175, Math.PI]}
-        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
-        onPointerOut={() => setBookDummyHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (bookDummyHovered = true))}
+        onPointerOut={() => (bookDummyHovered = false)}
         onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
@@ -575,8 +576,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
       <group
         position={[1.054, 2.79, 0.001]}
         rotation={[0, -0.175, Math.PI]}
-        onPointerOver={(e) => (e.stopPropagation(), setBookDummyHovered(true))}
-        onPointerOut={() => setBookDummyHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (bookDummyHovered = true))}
+        onPointerOut={() => (bookDummyHovered = false)}
         onClick={() => routeToRandomCardModal()}
         scale={0.077}
       >
@@ -588,8 +589,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[0.57, 1.135, 1.596]}
         rotation={[0, 0.506, -1.082]}
         scale={0.077}
-        onPointerOver={(e) => (e.stopPropagation(), setYellowBookHovered(true))}
-        onPointerOut={() => setYellowBookHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (yellowBookHovered = true))}
+        onPointerOut={() => (yellowBookHovered = false)}
         onClick={() => routeToRandomCardModal()}
       >
         <mesh geometry={nodes.Cube067.geometry} material={materials['Material.014']} />
@@ -600,8 +601,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[0.57, 1.135, 1.596]}
         rotation={[0, 0.506, -1.082]}
         scale={0.077}
-        onPointerOver={(e) => (e.stopPropagation(), setBlueBookHovered(true))}
-        onPointerOut={() => setBlueBookHovered(false)}
+        onPointerOver={(e) => (e.stopPropagation(), (blueBookHovered = true))}
+        onPointerOut={() => (blueBookHovered = false)}
         onClick={() => routeToRandomCardModal()}
       >
         <mesh geometry={nodes.Cube068.geometry} material={materials['Material.026']} />
