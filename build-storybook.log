@@ -1,11 +1,12 @@
+$ storybook build --output-dir /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--48917-IthDzGRb10as
 @storybook/cli v7.2.1
 
-info => Cleaning outputDir: /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--44679-Ff0WZXxWO2xl
+info => Cleaning outputDir: /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--48917-IthDzGRb10as
 info => Loading presets
 info => Building manager..
-info => Manager built (122 ms)
+info => Manager built (129 ms)
 info => Compiling preview..
-info => Copying static files: /Users/joo/Desktop/teoSprint-13team/mind-palace/node_modules/@storybook/manager/static at /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--44679-Ff0WZXxWO2xl/sb-common-assets
+info => Copying static files: /Users/joo/Desktop/teoSprint-13team/mind-palace/node_modules/@storybook/manager/static at /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--48917-IthDzGRb10as/sb-common-assets
 WARN You (or an addon) are using the 'config' preset field. This has been replaced by 'previewAnnotations' and will be removed in 8.0
 info Addon-docs: using MDX2
 info => Using implicit CSS loaders
@@ -116,7 +117,7 @@ info => Using default Webpack5 setup
 <s> [webpack.Progress] 17% building 0/1 entries 16/18 dependencies 2/15 modules
 <s> [webpack.Progress] 16% building import loader ./node_modules/babel-loader/lib/index.js
 <s> [webpack.Progress] 16% building 0/1 entries 16/18 dependencies 2/16 modules
-<s> [webpack.Progress] 19% building 0/1 entries 31/67 dependencies 4/23 modules
+<s> [webpack.Progress] 27% building 0/1 entries 33/76 dependencies 8/25 modules
 <s> [webpack.Progress] 17% building import loader ./node_modules/unplugin/dist/webpack/loaders/load.js
 <s> [webpack.Progress] 17% building 0/1 entries 72/76 dependencies 8/56 modules
 <s> [webpack.Progress] 28% building 0/1 entries 366/400 dependencies 56/166 modules
@@ -362,7 +363,7 @@ info => Using default Webpack5 setup
 <s> [webpack.Progress] 99% cache begin idle
 <s> [webpack.Progress] 100% 
 
-info => Preview built (9.58 s)
+info => Preview built (9.87 s)
 WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 WARN This can impact web performance.
 WARN Assets: 
@@ -380,4 +381,4 @@ WARN
 <s> [webpack.Progress] 99% cache shutdown
 <s> [webpack.Progress] 100% 
 
-info => Output directory: /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--44679-Ff0WZXxWO2xl
+info => Output directory: /var/folders/hw/_mgcr3qx5vx2xg40nyj6svf80000gn/T/chromatic--48917-IthDzGRb10as

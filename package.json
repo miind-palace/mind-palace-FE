@@ -11,11 +11,10 @@
     "storybook": "storybook dev -p 6006",
     "test-storybook": "test-storybook",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_68a786a288c637b"
+    "chromatic": "cp .env.local .env && chromatic --project-token $CHROMATIC_PROJECT_TOKEN"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "prettier --write",
       "eslint --quiet --fix ."
     ]
   },
