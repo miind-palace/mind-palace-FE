@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import CubeLoader from '@/components/common/Loader/CubeLoader'
 import CustomSuspense from '@/components/common/Suspense/CustomSuspense'
 
-const MainRoom = dynamic(() => import('../../components/Main/MainRoom'))
+const MainRoom = dynamic(() => import('../../components/main/MainRoom'))
 
 export default function Main() {
   return (
