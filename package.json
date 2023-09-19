@@ -1,0 +1,67 @@
+{
+  "name": "mind-palace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --quiet --fix ."
+    ]
+  },
+  "dependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@react-three/drei": "9.74.8",
+    "@react-three/fiber": "8.13.1",
+    "axios": "^1.4.0",
+    "colorthief": "^2.4.0",
+    "emotion-reset": "^3.0.1",
+    "html-to-image": "^1.11.11",
+    "leva": "0.9.35",
+    "lodash": "^4.17.21",
+    "next": "13.4.7",
+    "patch-package": "^7.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-query": "^3.39.3",
+    "react-youtube": "^10.1.0",
+    "three": "0.143.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.2.1",
+    "@storybook/addon-interactions": "^7.2.1",
+    "@storybook/addon-links": "^7.2.1",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.2.1",
+    "@storybook/nextjs": "^7.2.1",
+    "@storybook/react": "^7.2.1",
+    "@storybook/testing-library": "^0.2.0",
+    "@types/lodash": "^4.14.195",
+    "@types/node": "20.3.1",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
+    "@types/three": "0.143.0",
+    "@types/youtube": "^0.0.47",
+    "eslint": "8.43.0",
+    "eslint-config-next": "13.4.7",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-storybook": "^0.6.13",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
+    "storybook": "^7.2.1",
+    "typescript": "5.1.3"
+  }
+}

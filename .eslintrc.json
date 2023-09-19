@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "next",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:storybook/recommended"
+  ]
+}
