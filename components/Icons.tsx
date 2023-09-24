@@ -127,9 +127,20 @@ export function SearchIcon({ color = '#171717', ...props }: SVGAttributes<SVGEle
 
 export function ImageIcon({ color = '#171717', ...props }: SVGAttributes<SVGElement>) {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg color={color} width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M6 28C5.46667 28 5 27.8 4.6 27.4C4.2 27 4 26.5333 4 26V6C4 5.46667 4.2 5 4.6 4.6C5 4.2 5.46667 4 6 4H26C26.5333 4 27 4.2 27.4 4.6C27.8 5 28 5.46667 28 6V26C28 26.5333 27.8 27 27.4 27.4C27 27.8 26.5333 28 26 28H6ZM6 26H26V6H6V26ZM7.86667 22.7667H24.1667L19.2667 16.2333L14.8667 21.9333L11.7667 17.7L7.86667 22.7667Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+export function PencelIcon({ color = '#171717', ...props }: SVGAttributes<SVGElement>) {
+  return (
+    <svg color={color} width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M2.05209 21.949H3.39458L17.7917 7.48887L16.4492 6.14197L2.05209 20.6021V21.949ZM22.0619 6.08856L17.8528 1.86558L19.0597 0.646786C19.4869 0.218231 20.0076 0.00264356 20.6218 2.37693e-05C21.2361 -0.00257419 21.7568 0.207795 22.184 0.631132L23.4172 1.8684C23.8183 2.26565 24.0124 2.74761 23.9994 3.31429C23.9864 3.88095 23.7871 4.35769 23.4016 4.74451L22.0619 6.08856ZM20.6988 7.45612L4.20918 24H0V19.777L16.4819 3.24097L20.6988 7.45612ZM17.1283 6.81542L16.4492 6.14197L17.7917 7.48887L17.1283 6.81542Z"
         fill="currentColor"
       />
     </svg>
