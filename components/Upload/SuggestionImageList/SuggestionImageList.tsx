@@ -29,8 +29,8 @@ const SuggestionImageList = ({ images, onClickSuggestionImage }: SuggestionImage
         </SuggestionImageWrapper>
       ) : (
         <SuggestionImageWrapper>
-          {new Array(8).fill(null).map((el) => (
-            <div key={el} className="requestImage__item" />
+          {new Array(8).fill('DUMMY').map((el, idx) => (
+            <div key={`${el}-${idx}`} className="requestImage__item" />
           ))}
         </SuggestionImageWrapper>
       )}
