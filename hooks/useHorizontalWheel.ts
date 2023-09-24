@@ -6,7 +6,7 @@ const useHorizontalWheel = () => {
   const onWheelHandler = debounce((e: WheelEvent<HTMLDivElement>) => {
     if (wheelRef.current) {
       wheelRef.current.scrollLeft +=
-        e.deltaY > 0 ? wheelRef.current.clientWidth + 10 : -wheelRef.current.clientWidth + -10
+        e.deltaY > 0 ? wheelRef.current.clientWidth + 24 : -wheelRef.current.clientWidth + -24
     }
   }, 100)
 
