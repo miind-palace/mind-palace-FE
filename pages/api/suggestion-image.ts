@@ -27,19 +27,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       { headers }
     )
 
-    text = response.data.message.result.translatedText
+    text = String(response.data.message.result.translatedText)
   } catch (error: any) {
     return res.send({ ...error })
   }
 
   try {
     const response = await axios.post(
-      'https://api.kakaobrain.com/v1/inference/karlo/t2i',
+      'https://api.kakaobrain.com/v2/inference/karlo/t2i',
       {
-        prompt: {
-          text: text + 'by Claude Monet',
-          batch_size: 8,
-        },
+        prompt:
+          text +
+          'digital art, stunning beauty, devine beauty, best quality, detailed with 32K UHD resolution, masterpiece, distinct, highres, best dynamic composition',
+        negative_prompt:
+          'poorly drawn hands, poorly drawn feet, photorealistic, poorly drawn face, out of frame, body out of frame, watermark, distorted face, bad anatomy, ugly, mutilated, disfigured, mutation, bad proportions, cropped head, cross-eye, mutilated, distorted eyes, strabismus, skin blemishes, missing anatomy, missing body, missing face, missing legs, missing fingers, missing feet, missing toe, fewer digits, extra limbs, extra anatomy, extra face, extra arms, extra fingers, extra hands, extra legs, extra feet, extra toe, mutated hands',
+        return_type: 'base64_string',
+        width: 568,
+        height: 264,
+        nsfw_checker: true,
+        image_quality: 100,
+        samples: '8',
       },
       {
         headers: {
@@ -52,7 +59,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json({ ...response.data })
   } catch (error: any) {
     console.log(error)
-
     return res.send({ ...error })
   }
 }
