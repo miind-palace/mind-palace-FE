@@ -24,5 +24,4 @@ export const PreviewLabelContainer = styled.label<{ previewUrl: string }>`
 export const PreviewLabelText = styled.span`
   margin-top: 8px;
   color: ${({ theme }) => theme.colors.text.alternative};
-  font-weight: 400;
 `
