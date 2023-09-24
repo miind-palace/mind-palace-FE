@@ -12,6 +12,7 @@ const createSuggestionImage = async (keyword: string) => {
 
 const useCreateSuggestionImage = () => {
   const [convertedKeyword, setConvertedKeyword] = useState<string>('')
+  const [hasError, setHasError] = useState(false)
   const [images, setImages] = useState<ImagesTypes[]>([])
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
@@ -31,28 +32,31 @@ const useCreateSuggestionImage = () => {
 
         return [file, pngUrl]
       })
-
+      setHasError(false)
       setImages(imageUrls)
     },
     onError(error: any) {
       console.log(error)
+      setHasError(true)
     },
   })
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeKeywordHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setConvertedKeyword(e.target.value)
+    setHasError(false)
   }
 
-  const onSubmitHandler = () => {
+  const onClickKeywordButtonHandler = () => {
     if (0 >= convertedKeyword.trim().length) return alert('키워드를 입력해주세요!')
 
     createSuggestionImageMutation.mutate(convertedKeyword.trim())
   }
 
   return {
-    onChangeHandler,
-    onSubmitHandler,
+    onChangeKeywordHandler,
+    onClickKeywordButtonHandler,
     convertedKeyword,
+    hasError,
     images,
   }
 }
