@@ -1,8 +1,219 @@
+import { ThreeEvent, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
-import { GLTFResult } from '../../lib/types/mainTypes'
+import * as THREE from 'three'
+
+import { useRef } from 'react'
+import { useRouter } from 'next/router'
+
+import { GLTF } from 'three-stdlib'
+import { dummyMemoryList } from '@/lib/constant/dummyMemoryList'
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Cube001: THREE.Mesh
+    Cube002: THREE.Mesh
+    Cube003: THREE.Mesh
+    Cube004: THREE.Mesh
+    Cube005: THREE.Mesh
+    Cube006: THREE.Mesh
+    Cube007: THREE.Mesh
+    Cube009: THREE.Mesh
+    Cube010: THREE.Mesh
+    Cube012: THREE.Mesh
+    Cube011: THREE.Mesh
+    Cube013: THREE.Mesh
+    Cube014: THREE.Mesh
+    Cube015: THREE.Mesh
+    Cube008: THREE.Mesh
+    Cube017: THREE.Mesh
+    Cube019: THREE.Mesh
+    Circle: THREE.Mesh
+    Plane001: THREE.Mesh
+    Plane002: THREE.Mesh
+    Plane003: THREE.Mesh
+    Cube024: THREE.Mesh
+    Cube025: THREE.Mesh
+    Cube027: THREE.Mesh
+    Cube028: THREE.Mesh
+    Cube029: THREE.Mesh
+    Cube030: THREE.Mesh
+    Cube031: THREE.Mesh
+    Cube032: THREE.Mesh
+    Cube033: THREE.Mesh
+    Cube034: THREE.Mesh
+    Cube035: THREE.Mesh
+    Cube036: THREE.Mesh
+    Cube037: THREE.Mesh
+    Cube038: THREE.Mesh
+    Cube039: THREE.Mesh
+    Cube040: THREE.Mesh
+    Cube041: THREE.Mesh
+    Cube042: THREE.Mesh
+    Cube043: THREE.Mesh
+    Cube044: THREE.Mesh
+    Cube045: THREE.Mesh
+    Cube046: THREE.Mesh
+    Cube047: THREE.Mesh
+    Cube048: THREE.Mesh
+    Cube049: THREE.Mesh
+    Cube050: THREE.Mesh
+    Cube051: THREE.Mesh
+    Cube052: THREE.Mesh
+    Cube061_1: THREE.Mesh
+    Cube061_2: THREE.Mesh
+    Plane002_1: THREE.Mesh
+    Plane002_2: THREE.Mesh
+    Cube026: THREE.Mesh
+    Cube059: THREE.Mesh
+    Cube063_1: THREE.Mesh
+    Cube063_2: THREE.Mesh
+    Cube064_1: THREE.Mesh
+    Cube064_2: THREE.Mesh
+    Cube066: THREE.Mesh
+    Cube066_1: THREE.Mesh
+    Cube067: THREE.Mesh
+    Cube067_1: THREE.Mesh
+    Cube068: THREE.Mesh
+    Cube068_1: THREE.Mesh
+  }
+  materials: {
+    ['Material.001']: THREE.MeshStandardMaterial
+    ['Material.028']: THREE.MeshStandardMaterial
+    ['Material.007']: THREE.MeshStandardMaterial
+    ['Material.004']: THREE.MeshStandardMaterial
+    ['Material.005']: THREE.MeshStandardMaterial
+    ['Material.002']: THREE.MeshStandardMaterial
+    ['Material.019']: THREE.MeshStandardMaterial
+    ['Material.034']: THREE.MeshStandardMaterial
+    ['Material.018']: THREE.MeshStandardMaterial
+    ['Material.016']: THREE.MeshStandardMaterial
+    ['Material.015']: THREE.MeshStandardMaterial
+    ['Material.017']: THREE.MeshStandardMaterial
+    ['Material.014']: THREE.MeshStandardMaterial
+    ['Material.024']: THREE.MeshStandardMaterial
+    ['Material.008']: THREE.MeshStandardMaterial
+    ['Material.009']: THREE.MeshStandardMaterial
+    ['Material.012']: THREE.MeshStandardMaterial
+    ['Material.026']: THREE.MeshStandardMaterial
+    ['Material.003']: THREE.MeshStandardMaterial
+    ['Material.013']: THREE.MeshStandardMaterial
+    ['Material.010']: THREE.MeshStandardMaterial
+    ['Material.029']: THREE.MeshStandardMaterial
+    ['Material.006']: THREE.MeshStandardMaterial
+    ['Material.032']: THREE.MeshStandardMaterial
+    ['Material.011']: THREE.MeshStandardMaterial
+    ['Material.023']: THREE.MeshStandardMaterial
+    ['Material.022']: THREE.MeshStandardMaterial
+    ['Material.020']: THREE.MeshStandardMaterial
+    ['Material.021']: THREE.MeshStandardMaterial
+    ['Material.025']: THREE.MeshStandardMaterial
+    ['Material.027']: THREE.MeshStandardMaterial
+    ['Material.030']: THREE.MeshStandardMaterial
+    ['Material.031']: THREE.MeshStandardMaterial
+    ['Material.033']: THREE.MeshStandardMaterial
+  }
+}
+
+type meshNode = 'bookshelf' | 'bookDummy' | 'yellowBook' | 'blueBook' | 'leaf'
 
 export default function MainRoom(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/main_room.gltf') as GLTFResult
+  const bookshelfRef = useRef<THREE.Mesh>(null!)
+
+  const router = useRouter()
+
+  const nodeHoverInfos = {
+    bookshelf: false,
+    bookDummy: false,
+    yellowBook: false,
+    blueBook: false,
+    leaf: false,
+  }
+
+  const handleNodePointOver = (event: ThreeEvent<PointerEvent>, node: meshNode) => {
+    event.stopPropagation()
+    window.document.body.style.cursor = 'pointer'
+    nodeHoverInfos[node] = true
+  }
+
+  const handleNodePointOut = (node: meshNode) => {
+    window.document.body.style.cursor = 'default'
+    nodeHoverInfos[node] = false
+  }
+
+  useFrame(() => {
+    //책장
+    if (bookshelfRef.current !== undefined) {
+      //Ref는 책장 밀리는 애니메이션 적용을 위함
+      bookshelfRef.current.position.z = nodeHoverInfos['bookshelf']
+        ? THREE.MathUtils.lerp(bookshelfRef.current.position.z, -1, 0.025)
+        : THREE.MathUtils.lerp(bookshelfRef.current.position.z, -1.05, 0.025)
+
+      materials['Material.007'].color.lerp(
+        nodeHoverInfos['bookshelf']
+          ? new THREE.Color(Math.floor(Math.random() * 16777216))
+          : new THREE.Color('#D69034'),
+        0.01
+      )
+    }
+
+    //잎파리
+    const leafsMaterialName = ['Material.015', 'Material.016', 'Material.017'] as const
+    leafsMaterialName.forEach((leafName) => {
+      if (materials[leafName]) {
+        materials[leafName].color.lerp(
+          nodeHoverInfos['leaf'] ? new THREE.Color('green') : new THREE.Color('#CAE783'),
+          0.01
+        )
+      }
+    })
+
+    //책더미
+    const bookDummyKeys = ['Material.024', 'Material.021'] as const
+    bookDummyKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          nodeHoverInfos['bookDummy']
+            ? new THREE.Color(Math.floor(Math.random() * 16777216))
+            : new THREE.Color('#34495e'),
+          0.01
+        )
+      }
+    })
+
+    //노란책
+    const yellowBookKeys = ['Material.014', 'Material.031'] as const
+    yellowBookKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          nodeHoverInfos['yellowBook']
+            ? new THREE.Color(Math.floor(Math.random() * 16777216))
+            : new THREE.Color('yellow'),
+          0.01
+        )
+      }
+    })
+    //파란책
+    const blueBookKeys = ['Material.026', 'Material.033'] as const
+    blueBookKeys.forEach((key) => {
+      if (materials[key]) {
+        materials[key].color.lerp(
+          nodeHoverInfos['blueBook']
+            ? new THREE.Color(Math.floor(Math.random() * 16777216))
+            : new THREE.Color('#2980b9'),
+          0.01
+        )
+      }
+    })
+  })
+
+  const routeToRandomCardModal = () => {
+    const randomIndexOfDummyMemoryList = Math.floor(Math.random() * dummyMemoryList.length)
+    const randomDummyMemory = dummyMemoryList.filter((el, index) => index === randomIndexOfDummyMemoryList)[0]
+
+    sessionStorage.setItem('dummyMemory', JSON.stringify(randomDummyMemory))
+    router.push('/memory-list')
+  }
 
   return (
     <group {...props} dispose={null}>
@@ -24,7 +235,11 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.Cube003.geometry}
         material={materials['Material.007']}
         position={[1.404, 3.387, -1.132]}
+        ref={bookshelfRef}
         scale={0.645}
+        onPointerOver={(e) => handleNodePointOver(e, 'bookshelf')}
+        onPointerOut={() => handleNodePointOut('bookshelf')}
+        onClick={() => router.push('/memory-list')}
       />
       <mesh
         geometry={nodes.Cube004.geometry}
@@ -129,6 +344,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.453, 1.367]}
         rotation={[1.029, -0.021, -0.033]}
         scale={[0.369, 0.459, 0.332]}
+        onPointerOver={(e) => handleNodePointOver(e, 'leaf')}
+        onPointerOut={() => handleNodePointOut('leaf')}
       />
       <mesh
         geometry={nodes.Plane002.geometry}
@@ -136,6 +353,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.474, 1.388]}
         rotation={[2.178, 0.569, -2.19]}
         scale={[0.369, 0.459, 0.332]}
+        onPointerOver={(e) => handleNodePointOver(e, 'leaf')}
+        onPointerOut={() => handleNodePointOut('leaf')}
       />
       <mesh
         geometry={nodes.Plane003.geometry}
@@ -143,6 +362,8 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         position={[-1.115, 3.457, 1.367]}
         rotation={[0.657, -0.423, -0.528]}
         scale={[0.245, 0.304, 0.22]}
+        onPointerOver={(e) => handleNodePointOver(e, 'leaf')}
+        onPointerOut={() => handleNodePointOut('leaf')}
       />
       <mesh
         geometry={nodes.Cube024.geometry}
@@ -356,25 +577,60 @@ export default function MainRoom(props: JSX.IntrinsicElements['group']) {
         scale={0.077}
       />
       {/* 더미책 */}
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => handleNodePointOver(e, 'bookDummy')}
+        onPointerOut={() => handleNodePointOut('bookDummy')}
+        onClick={() => routeToRandomCardModal()}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube063_1.geometry} material={materials['Material.021']} />
         <mesh geometry={nodes.Cube063_2.geometry} material={materials['Material.025']} />
       </group>
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => handleNodePointOver(e, 'bookDummy')}
+        onPointerOut={() => handleNodePointOut('bookDummy')}
+        onClick={() => routeToRandomCardModal()}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube064_1.geometry} material={materials['Material.024']} />
         <mesh geometry={nodes.Cube064_2.geometry} material={materials['Material.027']} />
       </group>
-      <group position={[1.054, 2.79, 0.001]} rotation={[0, -0.175, Math.PI]} scale={0.077}>
+      <group
+        position={[1.054, 2.79, 0.001]}
+        rotation={[0, -0.175, Math.PI]}
+        onPointerOver={(e) => handleNodePointOver(e, 'bookDummy')}
+        onPointerOut={() => handleNodePointOut('bookDummy')}
+        onClick={() => routeToRandomCardModal()}
+        scale={0.077}
+      >
         <mesh geometry={nodes.Cube066.geometry} material={materials['Material.026']} />
         <mesh geometry={nodes.Cube066_1.geometry} material={materials['Material.030']} />
       </group>
       {/* 노랑 */}
-      <group position={[0.57, 1.135, 1.596]} rotation={[0, 0.506, -1.082]} scale={0.077}>
+      <group
+        position={[0.57, 1.135, 1.596]}
+        rotation={[0, 0.506, -1.082]}
+        scale={0.077}
+        onPointerOver={(e) => handleNodePointOver(e, 'yellowBook')}
+        onPointerOut={() => handleNodePointOut('yellowBook')}
+        onClick={() => routeToRandomCardModal()}
+      >
         <mesh geometry={nodes.Cube067.geometry} material={materials['Material.014']} />
         <mesh geometry={nodes.Cube067_1.geometry} material={materials['Material.031']} />
       </group>
       {/* 파랑 */}
-      <group position={[0.57, 1.135, 1.596]} rotation={[0, 0.506, -1.082]} scale={0.077}>
+      <group
+        position={[0.57, 1.135, 1.596]}
+        rotation={[0, 0.506, -1.082]}
+        scale={0.077}
+        onPointerOver={(e) => handleNodePointOver(e, 'blueBook')}
+        onPointerOut={() => handleNodePointOut('blueBook')}
+        onClick={() => routeToRandomCardModal()}
+      >
         <mesh geometry={nodes.Cube068.geometry} material={materials['Material.026']} />
         <mesh geometry={nodes.Cube068_1.geometry} material={materials['Material.033']} />
       </group>
