@@ -6,16 +6,26 @@ export const useChangePreviewImage = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState('')
 
   const onChangeBackgroundImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
+    if (previewImageUrl) {
       // 이전 생성한 프리뷰 URL 제거 (메모리 확보)
-      if (imgFile) {
-        URL.revokeObjectURL(previewImageUrl)
-      }
+      URL.revokeObjectURL(previewImageUrl)
+    }
 
+    if (event.target.files?.length) {
       const file = event.target.files[0]
+      const url = URL.createObjectURL(file)
+      const image = new Image()
 
-      setImgFile(file)
-      setPreviewImageUrl(URL.createObjectURL(file))
+      image.src = url
+
+      image.onload = () => {
+        if (image.width < 568 || image.height < 264) {
+          return alert('이미지는 너비 568px 이상 높이 264이상의 이미지로 넣어주세요.')
+        }
+
+        setImgFile(file)
+        setPreviewImageUrl(url)
+      }
     }
   }
 
