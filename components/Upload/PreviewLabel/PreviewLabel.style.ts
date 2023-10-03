@@ -13,15 +13,15 @@ export const PreviewLabelContainer = styled.label<{ previewUrl: string }>`
   border-radius: 12px;
   padding: 10px 14px;
   aspect-ratio: 71 / 33;
-  font-size: ${({ theme }) => theme.typography.size.text18};
   background-repeat: no-repeat;
   background-position: center center;
   background-color: ${({ theme }) => theme.colors.background.normal};
-  background-size: ${(props) => (props.previewUrl === '/images/images-icon.svg' ? 'none' : 'contain')};
+  background-size: ${(props) => (props.previewUrl === '/images/images-icon.svg' ? 'none' : 'cover')};
   cursor: pointer;
 `
 
 export const PreviewLabelText = styled.span`
   margin-top: 8px;
+  font-size: ${({ theme }) => theme.typography.size.text16};
   color: ${({ theme }) => theme.colors.text.alternative};
 `
