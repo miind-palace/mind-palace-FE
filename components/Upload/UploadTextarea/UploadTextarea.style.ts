@@ -49,7 +49,8 @@ export const UploadTextareaPlaceholderWrapper = styled.div`
 
 export const CustomTextarea = styled(ReactTextareaAutosize)`
   width: 100%;
-  max-height: 154px;
+  max-height: 122px;
+  padding: 0 16px;
   overflow: hidden;
   position: absolute;
   top: 50%;
