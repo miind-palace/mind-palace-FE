@@ -35,4 +35,10 @@ const StyledButton = styled.button`
     background: rgba(0, 0, 0, 0.9);
     border: 1px solid rgba(0, 0, 0, 0.9);
   }
+  &:disabled {
+    background: #999999;
+    border: #999999;
+    color: #d2d2d2;
+    cursor: default;
+  }
 `
