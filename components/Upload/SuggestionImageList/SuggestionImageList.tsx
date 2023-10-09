@@ -34,11 +34,9 @@ const SuggestionImageList = ({ images, isLoading, onClickSuggestionImage }: Sugg
       ) : (
         <SuggestionImageWrapper>
           {new Array(8).fill('DUMMY').map((el, idx) => (
-            <>
-              <div key={`${el}-${idx}`} className="requestImage__item">
-                {isLoading && <FlippingLoader size={30} />}
-              </div>
-            </>
+            <div key={`${el}-${idx}`} className="requestImage__item">
+              {isLoading && <FlippingLoader size={30} />}
+            </div>
           ))}
         </SuggestionImageWrapper>
       )}
