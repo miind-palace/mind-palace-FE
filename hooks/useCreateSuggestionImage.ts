@@ -57,6 +57,7 @@ const useCreateSuggestionImage = () => {
     onClickKeywordButtonHandler,
     convertedKeyword,
     hasError,
+    isLoading: createSuggestionImageMutation.isLoading,
     images,
   }
 }
