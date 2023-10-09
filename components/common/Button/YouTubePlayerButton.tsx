@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import YouTube from 'react-youtube'
 import styled from '@emotion/styled'
 
-import { PauseIcon, PauseIconInMemoryList, PlayIcon, PlayIconInMemoryList } from '@/components/Icons'
+import { PauseIcon, PlayIcon } from '@/components/Icons'
 
 interface YouTubePlayerButtonProps {
   videoId: string
   isAutoPlay: boolean
-  isInMemoryList?: boolean
+  color?: string
 }
 
-const YouTubePlayerButton: React.FC<YouTubePlayerButtonProps> = ({ videoId, isAutoPlay, isInMemoryList }) => {
+const YouTubePlayerButton: React.FC<YouTubePlayerButtonProps> = ({ videoId, isAutoPlay, color }) => {
   const [player, setPlayer] = useState<YT.Player | undefined>(undefined)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(isAutoPlay)
 
   const opts = {
     height: '0',
@@ -37,22 +37,12 @@ const YouTubePlayerButton: React.FC<YouTubePlayerButtonProps> = ({ videoId, isAu
     }
   }
 
-  const PlayerControlButton = (
-    <Button type="button" onClick={toggleVideoStatus}>
-      {isPlaying ? <PauseIcon width={40} /> : <PlayIcon width={40} />}
-    </Button>
-  )
-
-  const PlayerControlButtonInMemoryList = (
-    <Button onClick={toggleVideoStatus}>
-      {isPlaying ? <PauseIconInMemoryList width={40} /> : <PlayIconInMemoryList width={40} />}
-    </Button>
-  )
-
   return (
     <>
       <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} style={{ display: 'none' }} />
-      {!isInMemoryList ? PlayerControlButton : PlayerControlButtonInMemoryList}
+      <Button onClick={toggleVideoStatus} type="button">
+        {isPlaying ? <PauseIcon width={40} color={color} /> : <PlayIcon width={40} color={color} />}
+      </Button>
     </>
   )
 }
