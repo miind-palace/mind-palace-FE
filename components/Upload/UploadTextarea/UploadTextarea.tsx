@@ -1,5 +1,5 @@
 import { PencelIcon } from '@/components/Icons'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { CustomTextarea, UploadTextareaContainer, UploadTextareaPlaceholderWrapper } from './UploadTextarea.style'
 
 interface UploadTextareaProps {
@@ -9,6 +9,7 @@ interface UploadTextareaProps {
 
 const UploadTextarea = ({ value, onChange }: UploadTextareaProps) => {
   const [hasFocus, setHasFocus] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const onFocusTextareaHandler = () => {
     setHasFocus(true)
@@ -25,9 +26,10 @@ const UploadTextarea = ({ value, onChange }: UploadTextareaProps) => {
         value={value}
         onBlur={onBlurTextareaHandler}
         onFocus={onFocusTextareaHandler}
+        ref={textareaRef}
       />
       {!value && !hasFocus && (
-        <UploadTextareaPlaceholderWrapper>
+        <UploadTextareaPlaceholderWrapper onClick={() => textareaRef.current?.focus()}>
           <PencelIcon />
           <p>그날의 느낌을 기록하세요</p>
         </UploadTextareaPlaceholderWrapper>

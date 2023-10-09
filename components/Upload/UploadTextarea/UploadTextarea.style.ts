@@ -24,11 +24,6 @@ export const UploadTextArea = styled.textarea`
   text-align: center;
   align-items: center;
   justify-content: center;
-
-  &:focus {
-    outline: none;
-    box-shadow: 1px 1px 2px 0px #00000026 inset;
-  }
 `
 
 export const UploadTextareaPlaceholderWrapper = styled.div`
