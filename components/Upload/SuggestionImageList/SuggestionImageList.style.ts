@@ -16,16 +16,19 @@ export const SuggestionImageListContainer = styled.div`
 export const SuggestionImageWrapper = styled.div`
   height: 100%;
   display: flex;
-  white-space: nowrap;
   gap: 8px;
-  position: relative;
   cursor: pointer;
 
   .requestImage__item {
+    position: relative;
     flex: 0 0 138px;
     width: 138px;
     height: 138px;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.background.random};
+  }
+
+  .requestImage__box {
+    position: relative;
   }
 `
