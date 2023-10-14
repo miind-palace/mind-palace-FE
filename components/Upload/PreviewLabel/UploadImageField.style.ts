@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const PreviewLabelContainer = styled.label<{ previewUrl: string }>`
+export const UploadImageFieldContainer = styled.label<{ previewUrl: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,9 +18,13 @@ export const PreviewLabelContainer = styled.label<{ previewUrl: string }>`
   background-color: ${({ theme }) => theme.colors.background.normal};
   background-size: ${(props) => (props.previewUrl === '/images/images-icon.svg' ? 'none' : 'cover')};
   cursor: pointer;
+
+  > input {
+    display: none;
+  }
 `
 
-export const PreviewLabelText = styled.span`
+export const UploadImagePlaceholder = styled.span`
   margin-top: 8px;
   font-size: ${({ theme }) => theme.typography.size.text16};
   color: ${({ theme }) => theme.colors.text.alternative};

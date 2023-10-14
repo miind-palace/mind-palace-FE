@@ -3,7 +3,7 @@ import useInput from '@/hooks/useInput'
 import styled from '@emotion/styled'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import KeywordInput from '@/components/Upload/KeywordInput/KeywordInput'
-import PreviewLabel from '@/components/Upload/PreviewLabel/PreviewLabel'
+import UploadImageField from '@/components/Upload/PreviewLabel/UploadImageField'
 import SuggestionImageList from '@/components/Upload/SuggestionImageList/SuggestionImageList'
 import UploadTextarea from '@/components/Upload/UploadTextarea/UploadTextarea'
 
@@ -16,7 +16,7 @@ import UploadYouTubePlayer from '@/components/Upload/UploadYouTubePlayer/UploadY
 export default function Upload() {
   const [textAreaValue, setTextareaValue] = useState('')
   const [youtubeUrl, , onChangeYoutubeUrl] = useInput('')
-  const { previewImageUrl, setPreviewImageUrl, onChangeBackgroundImage, onClickSuggestionImage, setImgFile, imgFile } =
+  const { previewImageUrl, setPreviewImageUrl, onChangePreviewImage, onClickSuggestionImage, setImgFile, imgFile } =
     useChangePreviewImage()
   const { onChangeKeywordHandler, onClickKeywordButtonHandler, convertedKeyword, images, hasError, isLoading } =
     useCreateSuggestionImage()
@@ -61,7 +61,7 @@ export default function Upload() {
           placeholder="그날의 키워드를 입력하세요"
         />
         <SuggestionImageList images={images} isLoading={isLoading} onClickSuggestionImage={onClickSuggestionImage} />
-        <PreviewLabel previewImageUrl={previewImageUrl} onChangeBackgroundImage={onChangeBackgroundImage} />
+        <UploadImageField previewImageUrl={previewImageUrl} onChangePreviewImage={onChangePreviewImage} />
         <UploadTextarea value={textAreaValue} onChange={onChangeTextareaHandler} />
         <UploadYouTubePlayer youtubeUrl={youtubeUrl} onChangeYoutubeUrl={onChangeYoutubeUrl} />
         <LargeButton type="submit">추억을 보관하세요</LargeButton>
@@ -88,9 +88,5 @@ const FormWrapper = styled.form`
 
   > button {
     margin: 32px 0 26px 0;
-  }
-
-  .form__bgImage--input {
-    display: none;
   }
 `
