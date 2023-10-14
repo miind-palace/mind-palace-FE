@@ -39,7 +39,12 @@ const UploadYouTubePlayer = ({ youtubeUrl, onChangeYoutubeUrl }: UploadYoutubePl
         ref={inputRef}
       />
       {(youtubeUrl || hasFocus) && (
-        <YouTubePlayerButton videoId={makeYouTubeVideoId(youtubeUrl) || ''} isAutoPlay={false} color="#171717" />
+        <YouTubePlayerButton
+          key={youtubeUrl}
+          videoId={makeYouTubeVideoId(youtubeUrl) || ''}
+          isAutoPlay={false}
+          color="#171717"
+        />
       )}
     </UploadYouTubePlayerContainer>
   )
