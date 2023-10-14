@@ -18,6 +18,7 @@ export const SearchInput = styled.input`
   width: 100%;
   padding: 10px 100px 10px 46px;
   background-color: ${({ theme }) => theme.colors.background.normal};
+  font-size: ${({ theme }) => theme.typography.size.text16};
   color: ${({ theme }) => theme.colors.text.medium};
   border: none;
 
