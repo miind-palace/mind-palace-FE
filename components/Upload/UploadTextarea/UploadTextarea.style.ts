@@ -46,7 +46,7 @@ export const CustomTextarea = styled(ReactTextareaAutosize)`
   width: 100%;
   max-height: 122px;
   padding: 0 16px;
-  overflow: hidden;
+  overflow: auto;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
