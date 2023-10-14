@@ -42,8 +42,6 @@ export default function CheckEmailForm({ email, onChangeEmail, goNextStep }: Che
       return
     }
 
-    debugger
-
     alert('사용할 수 있는 이메일입니다.')
     goNextStep()
   }
