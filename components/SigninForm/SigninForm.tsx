@@ -8,6 +8,11 @@ import BasicButton from '../common/Button/BasicButton'
 import Spacing from '../common/Spacing/Spacing'
 import { axiosHttp } from '@/lib/utils/httpCore'
 
+const initialSignInValue = {
+  email: '',
+  password: '',
+}
+
 export default function SigninForm() {
   const router = useRouter()
 
@@ -18,31 +23,24 @@ export default function SigninForm() {
     }
   }, [router])
 
-  const [signinConditions, setSigninConditions] = useState({
-    email: '',
-    password: '',
-  })
+  const [signInValue, setSignInValue] = useState(initialSignInValue)
 
   const updateSigninConditions = (e: ChangeEvent<HTMLInputElement>) => {
-    // input 값에 onChange 를 통해 Conditions 을 변화시키는 함수
     const { value, name } = e.target
-    setSigninConditions((prevConditions) => ({
-      ...prevConditions,
-      [name]: value, // 네임 가져와서 네임에 맞는 애로 변경
+    setSignInValue((prev) => ({
+      ...prev,
+      [name]: value,
     }))
   }
 
-  const signinFunction = async (e: FormEvent) => {
-    // 로그인 버튼 클릭시 폼 제출 후 업로드 페이지로 라우팅
+  const handleSignIn = async (e: FormEvent) => {
     e.preventDefault()
-
-    debugger
-    if (!signinConditions.email || !signinConditions.password) return alert('아이디 혹은 비밀번호를 입력하세요!')
+    if (!signInValue.email || !signInValue.password) return alert('아이디 혹은 비밀번호를 입력하세요!')
 
     try {
       const response = await axiosHttp.post(`/member/login`, {
-        memberEmail: signinConditions.email,
-        memberPassword: signinConditions.password,
+        memberEmail: signInValue.email,
+        memberPassword: signInValue.password,
       })
       localStorage.setItem('memberId', response.data.id)
       router.push('/upload')
@@ -51,18 +49,12 @@ export default function SigninForm() {
     }
   }
 
-  const goToSignupPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    // Make an Account 클릭시 회원가입 페이지로 이동
-    e.preventDefault()
-    router.push('/sign-up')
-  }
-
   return (
     <Wrapper>
-      <form onSubmit={signinFunction}>
+      <form onSubmit={handleSignIn}>
         <Spacing size={20} />
         <Input
-          value={signinConditions.email}
+          value={signInValue.email}
           inputLabel="Email"
           type="text"
           name="email"
@@ -71,7 +63,7 @@ export default function SigninForm() {
         />
         <Spacing size={20} />
         <Input
-          value={signinConditions.password}
+          value={signInValue.password}
           inputLabel="Password"
           type="password"
           name="password"
@@ -82,9 +74,7 @@ export default function SigninForm() {
         <Spacing size={70} />
         <BasicButton>Log in</BasicButton>
         <Spacing size={20} />
-        <StyledLink href="#" onClick={goToSignupPage}>
-          Make an account
-        </StyledLink>
+        <StyledLink href="/sign-up">Make an account</StyledLink>
       </form>
     </Wrapper>
   )
