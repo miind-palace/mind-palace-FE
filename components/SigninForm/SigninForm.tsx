@@ -12,10 +12,10 @@ export default function SigninForm() {
   const router = useRouter()
 
   useEffect(() => {
-    // 마운트시 memberId 있으면 upload 페이지로 라우팅
-    // if (localStorage.getItem('memberId')) {
-    //   router.push('/upload')
-    // }
+    // 마운트시 localStorage에 memberId 있으면 upload 페이지로 라우팅
+    if (localStorage.getItem('memberId')) {
+      router.push('/upload')
+    }
   }, [router])
 
   const [signinConditions, setSigninConditions] = useState({
@@ -61,7 +61,6 @@ export default function SigninForm() {
   const goToSignupPage = (e: MouseEvent<HTMLAnchorElement>) => {
     // Make an Account 클릭시 회원가입 페이지로 이동
     e.preventDefault()
-
     router.push('/sign-up')
   }
 

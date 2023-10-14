@@ -1,6 +1,5 @@
-import { useState, useEffect, FormEvent, ChangeEvent, MouseEvent } from 'react'
+import { useState, useEffect, FormEvent, ChangeEvent, MouseEvent, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import styled from '@emotion/styled'
 import Input from '@/components/common/Input/Input'
 import { SecurityIcon } from '../Icons'
@@ -16,19 +15,26 @@ type SignUpValueType = {
   passwordCheck: string
 }
 
-const initialSignUpValue: SignUpValueType = {
+const defaultSignUpValue = {
   email: '',
   name: '',
   password: '',
   passwordCheck: '',
 }
 
-const SIGN_UP_KEY = Object.keys(initialSignUpValue)
+const initSignUpValue = (email: string) => {
+  return {
+    ...defaultSignUpValue,
+    email,
+  }
+}
 
-export default function SignupForm() {
+const SIGN_UP_KEY = Object.keys(defaultSignUpValue)
+
+export default function SignupForm({ email }: { email: string }) {
   const router = useRouter()
+  const initialSignUpValue = useMemo(() => initSignUpValue(email), [email])
   const [signUpValue, setSignUpValue] = useState<SignUpValueType>(initialSignUpValue)
-  const [isValidEmailCheck, setIsValidEmailCheck] = useState<boolean>(false)
 
   useEffect(() => {
     // 마운트시 memberId 있으면 upload 페이지로 라우팅
@@ -53,11 +59,9 @@ export default function SignupForm() {
   }
 
   const handleSubmitSignUp = async (e: FormEvent) => {
-    // 회원가입 시켜주는 함수 그 후 upload 페이지 이동
     e.preventDefault()
-    console.log('signUpValue: ', signUpValue)
 
-    const isValidEmail = validateEmail(signUpValue.email)
+    const isValidEmail = validateEmail(email)
     if (!isValidEmail) {
       alert('이메일 형식이 올바르지 않습니다.')
       return
@@ -78,32 +82,6 @@ export default function SignupForm() {
     }
   }
 
-  const checkEmail = async (email: string) => {
-    const { data } = await axiosHttp.post(`/member/mailCheck?memberEmail=${email}`)
-    const isValidEmail = data === AVAILABLE_EMAIL_MSG
-    const result = {
-      check: isValidEmail,
-      msg: data,
-    }
-    return result
-  }
-
-  const handleVerifyEmail = async () => {
-    const email = signUpValue.email
-    const { check, msg } = await checkEmail(email)
-    if (!check) {
-      alert(msg)
-      return
-    }
-
-    try {
-      const { data } = await axiosHttp.post(`/member/mailVerify`, { email })
-      alert(data)
-    } catch (err) {
-      if (err instanceof Error) alert(err.message)
-    }
-  }
-
   return (
     <>
       <Wrapper>
@@ -115,12 +93,9 @@ export default function SignupForm() {
             type="text"
             name="email"
             colorType="PENETRATED_WHITE"
-            onChange={handleChangeSignUpValue}
+            value={email}
+            readOnly
           />
-          <Spacing size={10} />
-          <BasicButton onClick={handleVerifyEmail} type="button">
-            이메일 인증
-          </BasicButton>
           <Spacing size={20} />
           <Input
             inputLabel="Name"
@@ -151,9 +126,7 @@ export default function SignupForm() {
             onChange={handleChangeSignUpValue}
           />
           <Spacing size={70} />
-          <BasicButton type="submit" disabled={!isValidEmailCheck}>
-            Sign up
-          </BasicButton>
+          <BasicButton type="submit">Sign up</BasicButton>
         </form>
       </Wrapper>
     </>
@@ -164,5 +137,3 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
-const AVAILABLE_EMAIL_MSG = '사용가능한 이메일입니다!'
