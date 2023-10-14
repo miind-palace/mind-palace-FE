@@ -4,7 +4,7 @@ import Input from '@/components/common/Input/Input'
 import BasicButton from '../common/Button/BasicButton'
 import Spacing from '../common/Spacing/Spacing'
 import { axiosHttp } from '@/lib/utils/httpCore'
-import { validateEmail } from '@/lib/utils/validateEmail'
+import { validateEmail } from '@/lib/utils/validateUserInfo'
 
 interface CheckEmailFormProps {
   email: string

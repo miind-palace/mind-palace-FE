@@ -5,7 +5,7 @@ import Input from '@/components/common/Input/Input'
 import { SecurityIcon } from '../Icons'
 import BasicButton from '../common/Button/BasicButton'
 import Spacing from '../common/Spacing/Spacing'
-import { validateEmail } from '@/lib/utils/validateEmail'
+import { validateEmail, validatePassword } from '@/lib/utils/validateUserInfo'
 import { axiosHttp } from '@/lib/utils/httpCore'
 
 type SignUpValueType = {
@@ -61,9 +61,20 @@ export default function SignupForm({ email }: { email: string }) {
   const handleSubmitSignUp = async (e: FormEvent) => {
     e.preventDefault()
 
-    const isValidEmail = validateEmail(email)
+    const isValidEmail = validateEmail(signUpValue.email)
     if (!isValidEmail) {
       alert('이메일 형식이 올바르지 않습니다.')
+      return
+    }
+
+    const isValidPassword = validatePassword(signUpValue.password)
+    if (!isValidPassword) {
+      alert(`비밀번호는 다음과 같은 규칙을 준수해야 합니다.\n영문, 숫자, 특수문자를 포함하여 8자리 이상`)
+      return
+    }
+
+    if (signUpValue.password !== signUpValue.passwordCheck) {
+      alert('비밀번호가 일치하지 않습니다.')
       return
     }
 
