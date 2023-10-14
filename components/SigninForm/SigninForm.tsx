@@ -37,24 +37,17 @@ export default function SigninForm() {
     e.preventDefault()
 
     debugger
-    if (!signinConditions.email || !signinConditions.password) return alert('아이디나 비밀번호를 입력하세요!')
+    if (!signinConditions.email || !signinConditions.password) return alert('아이디 혹은 비밀번호를 입력하세요!')
 
     try {
       const response = await axiosHttp.post(`/member/login`, {
         memberEmail: signinConditions.email,
         memberPassword: signinConditions.password,
       })
-
-      console.log(response)
-      console.log(response.headers['set-cookie'])
-      debugger
-
-      if (response.data === '로그인 실패') return alert(response.data)
-
       localStorage.setItem('memberId', response.data.id)
       router.push('/upload')
     } catch (error) {
-      alert('아이디나 비밀번호를 확인하세요!')
+      if (error instanceof Error) alert(error.message)
     }
   }
 
