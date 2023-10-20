@@ -25,7 +25,7 @@ export default function SigninForm() {
 
   const [signInValue, setSignInValue] = useState(initialSignInValue)
 
-  const updateSigninConditions = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSigninValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
     setSignInValue((prev) => ({
       ...prev,
@@ -58,7 +58,7 @@ export default function SigninForm() {
           inputLabel="Email"
           type="text"
           name="email"
-          onChange={updateSigninConditions}
+          onChange={handleChangeSigninValue}
           colorType="PENETRATED_BLACK"
         />
         <Spacing size={20} />
@@ -67,7 +67,7 @@ export default function SigninForm() {
           inputLabel="Password"
           type="password"
           name="password"
-          onChange={updateSigninConditions}
+          onChange={handleChangeSigninValue}
           svgIcon={<SecurityIcon width="16" height="17" color="white" />}
           colorType="PENETRATED_BLACK"
         />

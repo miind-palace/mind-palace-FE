@@ -38,9 +38,9 @@ export default function SignupForm({ email }: { email: string }) {
 
   useEffect(() => {
     // 마운트시 memberId 있으면 upload 페이지로 라우팅
-    // if (localStorage.getItem('memberId')) {
-    //   router.push('/upload')
-    // }
+    if (localStorage.getItem('memberId')) {
+      router.push('/upload')
+    }
   }, [router])
 
   const handleChangeSignUpValue = (e: ChangeEvent<HTMLInputElement>) => {
