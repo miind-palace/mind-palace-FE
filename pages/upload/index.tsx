@@ -10,7 +10,7 @@ import UploadTextarea from '@/components/Upload/UploadTextarea/UploadTextarea'
 import useCreateMemoryPost from '@/hooks/useCreateMemoryPost'
 import useCreateSuggestionImage from '@/hooks/useCreateSuggestionImage'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
-import LargeButton from '@/components/common/Button/LargeButton'
+import LargeButton from '@/components/common/Button/Button'
 import UploadYouTubePlayer from '@/components/Upload/UploadYouTubePlayer/UploadYouTubePlayer'
 
 export default function Upload() {

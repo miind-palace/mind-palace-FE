@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode, Ref, forwardRef } from 'react'
-import { LargeButtonContainer } from './LargeButton.style'
+import { LargeButtonContainer } from './Button.style'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
