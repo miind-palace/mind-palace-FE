@@ -15,7 +15,6 @@ interface CheckEmailFormProps {
 export default function CheckEmailForm({ email, onChangeEmail, goNextStep }: CheckEmailFormProps) {
   const checkValidateEmail = async (email: string) => {
     const { data } = await axiosHttp.post(`/member/mailCheck?memberEmail=${email}`)
-    // TODO: 서버 스펙 변경되면 message가 아니라 boolean값 기준으로 변경
     const result = {
       ...data,
     }
