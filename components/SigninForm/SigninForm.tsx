@@ -1,93 +1,80 @@
 import { useState, FormEvent, ChangeEvent, MouseEvent, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import styled from '@emotion/styled'
 import { SecurityIcon } from '../Icons'
 import Input from '@/components/common/Input/Input'
 import Link from 'next/link'
 import BasicButton from '../common/Button/BasicButton'
 import Spacing from '../common/Spacing/Spacing'
+import { axiosHttp } from '@/lib/utils/httpCore'
+
+const initialSignInValue = {
+  email: '',
+  password: '',
+}
 
 export default function SigninForm() {
   const router = useRouter()
 
   useEffect(() => {
-    // 마운트 시 토큰 존재하면 업로드 페이지 이동 -> ( api 받으면 추후 세션 방식으로 바꿔야 한다 ) - 자동 로그인 되어있을 경우 업로드로 라우팅도 구현해야
+    // 마운트시 localStorage에 memberId 있으면 upload 페이지로 라우팅
     if (localStorage.getItem('memberId')) {
       router.push('/upload')
     }
   }, [router])
 
-  const [signinConditions, setSigninConditions] = useState({
-    email: '',
-    password: '',
-  })
+  const [signInValue, setSignInValue] = useState(initialSignInValue)
 
-  const updateSigninConditions = (e: ChangeEvent<HTMLInputElement>) => {
-    // input 값에 onChange 를 통해 Conditions 을 변화시키는 함수
+  const handleChangeSigninValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
-    setSigninConditions((prevConditions) => ({
-      ...prevConditions,
-      [name]: value, // 네임 가져와서 네임에 맞는 애로 변경
+    setSignInValue((prev) => ({
+      ...prev,
+      [name]: value,
     }))
   }
 
-  const signinFunction = async (e: FormEvent) => {
-    // 로그인 버튼 클릭시 폼 제출 후 업로드 페이지로 라우팅
+  const handleSignIn = async (e: FormEvent) => {
     e.preventDefault()
-
-    if (!signinConditions.email || !signinConditions.password) return alert('아이디나 비밀번호를 입력하세요!')
+    if (!signInValue.email || !signInValue.password) return alert('아이디 혹은 비밀번호를 입력하세요!')
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}member/login`, {
-        memberEmail: signinConditions.email,
-        memberPassword: signinConditions.password,
+      const response = await axiosHttp.post(`/member/login`, {
+        memberEmail: signInValue.email,
+        memberPassword: signInValue.password,
       })
-
-      if (response.data === '로그인 실패') return alert(response.data)
-
       localStorage.setItem('memberId', response.data.id)
       router.push('/upload')
     } catch (error) {
-      alert('아이디나 비밀번호를 확인하세요!')
+      if (error instanceof Error) alert(error.message)
     }
-  }
-
-  const goToSignupPage = (e: MouseEvent<HTMLAnchorElement>) => {
-    // Make an Account 클릭시 회원가입 페이지로 이동
-    e.preventDefault()
-
-    router.push('/sign-up')
   }
 
   return (
     <Wrapper>
-      <form onSubmit={signinFunction}>
+      <form onSubmit={handleSignIn}>
         <Spacing size={20} />
         <Input
-          value={signinConditions.email}
+          value={signInValue.email}
           inputLabel="Email"
           type="text"
           name="email"
-          onChange={updateSigninConditions}
+          onChange={handleChangeSigninValue}
           colorType="PENETRATED_BLACK"
         />
         <Spacing size={20} />
         <Input
-          value={signinConditions.password}
+          value={signInValue.password}
           inputLabel="Password"
           type="password"
           name="password"
-          onChange={updateSigninConditions}
+          onChange={handleChangeSigninValue}
           svgIcon={<SecurityIcon width="16" height="17" color="white" />}
           colorType="PENETRATED_BLACK"
         />
         <Spacing size={70} />
         <BasicButton>Log in</BasicButton>
         <Spacing size={20} />
-        <StyledLink href="#" onClick={goToSignupPage}>
-          Make an account
-        </StyledLink>
+        <StyledLink href="/sign-up">Make an account</StyledLink>
       </form>
     </Wrapper>
   )

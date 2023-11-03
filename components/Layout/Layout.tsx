@@ -1,20 +1,30 @@
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import { PropsWithChildren } from 'react'
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const router = useRouter()
+
+  const tempLogout = () => {
+    localStorage.removeItem('memberId')
+    router.push('/sign-in')
+    alert('로그아웃 되었습니다.')
+  }
+
   return (
-    <TempBody>
-      <LayoutContainer>{children}</LayoutContainer>
-    </TempBody>
+    <LayoutContainer>
+      <TempLogoutButton onClick={tempLogout}>로그아웃(임시)</TempLogoutButton>
+      {children}
+    </LayoutContainer>
   )
 }
 
 export default Layout
 
-const TempBody = styled.div`
-  // 작업 편의성을 위하여 임시로 부여한 스타일.
-  // 데모데이 직전에 본 부분 제거 예정입니다.
-  background: #f4f4f4;
+const TempLogoutButton = styled.button`
+  position: fixed;
+  top: 10px;
+  left: 10px;
 `
 
 const LayoutContainer = styled.div`
