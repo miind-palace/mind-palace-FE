@@ -4,15 +4,15 @@ import styled from '@emotion/styled'
 import { ChangeEvent, useState } from 'react'
 import CheckEmailForm from '@/components/CheckEmailForm/CheckEmailForm'
 
-export const SING_UP_STEP = {
+export const SIGN_UP_STEP = {
   CHECK_EMAIL: 'CHECK_EMAIL',
   SIGN_UP: 'SIGN_UP',
 } as const
 
-type SignUpStepType = keyof typeof SING_UP_STEP
+type SignUpStepType = keyof typeof SIGN_UP_STEP
 
 const SignUpPage = () => {
-  const [step, setStep] = useState<SignUpStepType>(SING_UP_STEP.CHECK_EMAIL)
+  const [step, setStep] = useState<SignUpStepType>(SIGN_UP_STEP.CHECK_EMAIL)
   const [email, setEmail] = useState('')
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ const SignUpPage = () => {
   }
 
   const goNextStep = () => {
-    setStep(SING_UP_STEP.SIGN_UP)
+    setStep(SIGN_UP_STEP.SIGN_UP)
   }
 
   return (
@@ -31,10 +31,10 @@ const SignUpPage = () => {
         </CubeBox>
         <DimBg isShow={true} />
         <InputBox isShow={true}>
-          {step === SING_UP_STEP.CHECK_EMAIL && (
+          {step === SIGN_UP_STEP.CHECK_EMAIL && (
             <CheckEmailForm email={email} onChangeEmail={onChangeEmail} goNextStep={goNextStep} />
           )}
-          {step === SING_UP_STEP.SIGN_UP && <SignupForm email={email} />}
+          {step === SIGN_UP_STEP.SIGN_UP && <SignupForm email={email} />}
         </InputBox>
       </Wrapper>
     </Container>
