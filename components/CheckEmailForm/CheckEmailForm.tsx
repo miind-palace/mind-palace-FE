@@ -16,10 +16,8 @@ export default function CheckEmailForm({ email, onChangeEmail, goNextStep }: Che
   const checkValidateEmail = async (email: string) => {
     const { data } = await axiosHttp.post(`/member/mailCheck?memberEmail=${email}`)
     // TODO: 서버 스펙 변경되면 message가 아니라 boolean값 기준으로 변경
-    const isValidEmail = data === AVAILABLE_EMAIL_MSG
     const result = {
-      check: isValidEmail,
-      msg: data,
+      ...data,
     }
     return result
   }
@@ -36,9 +34,9 @@ export default function CheckEmailForm({ email, onChangeEmail, goNextStep }: Che
     }
 
     // 이메일 중복 검증 로직
-    const { check, msg } = await checkValidateEmail(email)
-    if (!check) {
-      alert(msg)
+    const { duplicated, message } = await checkValidateEmail(email)
+    if (duplicated) {
+      alert(message)
       return
     }
 
