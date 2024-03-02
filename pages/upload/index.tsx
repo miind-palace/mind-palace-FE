@@ -12,8 +12,13 @@ import useCreateSuggestionImage from '@/hooks/useCreateSuggestionImage'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import LargeButton from '@/components/common/Button/Button'
 import UploadYouTubePlayer from '@/components/Upload/UploadYouTubePlayer/UploadYouTubePlayer'
+import Header from '@/components/common/Header/Header'
+import { QuestionIcon } from '@/components/Icons'
+import HelpInfo from '@/components/Upload/HelpInfo/HelpInfo'
 
 export default function Upload() {
+  const [showHelpInfo, setShowHelpInfo] = useState(false)
+  const [helpInfoStep, setHelpInfoStep] = useState(1)
   const [textAreaValue, setTextareaValue] = useState('')
   const [youtubeUrl, , onChangeYoutubeUrl] = useInput('')
   const { previewImageUrl, setPreviewImageUrl, onChangePreviewImage, onClickSuggestionImage, setImgFile, imgFile } =
@@ -43,6 +48,10 @@ export default function Upload() {
     setTextareaValue(e.target.value)
   }
 
+  const onClickHeaderRightButtonHandler = () => {
+    setShowHelpInfo(true)
+  }
+
   useEffect(() => {
     if (images[0] && !previewImageUrl) {
       setImgFile(images[0][0])
@@ -52,6 +61,14 @@ export default function Upload() {
 
   return (
     <Container>
+      {showHelpInfo && (
+        <HelpInfo step={helpInfoStep} setHelpInfoStep={setHelpInfoStep} setShowHelpInfo={setShowHelpInfo} />
+      )}
+      <Header
+        title="My Palace"
+        hasRightButton={<QuestionIcon />}
+        onClickRightButton={onClickHeaderRightButtonHandler}
+      />
       <FormWrapper onSubmit={onSubmitUploadHandler}>
         <KeywordInput
           value={convertedKeyword}
@@ -71,8 +88,9 @@ export default function Upload() {
 }
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
-  padding: 25px 16px 0;
+  padding: 16px 16px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
