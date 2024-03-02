@@ -5,14 +5,15 @@ import { Container } from './Header.style'
 interface HeaderProps {
   hasRightButton?: JSX.Element
   onClickRightButton?: () => void
+  titleFontSize?: string
   title: string
 }
 
-const Header = ({ hasRightButton, onClickRightButton, title }: HeaderProps) => {
+const Header = ({ hasRightButton, onClickRightButton, title, titleFontSize = '24px' }: HeaderProps) => {
   const route = useRouter()
 
   return (
-    <Container>
+    <Container titleFontSize={titleFontSize}>
       <button onClick={() => route.back()}>
         <LeftArrowIcon />
       </button>
