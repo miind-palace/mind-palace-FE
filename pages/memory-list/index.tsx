@@ -136,11 +136,10 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     setClickedMemory(memory)
     handleOpenModal()
   }
-  const { createToast } = useToastMessage()
 
   return (
     <S.Wrapper>
-      <S.Title onClick={() => createToast()}>My Palace</S.Title>
+      <S.Title>My Palace</S.Title>
       {memoryList?.memoryList.map((memory, index) => (
         <div key={`${memory.id}${index}`} onClick={() => handleClickMemory(memory)}>
           <Card memory={memory} ref={targetRef} />
