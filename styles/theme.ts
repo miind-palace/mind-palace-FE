@@ -4,7 +4,7 @@ const colors = {
     bright: '#4DA3FF',
     light: '#8FC4FF',
     strong: '#003D80',
-    heavy: '#003D80',
+    heavy: '#00254D',
     disable: '#D0DDEBCC',
   },
   text: {
