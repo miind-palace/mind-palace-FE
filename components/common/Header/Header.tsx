@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 import { Container } from './Header.style'
 
 interface HeaderProps {
-  hasRightButton?: JSX.Element
+  rightButton?: JSX.Element
   onClickRightButton?: () => void
   titleFontSize?: string
   title: string
 }
 
-const Header = ({ hasRightButton, onClickRightButton, title, titleFontSize = '24px' }: HeaderProps) => {
+const Header = ({ rightButton, onClickRightButton, title, titleFontSize = '24px' }: HeaderProps) => {
   const route = useRouter()
 
   return (
@@ -17,8 +17,8 @@ const Header = ({ hasRightButton, onClickRightButton, title, titleFontSize = '24
       <button onClick={() => route.back()}>
         <LeftArrowIcon />
       </button>
-      <p>{title}</p>
-      <button onClick={onClickRightButton}>{hasRightButton && hasRightButton}</button>
+      <h1>{title}</h1>
+      <button onClick={onClickRightButton}>{rightButton && rightButton}</button>
     </Container>
   )
 }
