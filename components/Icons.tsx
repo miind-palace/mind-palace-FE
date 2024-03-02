@@ -120,3 +120,25 @@ export function LinkIcon(props: SVGAttributes<SVGElement>) {
     </svg>
   )
 }
+
+export function LeftArrowIcon(props: SVGAttributes<SVGElement>) {
+  return (
+    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M10.8284 12.5007L15.7782 17.4504L14.364 18.8646L8 12.5007L14.364 6.13672L15.7782 7.55093L10.8284 12.5007Z"
+        fill="#007AFF"
+      />
+    </svg>
+  )
+}
+
+export function QuestionIcon(props: SVGAttributes<SVGElement>) {
+  return (
+    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        d="M12 22.5C6.47715 22.5 2 18.0228 2 12.5C2 6.97715 6.47715 2.5 12 2.5C17.5228 2.5 22 6.97715 22 12.5C22 18.0228 17.5228 22.5 12 22.5ZM12 20.5C16.4183 20.5 20 16.9183 20 12.5C20 8.08172 16.4183 4.5 12 4.5C7.58172 4.5 4 8.08172 4 12.5C4 16.9183 7.58172 20.5 12 20.5ZM11 15.5H13V17.5H11V15.5ZM13 13.8551V14.5H11V13C11 12.4477 11.4477 12 12 12C12.8284 12 13.5 11.3284 13.5 10.5C13.5 9.67157 12.8284 9 12 9C11.2723 9 10.6656 9.51823 10.5288 10.2058L8.56731 9.81346C8.88637 8.20919 10.302 7 12 7C13.933 7 15.5 8.567 15.5 10.5C15.5 12.0855 14.4457 13.4248 13 13.8551Z"
+        fill="#007AFF"
+      />
+    </svg>
+  )
+}
