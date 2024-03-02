@@ -2,13 +2,9 @@ import { forwardRef } from 'react'
 import styled from '@emotion/styled'
 
 import { MemoryType } from '@/pages/memory-list'
-import CardPlayButton from './button/CardPlayButton'
+import CardPlayButton from './common/Button/CardPlayButton'
 
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
-import useControlModal from '@/lib/hooks/useControlModal'
-import MemoryDetail from './MemoryDetail'
-import Modal from './Modal'
-
 import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
 
 type CardProps = {
@@ -16,39 +12,16 @@ type CardProps = {
 } & React.ComponentProps<'div'>
 
 const Card = forwardRef<HTMLDivElement, CardProps>(({ memory }, ref) => {
-  const { isOpen, handleCloseModal, handleOpenModal } = useControlModal()
-  const handleRemoveMemory = async (id: number) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DEFAULT_END_POINT}post/delete?postId=${id}`)
-    const data = await response.json()
-  }
-  const convertedTitle = createdAtToTitleDate(memory.createdAt)
-  const slicedVideoId =
-    !memory.videoId.includes('youtu.be/') && !memory.videoId.includes('youtube.com')
-      ? memory.videoId
-      : makeYouTubeVideoId(memory.videoId)
-
   return (
     <>
-      {isOpen && memory && (
-        <Modal onClose={handleCloseModal}>
-          <MemoryDetail
-            createdAt={convertedTitle}
-            backgroundImage={memory.backgroundImage}
-            videoId={slicedVideoId}
-            text={memory.text}
-            onClickCloseModal={handleCloseModal}
-            onClickRemoveMemory={() => handleRemoveMemory(memory.id)}
-          />
-        </Modal>
-      )}
       <S.CardComponentContainer ref={ref} backgroundImage={memory.backgroundImage}>
         {!!memory.videoId && (
           <S.CardComponentPlayerWrapper>
-            <CardPlayButton videoId={slicedVideoId} />
+            <CardPlayButton videoId={makeYouTubeVideoId(memory.videoId) || memory.videoId} />
           </S.CardComponentPlayerWrapper>
         )}
-        <S.CardComponentWrapper onClick={() => handleOpenModal()}>
-          <S.CardComponentTitle>{convertedTitle}</S.CardComponentTitle>
+        <S.CardComponentWrapper>
+          <S.CardComponentTitle>{createdAtToTitleDate(memory.createdAt)}</S.CardComponentTitle>
           <S.CardComponentDesc>{memory.text}</S.CardComponentDesc>
         </S.CardComponentWrapper>
       </S.CardComponentContainer>

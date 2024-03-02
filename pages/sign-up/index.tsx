@@ -1,33 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import SignupForm from '../../components/SignupForm/SignupForm'
-import styled from '@emotion/styled'
+import SignupForm from '@/components/SignupForm/SignupForm'
 import BounceCube from '@/components/Intro/BounceCube/BounceCube'
+import styled from '@emotion/styled'
+import { ChangeEvent, useState } from 'react'
+import CheckEmailForm from '@/components/CheckEmailForm/CheckEmailForm'
 
-const TRANSITION_DELAY = 3700
+export const SIGN_UP_STEP = {
+  CHECK_EMAIL: 'CHECK_EMAIL',
+  SIGN_UP: 'SIGN_UP',
+} as const
+
+type SignUpStepType = keyof typeof SIGN_UP_STEP
 
 const SignUpPage = () => {
-  // const [isShow, setIsShow] = useState(false)
+  const [step, setStep] = useState<SignUpStepType>(SIGN_UP_STEP.CHECK_EMAIL)
+  const [email, setEmail] = useState('')
+
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+
+  const goNextStep = () => {
+    setStep(SIGN_UP_STEP.SIGN_UP)
+  }
 
   return (
-    <Temp>
-      <Container>
-        <Wrapper>
-          <CubeBox>
-            <BounceCube />
-          </CubeBox>
-          <DimBg isShow={true} />
-          <InputBox isShow={true}>
-            <SignupForm />
-          </InputBox>
-        </Wrapper>
-      </Container>
-    </Temp>
+    <Container>
+      <Wrapper>
+        <CubeBox>
+          <BounceCube />
+        </CubeBox>
+        <DimBg isShow={true} />
+        <InputBox isShow={true}>
+          {step === SIGN_UP_STEP.CHECK_EMAIL && (
+            <CheckEmailForm email={email} onChangeEmail={onChangeEmail} goNextStep={goNextStep} />
+          )}
+          {step === SIGN_UP_STEP.SIGN_UP && <SignupForm email={email} />}
+        </InputBox>
+      </Wrapper>
+    </Container>
   )
 }
 
 export default SignUpPage
-
-const Temp = styled.div``
 
 const Container = styled.div`
   width: 100%;
