@@ -4,31 +4,29 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { keyword } = req.body
-  const PAPAGO_API_URL = process.env.PAPAGO_TRANSLATION_API_URL
-  const PAPAGO_CLIENT_ID = process.env.PAPAGO_CLIENT_ID
-  const PAPAGO_CLIENT_SECRET = process.env.PAPAGO_CLIENT_SECRET
+  const DEEPL_API_URL = process.env.DEEPL_API_URL
+  const DEEPL_API_KEY = process.env.DEEPL_API_KEY
   const KAKAO_REST_API_KEY = process.env.KAKAO_REST_API_KEY
-
   const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'X-Naver-Client-Id': PAPAGO_CLIENT_ID,
-    'X-Naver-Client-Secret': PAPAGO_CLIENT_SECRET,
+    'Content-Type': 'application/json',
+    Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
   }
   let text
 
   try {
     const response = await axios.post(
-      PAPAGO_API_URL as string,
+      `${DEEPL_API_URL}/v2/translate`,
       {
-        source: 'ko',
-        target: 'en',
-        text: keyword,
+        text: [keyword],
+        source_lang: 'KO',
+        target_lang: 'EN',
       },
       { headers }
     )
 
-    text = String(response.data.message.result.translatedText)
+    text = String(response.data.translations[0].text)
   } catch (error: any) {
+    console.log(error)
     return res.send({ ...error })
   }
 
@@ -58,6 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json({ ...response.data })
   } catch (error: any) {
+    console.log('칼루 API 에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ')
     console.log(error)
     return res.send({ ...error })
   }
