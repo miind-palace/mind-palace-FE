@@ -17,8 +17,10 @@ const Header = ({ rightButton, onClickRightButton, title, titleFontSize = '24px'
       <button onClick={() => route.back()}>
         <LeftArrowIcon />
       </button>
-      <h1>{title}</h1>
-      <button onClick={onClickRightButton}>{rightButton && rightButton}</button>
+      <h1 className="header-title">{title}</h1>
+      <button className="right-btn" onClick={onClickRightButton}>
+        {rightButton && rightButton}
+      </button>
     </Container>
   )
 }
