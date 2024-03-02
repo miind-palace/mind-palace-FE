@@ -10,38 +10,42 @@ export const Container = styled.div`
   background-color: rgba(0, 122, 255, 0.2);
   cursor: pointer;
 
-  & > p {
-    position: absolute;
-    color: ${({ theme }) => theme.colors.primary.normal};
-    font-size: ${({ theme }) => theme.typography.size.text15};
-    background-color: ${({ theme }) => theme.colors.background.white};
-    border-radius: 0 12px 12px 12px;
-    padding: 10px;
-    line-height: 1;
+  & > div {
+    & > p {
+      position: absolute;
 
-    &.first-text {
-      top: 79px;
-      left: 69px;
-    }
+      color: ${({ theme }) => theme.colors.primary.normal};
+      font-size: ${({ theme }) => theme.typography.size.text15};
+      background-color: ${({ theme }) => theme.colors.background.white};
+      margin: 0px 12px;
+      border-radius: 0 12px 12px 12px;
+      padding: 10px;
+      line-height: 1;
 
-    &.second-text {
-      top: 221px;
-      left: 23px;
-    }
+      &.first-text {
+        top: 79px;
+        left: 69px;
+      }
 
-    &.third-text {
-      top: 442px;
-      left: 41px;
-    }
+      &.second-text {
+        top: 221px;
+        left: 23px;
+      }
 
-    &.four-text {
-      top: 624px;
-      left: 69px;
-    }
+      &.third-text {
+        top: 442px;
+        left: 41px;
+      }
 
-    &.five-text {
-      top: 729px;
-      left: 40px;
+      &.four-text {
+        top: 624px;
+        left: 69px;
+      }
+
+      &.five-text {
+        top: 729px;
+        left: 40px;
+      }
     }
   }
 `
