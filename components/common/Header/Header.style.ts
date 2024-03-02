@@ -8,11 +8,11 @@ export const Container = styled.header<{ titleFontSize: string }>`
   padding: 0px 8px 24px;
   line-height: 41px;
 
-  & > button {
+  & > .right-btn {
     display: flex;
   }
 
-  & > h1 {
+  & > .header-title {
     font-size: ${({ titleFontSize }) => titleFontSize};
     font-weight: ${({ theme }) => theme.typography.weight.bold};
     color: ${({ theme }) => theme.colors.text.normal};
