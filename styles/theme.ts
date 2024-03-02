@@ -1,11 +1,11 @@
 const colors = {
   primary: {
     normal: '#007AFF',
-    bright: '#3395FF',
-    light: '#66AFFF',
+    bright: '#4DA3FF',
+    light: '#8FC4FF',
     strong: '#2559F4',
-    heavy: '#1A4DE5',
-    disable: '#D0DDEB',
+    heavy: '#003D80',
+    disable: '#D0DDEBCC',
   },
   text: {
     strong: '#000000',
@@ -25,7 +25,7 @@ const colors = {
   },
   line: {
     normal: '#6D7179',
-    alternative: '#F4F4F5',
+    alternative: '#BCBCC2',
   },
 }
 const typography = {
