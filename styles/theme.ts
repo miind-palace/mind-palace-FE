@@ -3,7 +3,7 @@ const colors = {
     normal: '#007AFF',
     bright: '#4DA3FF',
     light: '#8FC4FF',
-    strong: '#2559F4',
+    strong: '#003D80',
     heavy: '#003D80',
     disable: '#D0DDEBCC',
   },
