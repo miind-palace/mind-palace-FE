@@ -9,6 +9,8 @@ import createdAtToTitleDate from '@/lib/utils/createdAtToTitleDate'
 import makeYouTubeVideoId from '@/lib/utils/makeYouTubeVideoId'
 import useControlModal from '@/hooks/useControlModal'
 import Modal from '@/components/common/Modal'
+import Toast from '@/components/common/Toast/Toast'
+import useToastMessage from '@/hooks/useToastMessage'
 
 const GET_MEMORY_LIST_DEFAULT_SIZE = 3
 
@@ -134,10 +136,11 @@ export default function MemoryList({ initMemoryList }: InferGetServerSidePropsTy
     setClickedMemory(memory)
     handleOpenModal()
   }
+  const { createToast } = useToastMessage()
 
   return (
     <S.Wrapper>
-      <S.Title>My Palace</S.Title>
+      <S.Title onClick={() => createToast()}>My Palace</S.Title>
       {memoryList?.memoryList.map((memory, index) => (
         <div key={`${memory.id}${index}`} onClick={() => handleClickMemory(memory)}>
           <Card memory={memory} ref={targetRef} />

@@ -1,10 +1,13 @@
+import ToastProvider from '@/lib/provider/ToastProvider'
 import styled from '@emotion/styled'
 import { PropsWithChildren } from 'react'
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
     <TempBody>
-      <LayoutContainer>{children}</LayoutContainer>
+      <LayoutContainer>
+        <ToastProvider>{children}</ToastProvider>
+      </LayoutContainer>
     </TempBody>
   )
 }
