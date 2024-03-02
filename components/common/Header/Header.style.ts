@@ -12,7 +12,7 @@ export const Container = styled.header<{ titleFontSize: string }>`
     display: flex;
   }
 
-  & > p {
+  & > h1 {
     font-size: ${({ titleFontSize }) => titleFontSize};
     font-weight: ${({ theme }) => theme.typography.weight.bold};
     color: ${({ theme }) => theme.colors.text.normal};

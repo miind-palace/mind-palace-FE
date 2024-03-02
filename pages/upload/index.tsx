@@ -64,11 +64,7 @@ export default function Upload() {
       {showHelpInfo && (
         <HelpInfo step={helpInfoStep} setHelpInfoStep={setHelpInfoStep} setShowHelpInfo={setShowHelpInfo} />
       )}
-      <Header
-        title="My Palace"
-        hasRightButton={<QuestionIcon />}
-        onClickRightButton={onClickHeaderRightButtonHandler}
-      />
+      <Header title="My Palace" rightButton={<QuestionIcon />} onClickRightButton={onClickHeaderRightButtonHandler} />
       <FormWrapper onSubmit={onSubmitUploadHandler}>
         <KeywordInput
           value={convertedKeyword}
