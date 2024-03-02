@@ -19,16 +19,6 @@ export type GetMemoryListRes = {
   total: number
   content: Array<MemoryType>
   pageable: {
-    sort: {
-      orders: [
-        {
-          direction: string
-          property: string
-          ignoreCase: boolean
-          nullHandling: string
-        }
-      ]
-    }
     page: number
     size: number
   }
@@ -36,10 +26,12 @@ export type GetMemoryListRes = {
 
 export type MemoryType = {
   id: number
+  keyword: string
   backgroundImage: string
   text: string
   videoId: string
   createdAt: string
+  memberId: number
   deletedAt?: string
 }
 
