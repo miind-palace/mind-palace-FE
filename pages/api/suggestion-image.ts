@@ -56,7 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(200).json({ ...response.data })
   } catch (error: any) {
-    console.log('칼루 API 에러ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓ')
     console.log(error)
     return res.send({ ...error })
   }
