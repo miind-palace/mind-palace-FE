@@ -17,8 +17,6 @@ const useCreateSuggestionImage = () => {
 
   const createSuggestionImageMutation = useMutation(createSuggestionImage, {
     onSuccess(resData) {
-      console.log(resData)
-
       const imageUrls = resData.images.map((el: any) => {
         const decodedData = atob(el.image)
         const byteArray = new Uint8Array(decodedData.length)
